@@ -9,9 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Claus Rüffler" />
 
+<meta name="date" content="2021-10-26" />
 
-<title>Population and community ecology @ Uppsala University</title>
+<title>Untitled</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -273,27 +275,26 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Population and community ecology @ Uppsala University</h1>
+<h1 class="title toc-ignore">Untitled</h1>
+<h4 class="author">Claus Rüffler</h4>
+<h4 class="date">10/26/2021</h4>
 
 </div>
 
 
-<p><em>Learning coding in R</em></p>
-<p>R has been developed as a tool for statistical analysis and might by now be the most popular tool in this area. However, R is also a language that we can use to program simulation models in order to investigate population dynamical models in ecology. As such, R can to some extend replace proprietary software packages like MatLab or Mathematica.</p>
-<p>This website contains an introduction to some R commands that are essential for coding simulations in R (and, in fact, pretty much everything else you might want to do in R…). Click the tab button and select from the differnt sections in the drop-down menu. You can work on this material by copying the R-code and pasting it in the skript window of your R-Studio application.</p>
-<p>This website borrows heavily from chapter 8 of the book</p>
-<p><a href="https://computingskillsforbiologists.com/"><em>S. Allesina and M. Wilmes (2019). Computing Skills for Biologists: A Toolbox (2019).</em></a></p>
-<p>In fact, several parts are produced by simply copy and paste parts from that chapter without further reference.</p>
-<p>Material on this website is also inspired by the introductions to R that you can find in these books:</p>
-<ol style="list-style-type: decimal">
-<li><p><a href="https://link.springer.com/book/10.1007%2F978-1-4020-8624-3">Karline Soetaert and Peter M. J. Herman (2009). A practical guide to ecological modelling: using R as a simulation platform.</a></p></li>
-<li><p><a href="http://link.springer.com/book/10.1007%2F978-0-387-89882-7">M. Henry H. Stevens (2010). A Primer of Ecology with R.</a></p></li>
-</ol>
-<p>Both these latter books can be downloaded for free from the Uppsala University Library.</p>
-<p>An excellent and freely available systematic introduction to programming in R can be found <a href="https://rstudio-education.github.io/hopr/">here</a>.</p>
-<p>If you are more of a YouTube-person ckeck out <a href="https://www.youtube.com/channel/UCCJJdmc4DlwiWmXVZnMPb0w/playlists">this series</a> of video tutorials.</p>
-<p><strong>Enjoy!</strong></p>
-<p>Claus</p>
+<p>if (is.integer(k / 4) == TRUE) { print(k) }</p>
+<pre class="r"><code>if (is.integer(k / 4) == TRUE) {
+    print(k)
+  }</code></pre>
+<pre class="r"><code>z &lt;- seq(1, 100, by = 3)
+z</code></pre>
+<pre><code>##  [1]   1   4   7  10  13  16  19  22  25  28  31  34  37  40  43  46  49  52  55
+## [20]  58  61  64  67  70  73  76  79  82  85  88  91  94  97 100</code></pre>
+<pre class="r"><code>for (k in z) {
+  if (is.integer(k / 4) == TRUE) {
+    print(k)
+  }
+}</code></pre>
 
 
 

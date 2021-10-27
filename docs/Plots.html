@@ -11,7 +11,7 @@
 
 
 
-<title>Population and community ecology @ Uppsala University</title>
+<title>Learning Coding in R</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -273,27 +273,88 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Population and community ecology @ Uppsala University</h1>
 
 </div>
 
 
-<p><em>Learning coding in R</em></p>
-<p>R has been developed as a tool for statistical analysis and might by now be the most popular tool in this area. However, R is also a language that we can use to program simulation models in order to investigate population dynamical models in ecology. As such, R can to some extend replace proprietary software packages like MatLab or Mathematica.</p>
-<p>This website contains an introduction to some R commands that are essential for coding simulations in R (and, in fact, pretty much everything else you might want to do in R…). Click the tab button and select from the differnt sections in the drop-down menu. You can work on this material by copying the R-code and pasting it in the skript window of your R-Studio application.</p>
-<p>This website borrows heavily from chapter 8 of the book</p>
-<p><a href="https://computingskillsforbiologists.com/"><em>S. Allesina and M. Wilmes (2019). Computing Skills for Biologists: A Toolbox (2019).</em></a></p>
-<p>In fact, several parts are produced by simply copy and paste parts from that chapter without further reference.</p>
-<p>Material on this website is also inspired by the introductions to R that you can find in these books:</p>
-<ol style="list-style-type: decimal">
-<li><p><a href="https://link.springer.com/book/10.1007%2F978-1-4020-8624-3">Karline Soetaert and Peter M. J. Herman (2009). A practical guide to ecological modelling: using R as a simulation platform.</a></p></li>
-<li><p><a href="http://link.springer.com/book/10.1007%2F978-0-387-89882-7">M. Henry H. Stevens (2010). A Primer of Ecology with R.</a></p></li>
-</ol>
-<p>Both these latter books can be downloaded for free from the Uppsala University Library.</p>
-<p>An excellent and freely available systematic introduction to programming in R can be found <a href="https://rstudio-education.github.io/hopr/">here</a>.</p>
-<p>If you are more of a YouTube-person ckeck out <a href="https://www.youtube.com/channel/UCCJJdmc4DlwiWmXVZnMPb0w/playlists">this series</a> of video tutorials.</p>
-<p><strong>Enjoy!</strong></p>
-<p>Claus</p>
+<div id="learning-coding-in-r" class="section level1 tabset">
+<h1>Learning Coding in R</h1>
+<div id="basic-plotting" class="section level2">
+<h2>Basic Plotting</h2>
+<p>In R, you can choose different ways to plot your data and results. By default, R ships with built-in graphical functions. Other functions, or entirely different paradigms, can be enabled using different packages. Here we give a brief overview of the standard plotting functions that are useful for quick data exploration. These are also referred to as R “base graphics” as no extra package is required.</p>
+<p>R base graphics are drawn interactively: you can start with a plot, and then overlay other elements on the existing plot.</p>
+<div id="scatter-plots" class="section level3">
+<h3>Scatter Plots</h3>
+<p>The function <code>plot(x, y, ...)</code> is the most basic way to plot points defined by their x- and y-coordinates. Here, <code>x</code> and <code>y</code> are vectors of equal length containing the x- and y-coordinates of the point to be plotted. For example,</p>
+<pre class="r"><code># generate data
+x &lt;- 1:30 # creates a vector of 30 values that we use as x-coordinates
+y &lt;- rnorm(30, mean = x) # creates a vector of 30 values that we use as y-coordinates; each values is drawn from normal distribution with with an increasing mean value
+plot(y) # if no x-vector is given the defaul x = (1, 2, 3, ...) is used
+plot(x, y) # this plot produces an identical result
+# there are many different option one can add to the plot command
+plot(x, y, type = &quot;l&quot;) # using lines instead of points
+plot(x, y, type = &quot;b&quot;) # using both lines and points
+plot(x, y, type = &quot;b&quot;, pch = 4) # change the type of point
+plot(x, y, type = &quot;b&quot;, pch = 4, col = &quot;blue&quot;) # change color
+abline(a = 0, b = 1) # add a line to the same plot by specifying its intercept a and slope b,
+abline(h = 20) # adding a horizontal line by setting a y-value h
+abline(v = 10) # adding a vertical line by setting an x-value v
+plot(x, y, col = &quot;orange&quot;, xlab = &quot;my x-label&quot;, ylab = &quot;a y-label&quot;)
+plot(x, y2, xlim = c(1,35), ylim = c(1,40)) # set plot ranges</code></pre>
+</div>
+<div id="function-plots" class="section level3">
+<h3>Function Plots</h3>
+<p>We can plot the graphs of functions using the command <code>curve(expr, from, to, ...)</code>, where <code>expr</code> is a mathematical expression containing an argument <code>x</code> or function name, and <code>from</code> and <code>to</code> defines the range of <code>x</code> for which the function is plotted. This is a useful tool for visually exploring the shape of a function.</p>
+<pre class="r"><code>curve(exp, from = -3, to = 3) # plot of the exponential function in the interval (-3, 3)
+abline(v = 0) # adding a vertical line at x = 0
+logistic &lt;- function(n, r, k){# definition of the user-defined function giving the population growth rate of a logistically growing population as a function the current population size n, the intrinsic growth rate r and the carrying capacity k
+  n*r*(1-n/k)
+}
+curve(logistic(x , r = 1, k = 2), from = 0, to =2.5) # plot of the function logistic as a function of the population size n = x
+abline(h = 0) # adding a horizontal line at y = 0</code></pre>
+</div>
+<div id="histograms" class="section level3">
+<h3>Histograms</h3>
+<p>The function <code>hist(x, ...)</code> is used to produce simple histograms, where <code>x</code> is a vector of values for which the histogram is desired. Histograms show the abundance or frequency of data falling in certain discrete classes.</p>
+<pre class="r"><code># generate data, drawn from Poisson distribution with mean 3
+d1 &lt;- rpois(100, lambda = 3)
+# basic histogram
+hist(d1) # without further options R decides how bin the data
+# specify desired number of bins
+hist(d1, breaks = 4) # four break points results in five bins
+# specify bin edges
+hist(d1, breaks = c(0, 1, 3, 5, 7, 11, 21)) # manually defining bins
+# use frequencies (default if bins have equal size)
+hist(d1, freq = TRUE)
+# use density
+hist(d1, freq = FALSE)
+# get the histogram, but without plotting it
+z &lt;- hist(d1, plot = FALSE)
+# access elements of the histogram
+z$counts # counts per bin
+z$mids # midpoints of the bins</code></pre>
+</div>
+<div id="bar-plots" class="section level3">
+<h3>Bar Plots</h3>
+<p>A bar plot is used to represent data for discrete groups. Here are some examples using the function <code>barplot(height, ...)</code>:</p>
+<pre class="r"><code>data(rivers) # load data on length of North American rivers
+barplot(rivers, xlab = &quot;rivers&quot;, ylab = &quot;length&quot;)
+barplot(order(rivers), xlab = &quot;rivers&quot;, ylab = &quot;length&quot;)
+barplot(rivers, xlab = &quot;rivers&quot;, ylab = &quot;length&quot;, horiz = TRUE) # horizontal
+data(iris) # load iris data set
+structure(iris) # inspect the iris data set
+# color by group level
+barplot(height = iris$Petal.Width, beside = TRUE, col = iris$Species, xlab = &quot;species&quot;)</code></pre>
+</div>
+<div id="box-plots" class="section level3">
+<h3>Box Plots</h3>
+<p>Box plots are used to show the range of a distribution, and the location of the bulk of its mass. Use the function <code>boxplot(x, ...)</code> where <code>x</code> specifies the data from which the boxplot is to be produced.</p>
+<pre class="r"><code>data(iris)
+# set specific colors
+boxplot(iris$Petal.Width ~ iris$Species, col = c(&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;))</code></pre>
+</div>
+</div>
+</div>
 
 
 

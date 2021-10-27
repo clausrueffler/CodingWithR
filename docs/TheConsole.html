@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Learning Coding in R</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Population and community ecology</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Learning Coding in R
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="./TheConsole.html">R as an oversized calculator: The Console</a>
+    </li>
+    <li>
+      <a href="./Scripting.html">Programming in R</a>
+    </li>
+    <li>
+      <a href="./Plots.html">Basic Plotting</a>
+    </li>
+    <li>
+      <a href="./Markdown.html">Documenting Code</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<div id="learning-coding-in-r" class="section level1 tabset">
+<h1>Learning Coding in R</h1>
+<div id="getting-started" class="section level2">
+<h2>Getting started</h2>
+<p>R is a versatatile programming language for statistical analysis, data analysis and numerical calculationns. The main hurdle new users face when learning R is that it is based on a command-line interface: to make things happen, you write text commands in a “console,” and then the program executes them. This might seem unusual if you are used to software based on a graphical user interface, where you tend to work by clicking on windows and buttons. However, the command line is what makes it easy to automate your analysis - all you have to do is collect all the commands in a text file, and then run them in R.</p>
+<div id="installing-r-and-rstudio" class="section level3">
+<h3>Installing R and RStudio</h3>
+<p>For this introduction, we are going to use RStudio, a graphical interface that simplifies the use of R by giving you immediate access to the code, the console, and the graphics.</p>
+<p>To install R and RStudio, you can follow <a href="https://rstudio-education.github.io/hopr/starting.html">these instructions</a>.</p>
+</div>
+<div id="finding-help" class="section level3">
+<h3>Finding Help</h3>
+<p>Each command in R comes with a manual page. To access it, type <code>?[NAME OFCOMMAND]</code> in the console (e.g., <code>?lm</code>). Alternatively, search the command under the help-tab tin the bottom right window of RStudio.</p>
+</div>
+</div>
+<div id="the-console" class="section level2">
+<h2>The Console</h2>
+<p>We will first explore simple operations, assignments, and data types to get familiar with the R console. A “greater than sign” (&gt;) at the <strong>beginning of the line in the console</strong> means that R is ready to accept your input. You can navigate the history of previously typed commands by using the arrows on your keyboard. A comment starts with the hash (#), and does not require a closing symbol.</p>
+<p>We can use R as an oversized calculator:</p>
+<pre class="r"><code>&gt; 1.7 * 2
+&gt; 12 / 5
+&gt; 2.1 ^ 5
+&gt; log(10)
+&gt; log10(10)
+&gt; sqrt(9)</code></pre>
+<p>The following box provides a list of arithmetic and logical operators in R:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Operators</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>+</td>
+<td>Addition</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>Subtraction</td>
+</tr>
+<tr class="odd">
+<td>*</td>
+<td>Multiplication</td>
+</tr>
+<tr class="even">
+<td>/</td>
+<td>Division</td>
+</tr>
+<tr class="odd">
+<td>^ or **</td>
+<td>Exponentiation</td>
+</tr>
+<tr class="even">
+<td>==</td>
+<td>Equal to</td>
+</tr>
+<tr class="odd">
+<td>!=</td>
+<td>Differs from</td>
+</tr>
+<tr class="even">
+<td>&gt;</td>
+<td>Greater than</td>
+</tr>
+<tr class="odd">
+<td>&lt;</td>
+<td>Less than</td>
+</tr>
+<tr class="even">
+<td>&gt;=</td>
+<td>Greater than or equal to</td>
+</tr>
+<tr class="odd">
+<td>&lt;=</td>
+<td>Less than or equal to</td>
+</tr>
+<tr class="even">
+<td>&amp;</td>
+<td>Logical and</td>
+</tr>
+<tr class="odd">
+<td>|</td>
+<td>Logical or</td>
+</tr>
+<tr class="even">
+<td>!</td>
+<td>Logical not</td>
+</tr>
+</tbody>
+</table>
+<p>R is designed for statistical analysis, and therefore it provides many built-in mathematical functions. Some are listed in the next box.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>abs(x)</td>
+<td>Absolute value</td>
+</tr>
+<tr class="even">
+<td>sqrt(x)</td>
+<td>Square root</td>
+</tr>
+<tr class="odd">
+<td>cos(x), sin(x), tan(x)</td>
+<td>Trigonometric functions</td>
+</tr>
+<tr class="even">
+<td>log(x)</td>
+<td>Natural logarithm</td>
+</tr>
+<tr class="odd">
+<td>log10(x)</td>
+<td>Base 10 logarithm</td>
+</tr>
+<tr class="even">
+<td>exp(x)</td>
+<td>eponential function <span class="math inline">\(e^x\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Let’s have a closer look at the logical operators. They create a logical value by comparing two elements:</p>
+<pre class="r"><code>&gt; 5 &gt; 3
+&gt; 5 == (10 / 2)
+&gt; 6&gt;2^4
+&gt; 6 &gt;= (2 * 3)
+&gt; (5 &gt; 3) &amp; (7 &lt; 5) # logical AND
+&gt; (5 &gt; 3) | (7 &lt; 5) # logical OR</code></pre>
+<p>We can use the operator <code>%in%</code> to search for matches. It returns a logical value (i.e., <code>TRUE</code> or <code>FALSE</code>) indicating whether or not a match exists.</p>
+<pre class="r"><code>&gt; 3 %in% 1:5 # 1:5 generates a sequence
+&gt; # c() combines values into a vector or list
+&gt; # all arguments are converted to the same type
+&gt; c(2, &quot;good to be&quot;, TRUE)
+&gt; 2 %in% c(2, &quot;good to be&quot;, TRUE)
+&gt; # test for multiple elements at once
+&gt; 1:8 %in% c(1, 3, 5)</code></pre>
+</div>
+<div id="assignment-and-data-types" class="section level2">
+<h2>Assignment and Data Types</h2>
+<p>When programming in R, you assign values to variables: a variable is a “box” that can contain a value or object. The assignment command in R is <code>&lt;-</code> (less-than sign, followed by a minus sign).</p>
+<pre class="r"><code>&gt; x &lt;- 5 # assign the value 5 to x
+&gt; x * 2 # use variable x to perform operations
+&gt; x &lt;- 7 # assign new value to variable &gt;x*2</code></pre>
+<p>Note that the previous value is overwritten whenever a new value is assigned to the variable. To list all the variables you have created, type <code>ls()</code>. To remove a variable <code>x</code> from the current R session, type <code>rm(x)</code>.</p>
+<p>R can handle different types of data. In the following, we assign a new value to the variable <code>x</code>, each time altering its <em>data type</em>. To determine the type of variable <code>x</code>, use the command <code>class</code>. You can also test whether a variable is of a certain type by using the functions <code>is.numeric</code>, <code>is.character</code>, etc.</p>
+<pre class="r"><code>&gt; # integer (natural numbers)
+&gt; x &lt;- as.integer(5)
+&gt; class(x)
+&gt; # numeric (real numbers)
+&gt; x &lt;- pi
+&gt; class(x)
+&gt; # complex (complex number)
+&gt; x &lt;- 1 + 3i
+&gt; class(x)
+&gt; # logical (TRUE or FALSE)
+&gt; x &lt;- (5 &gt; 7)
+&gt; class(x)
+&gt; # character (strings)
+&gt; x &lt;- &quot;hello&quot;
+&gt; class(x)
+&gt; is.numeric(x)</code></pre>
+<p>If you need to change the type of a variable (an operation called <em>casting</em>), use the functions <code>as.character</code>, <code>as.integer</code>, <code>as.numeric</code>, etc. In RStudio, if you type the first few letters of the name of a function or a variable, and hit Tab, you can see all the possible ways to complete the name; try typing <code>as.</code> and hit Tab to see all the available functions for type conversion. Some examples:</p>
+<pre class="r"><code>&gt; x &lt;- 5
+&gt; as.character(x)
+&gt; as.logical(x) # only 0 is FALSE
+&gt; y &lt;- &quot;07.123&quot; # assign a character string
+&gt; x &lt; y # beware: comparing different types
+&gt; x &lt; as.numeric(y) # cast string to numeric</code></pre>
+</div>
+<div id="data-structures" class="section level2">
+<h2>Data Structures</h2>
+<p>R ships with several data structures, which can be used to organize your data. Knowing the characteristics and specific operations of each data structure allows you to write better and more compact code.</p>
+<div id="vectors" class="section level3">
+<h3>Vectors</h3>
+<p>The most basic data structure in R is the vector, which is an ordered collection of values of the same type. Vectors can be created by concatenating different values with the command <code>c</code>:</p>
+<pre class="r"><code>&gt; x &lt;- c(2, 3, 5, 2, 3, 13, 17, 3)</code></pre>
+<p>You can access the elements of a vector by their index. You can access the elements of a vector by specifying their positions:</p>
+<pre class="r"><code>&gt; x[3]
+&gt; x[8]
+&gt; x[9] # what if the element does not exist?</code></pre>
+<p>You can extract several elements at once (i.e., create another vector) using the colon (<code>:</code>) command, or by concatenating the indices:</p>
+<pre class="r"><code>&gt; x[1:3]
+&gt; x[4:7]
+&gt; x[c(1,3,5)]</code></pre>
+<p>Sometimes one wants to know at which position in a vector a certain values occurs. We can find out with the <code>which</code> function.</p>
+<pre class="r"><code>&gt; which(x == 3) # the value 3 occurs at postion 2, 4 and 8
+&gt; which(x &gt; 5) # values larger than 5 occur at position 6 and 7
+&gt; length(which(x == 3)) # the value 3 occurs exactly three times within the vector x</code></pre>
+<p>Given that R was born for statistics, there are many statistical functions you can perform on vectors:</p>
+<pre class="r"><code>&gt; length(x)
+&gt; min(x)
+&gt; max(x)
+&gt; sum(x) # sum all elements
+&gt; prod(x) # multiply all elements
+&gt; median(x) # median value
+&gt; mean(x) # arithmetic mean
+&gt; var(x) # unbiased sample variance
+&gt; mean(x ^ 2) - mean(x) ^ 2 # population variance
+&gt; summary(x) # print a summary</code></pre>
+<p>You can generate vectors of sequential numbers using the colon command:</p>
+<pre class="r"><code>&gt; x &lt;- 1:10
+&gt; x</code></pre>
+<p>For more complex sequences, use <code>seq</code>:</p>
+<pre class="r"><code>&gt; seq(from = 1, to = 5, by = 0.5)</code></pre>
+<p>To repeat a value or a sequence several times, use <code>rep</code>:</p>
+<pre class="r"><code>&gt; rep(&quot;abc&quot;, 3)
+&gt; rep(c(1,2,3), 3)</code></pre>
+<div id="exercises" class="section level4">
+<h4>Exercises</h4>
+<ol style="list-style-type: lower-alpha">
+<li>Create a vector containing all the even numbers between 2 and 100 (inclusive) and store it in the variable z.</li>
+<li>Extractalltheelementsofzthataredivisibleby12.Howmanyelements match this criterion?</li>
+<li>What is the sum of all the elements of z?</li>
+<li>Is the sum of the elements of z equal to 51 × 50?</li>
+<li>What is the product of elements 5, 10, and 15 of z?</li>
+<li>Create a vector y that contains all numbers between 0 and 30 that are divisible by 3. Find the five elements of y that are also elements of z.</li>
+<li>Does seq(2, 100, by = 2) produce the same vector as (1:50) * 2?</li>
+<li>What happens if you type z ^ 2?</li>
+</ol>
+</div>
+</div>
+<div id="matrices" class="section level3">
+<h3>Matrices</h3>
+<p>A matrix is a two-dimensional table of values. In the case of numeric values, you can perform common matrix operations (e.g., product, inverse, decomposition):</p>
+<pre class="r"><code>&gt; # create matrix
+&gt; # indicate values, number of rows, number of columns
+&gt; A &lt;- matrix(c(1, 2, 3, 4), 2, 2)
+&gt; A
+&gt; A %*% A # matrix product
+&gt; solve(A) # matrix inverse
+&gt; A %*% solve(A)
+&gt; diag(A) # vector containing the diagonal elements
+&gt; B &lt;- matrix(1, 3, 2) # 3 x 2 matrix filled with 1s
+&gt; B
+&gt; t(B) # transpose
+&gt; B %*% t(B)
+&gt; # by defaul, matrices are filled by column
+&gt; Z &lt;- matrix(1:9, 3, 3)
+&gt; Z
+&gt; # to fill by rows specify matrix (1:9, 3, 3, byrow = TRUE)</code></pre>
+<p>Determine the dimensions of a matrix (the numbers of rows and columns) using the following commands:</p>
+<pre class="r"><code>&gt; dim(B)
+&gt; nrow(B)
+&gt; ncol(B)</code></pre>
+<p>Use indices to access a particular row/column of a matrix:</p>
+<pre class="r"><code>&gt; Z
+&gt; Z[1, ] # first row
+&gt; Z[, 2] # second column
+&gt; # select submatrix with coefficients of second
+&gt; # and third columns of the first two rows
+&gt; Z[1:2, 2:3]
+&gt; # concatenate positions to index nonadjacent rows/columns
+&gt; Z[c(1,3), c(1,3)]</code></pre>
+<p>Most functions consider all coefficients in the matrix:</p>
+<pre class="r"><code>&gt; sum(Z)
+&gt; mean(Z)</code></pre>
+</div>
+<div id="lists" class="section level3">
+<h3>Lists</h3>
+<p>Vectors are a good choice when each element is of the same type (e.g., numbers, strings). Lists are used when we want to store elements of dif- ferent types, or more complex objects (e.g., vectors, matrices, even lists of lists). Each element of the list can be referenced either by its index, or by a label:</p>
+<pre class="r"><code>&gt; # create list containing two vectors that are labelled Names and Values
+&gt; mylist &lt;- list(Names = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), Values = c(1, 2, 3))
+&gt; mylist # prints the content of mylist
+&gt; mylist[[1]] # access first entry within list by index
+&gt; # note that inorder to access entries in a list we have to use [[]]
+&gt; mylist[[2]] # access second entry by index
+&gt; mylist$Names # access first entry by label
+&gt; mylist[[&quot;Names&quot;]] # an alternative way to access by label
+&gt; mylist[[&quot;Values&quot;]][3] # third element of the second entry</code></pre>
+</div>
+<div id="data-frames" class="section level3">
+<h3>Data Frames</h3>
+<p>Data frames contain data organized like in a spreadsheet. The columns (typically representing different measurements) can be of different types (e.g., one column could be the date of measurement, another the weight of the individual, or the volume of the cell, or the treatment of the sample), while the rows typically represent different samples.</p>
+<p>When you import a spreadsheet file into R, it is automatically stored as a data frame. The difference between a matrix and a data frame is that in a matrix all the values are of the same type (e.g., all numeric), while in a data frame each column can be of a different type.</p>
+<p>Because typing a data frame by hand would be tedious, let’s use a data set that is already available in R:</p>
+<pre class="r"><code>&gt; data(trees) # load data set &quot;trees&quot;
+&gt; str(trees) # structure of data frame ’data.frame’
+&gt; ncol(trees) # number of columns
+&gt; nrow(trees) # number of rows
+&gt; head(trees) # print the first few rows Girth Height Volume
+&gt; trees$Girth # select column by name
+&gt; # select column by name; return first 5 elements
+&gt; trees$Height[1:5]
+&gt; trees[1:3, ] # select rows 1 through 3
+&gt; # select rows 1 through 3; return column Volume
+&gt; trees[1:3, ]$Volume
+&gt; trees &lt;- rbind(trees, c(13.25, 76, 30.17)) # add a row
+&gt; trees_double &lt;- cbind(trees, trees) # combine columns
+&gt; # change column names
+&gt; colnames(trees) &lt;- c(&quot;girth&quot;, &quot;height&quot;, &quot;volume&quot;)</code></pre>
+<div id="exercises-1" class="section level4">
+<h4>Exercises</h4>
+<ol style="list-style-type: lower-alpha">
+<li>What is the average height of the cherry trees?</li>
+<li>What is the average girth of those that are more than 75 ft tall?</li>
+<li>What is the maximum height of trees with a volume between 15 and 35 ft3?</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

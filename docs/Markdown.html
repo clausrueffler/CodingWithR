@@ -11,7 +11,7 @@
 
 
 
-<title>Population and community ecology @ Uppsala University</title>
+<title>Learning Coding in R</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -273,27 +273,40 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Population and community ecology @ Uppsala University</h1>
 
 </div>
 
 
-<p><em>Learning coding in R</em></p>
-<p>R has been developed as a tool for statistical analysis and might by now be the most popular tool in this area. However, R is also a language that we can use to program simulation models in order to investigate population dynamical models in ecology. As such, R can to some extend replace proprietary software packages like MatLab or Mathematica.</p>
-<p>This website contains an introduction to some R commands that are essential for coding simulations in R (and, in fact, pretty much everything else you might want to do in R…). Click the tab button and select from the differnt sections in the drop-down menu. You can work on this material by copying the R-code and pasting it in the skript window of your R-Studio application.</p>
-<p>This website borrows heavily from chapter 8 of the book</p>
-<p><a href="https://computingskillsforbiologists.com/"><em>S. Allesina and M. Wilmes (2019). Computing Skills for Biologists: A Toolbox (2019).</em></a></p>
-<p>In fact, several parts are produced by simply copy and paste parts from that chapter without further reference.</p>
-<p>Material on this website is also inspired by the introductions to R that you can find in these books:</p>
-<ol style="list-style-type: decimal">
-<li><p><a href="https://link.springer.com/book/10.1007%2F978-1-4020-8624-3">Karline Soetaert and Peter M. J. Herman (2009). A practical guide to ecological modelling: using R as a simulation platform.</a></p></li>
-<li><p><a href="http://link.springer.com/book/10.1007%2F978-0-387-89882-7">M. Henry H. Stevens (2010). A Primer of Ecology with R.</a></p></li>
-</ol>
-<p>Both these latter books can be downloaded for free from the Uppsala University Library.</p>
-<p>An excellent and freely available systematic introduction to programming in R can be found <a href="https://rstudio-education.github.io/hopr/">here</a>.</p>
-<p>If you are more of a YouTube-person ckeck out <a href="https://www.youtube.com/channel/UCCJJdmc4DlwiWmXVZnMPb0w/playlists">this series</a> of video tutorials.</p>
-<p><strong>Enjoy!</strong></p>
-<p>Claus</p>
+<div id="learning-coding-in-r" class="section level1 tabset">
+<h1>Learning Coding in R</h1>
+<div id="documenting-code" class="section level2">
+<h2>Documenting Code</h2>
+<p>Properly documenting your code is important. R and RStudio provide special packages that make it easy to write very clear and pretty documentation for your code, without the need to put in any extra effort.</p>
+<p>The easiet way is to use the “Compile Report” button that you can apply to any R-script to produce a report in html or pdf format. In this case explanatory text is added using the “#”-symbol.</p>
+<p>However, such reports are not exaclty “pretty”. R can do much better. Using the package <code>knitr</code> enables you to document your code using Markdown, LATEX, etc., and either run it as an R script, or dynamically produce reports including the text describing the code, the code itself, and the results!</p>
+<p>To give you an idea how elegant your code and documentation could look I note that all websites through which I provide exercises to you are produced using Rmarkdown, e.g., <a href="https://clausrueffler.github.io/ecology-course/Competition.html">this one</a> from the Ecology course. In fact, you could easily write a whole book using Rrarkdown such as <a href="https://bookdown.org/yihui/rmarkdown-cookbook/">this one</a> or make a personal website like <a href="https://clausrueffler.github.io/">this one</a>.</p>
+<p>In order to create Rmarkdown documents you have to first install a free of charge and open source package.</p>
+<pre class="r"><code>install.packages(&quot;rmarkdown&quot;)
+library(rmarkdown)</code></pre>
+<p>Once this package is installed, open a new RMarkdown document under the file menu: -&gt;File -&gt;New Document -&gt;R Markdown. This will open an .Rmd file. You then have to decide on an output format (e.g., PDF or HTML among many others, HTML seems to be the most robust). You “knit” a file in RStudio to produce the desired output format. Hit Ctrl+Shift+K (Cmd on a Mac) to start the process (when launched for the first time, RStudio may prompt you to install some packages) or press the “Knit”-button.</p>
+<p>Using Rmarkdown is an extremely easy method to write documents that contains extensive documentation of your code using plain text. You can alternate documentation and code chunks by using special Rmarkdown tags. Code chunks are set within triple tick marks, followed by {r}:</p>
+<pre class="r"><code>#Everything between these marks will be evaluated in the R console
+curve(log, from = 0, to = 2)
+abline(h = 0)</code></pre>
+<p><img src="Markdown_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>While working on you document, you can either execute code using the code section or evaluate all code in one step by presseing Ctrl+Shift*S (Cmd on a Mac). Text not enclosed in triple tick marks is not evaluated. This is the spot to write extensive documentation.</p>
+<p>Below you can see a few examples of R Markdown syntax that allows you to format your text in different ways:</p>
+</div>
+</div>
+<div id="this-is-a-first-level-headline" class="section level1">
+<h1># This is a first-level headline</h1>
+<div id="this-is-a-second-level-headline" class="section level2">
+<h2>## This is a second-level headline</h2>
+<p><em>*italics</em>*</p>
+<p><strong>**bold**</strong></p>
+<p>You can find an introduction to the basics of RMarkdown <a href="https://rmarkdown.rstudio.com/lesson-1.html">here</a> and an overview of the most important commands <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">here</a>. There are dozens if not hundreds tutorials on Rmarkdown on the web. <a href="https://m-clark.github.io/Introduction-to-Rmarkdown/">This one</a> seems nice and crisp.</p>
+</div>
+</div>
 
 
 
