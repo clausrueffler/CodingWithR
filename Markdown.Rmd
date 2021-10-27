@@ -21,6 +21,8 @@ However, such reports are not exaclty "pretty". R can do much better. Using the 
 
 To give you an idea how elegant your code and documentation could look I note that all websites through which I provide exercises to you are produced using Rmarkdown, e.g., [this one](https://clausrueffler.github.io/ecology-course/Competition.html) from the Ecology course. In fact, you could easily write a whole book using Rrarkdown such as [this one](https://bookdown.org/yihui/rmarkdown-cookbook/) or make a personal website like [this one](https://clausrueffler.github.io/).
 
+As always, the internet is full with resources. [Here](https://bookdown.org/ndphillips/YaRrr/) the cheat sheet for Rmarkdown and [here](https://bookdown.org/yihui/rmarkdown/) a link to a comprehensive overview.
+
 In order to create Rmarkdown documents you have to first install a free of charge and open source package.
 ```{r eval=FALSE}
 install.packages("rmarkdown")
