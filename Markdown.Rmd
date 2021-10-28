@@ -31,11 +31,13 @@ Once this package is installed, open a new RMarkdown document under the file men
 
 Using Rmarkdown is an extremely easy method to write documents that contains extensive documentation of your code using plain text. You can alternate documentation and code chunks by using special Rmarkdown tags. Code chunks are set within triple tick marks, followed by {r}:
 
-```{r}
+````
+```{r}`r ''`
 #Everything between these marks will be evaluated in the R console
 curve(log, from = 0, to = 2)
 abline(h = 0)
 ```
+````
 
 While working on you document, you can either execute code using the code section or evaluate all code in one step by presseing Ctrl+Shift*S (Cmd on a Mac). Text not enclosed in triple tick marks is not evaluated. This is the spot to write extensive documentation.
 

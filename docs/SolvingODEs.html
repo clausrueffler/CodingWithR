@@ -277,34 +277,9 @@ $(document).ready(function () {
 </div>
 
 
-<div id="documenting-code" class="section level1">
-<h1>Documenting Code</h1>
-<p>Properly documenting your code is important. R and RStudio provide special packages that make it easy to write very clear and pretty documentation for your code, without the need to put in any extra effort.</p>
-<p>The easiet way is to use the “Compile Report” button that you can apply to any R-script to produce a report in html or pdf format. In this case explanatory text is added using the “#”-symbol.</p>
-<p>However, such reports are not exaclty “pretty”. R can do much better. Using the package <code>knitr</code> enables you to document your code using Markdown, LATEX, etc., and either run it as an R script, or dynamically produce reports including the text describing the code, the code itself, and the results!</p>
-<p>To give you an idea how elegant your code and documentation could look I note that all websites through which I provide exercises to you are produced using Rmarkdown, e.g., <a href="https://clausrueffler.github.io/ecology-course/Competition.html">this one</a> from the Ecology course. In fact, you could easily write a whole book using Rrarkdown such as <a href="https://bookdown.org/yihui/rmarkdown-cookbook/">this one</a> or make a personal website like <a href="https://clausrueffler.github.io/">this one</a>.</p>
-<p>As always, the internet is full with resources. <a href="https://bookdown.org/ndphillips/YaRrr/">Here</a> the cheat sheet for Rmarkdown and <a href="https://bookdown.org/yihui/rmarkdown/">here</a> a link to a comprehensive overview.</p>
-<p>In order to create Rmarkdown documents you have to first install a free of charge and open source package.</p>
-<pre class="r"><code>install.packages(&quot;rmarkdown&quot;)
-library(rmarkdown)</code></pre>
-<p>Once this package is installed, open a new RMarkdown document under the file menu: -&gt;File -&gt;New Document -&gt;R Markdown. This will open an .Rmd file. You then have to decide on an output format (e.g., PDF or HTML among many others, HTML seems to be the most robust). You “knit” a file in RStudio to produce the desired output format. Hit Ctrl+Shift+K (Cmd on a Mac) to start the process (when launched for the first time, RStudio may prompt you to install some packages) or press the “Knit”-button.</p>
-<p>Using Rmarkdown is an extremely easy method to write documents that contains extensive documentation of your code using plain text. You can alternate documentation and code chunks by using special Rmarkdown tags. Code chunks are set within triple tick marks, followed by {r}:</p>
-<pre><code>```{r}
-#Everything between these marks will be evaluated in the R console
-curve(log, from = 0, to = 2)
-abline(h = 0)
-```</code></pre>
-<p>While working on you document, you can either execute code using the code section or evaluate all code in one step by presseing Ctrl+Shift*S (Cmd on a Mac). Text not enclosed in triple tick marks is not evaluated. This is the spot to write extensive documentation.</p>
-<p>Below you can see a few examples of R Markdown syntax that allows you to format your text in different ways:</p>
-</div>
-<div id="this-is-a-first-level-headline" class="section level1">
-<h1># This is a first-level headline</h1>
-<div id="this-is-a-second-level-headline" class="section level2">
-<h2>## This is a second-level headline</h2>
-<p><em>*italics</em>*</p>
-<p><strong>**bold**</strong></p>
-<p>You can find an introduction to the basics of RMarkdown <a href="https://rmarkdown.rstudio.com/lesson-1.html">here</a> and an overview of the most important commands <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">here</a>. There are dozens if not hundreds tutorials on Rmarkdown on the web. <a href="https://m-clark.github.io/Introduction-to-Rmarkdown/">This one</a> seems nice and crisp.</p>
-</div>
+<div id="solving-differential-equations-in-r" class="section level1 tabset">
+<h1>Solving differential equations in R</h1>
+<p>In R, you can choose different ways to plot your data and results. By default, R ships with built-in graphical functions. Other functions, or entirely different paradigms, can be enabled using different packages. Here we give a brief overview of the standard plotting functions that are useful for quick data exploration. These are also referred to as R “base graphics” as no extra package is required.</p>
 </div>
 
 

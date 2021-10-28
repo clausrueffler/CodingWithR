@@ -1,0 +1,15 @@
+---
+pagetitle: 'Learning Coding in R'
+output: 
+  html_document:
+    toc: FALSE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Solving differential equations in R {.tabset}
+
+In R, you can choose different ways to plot your data and results. By default, R ships with built-in graphical functions. Other functions, or entirely different paradigms, can be enabled using different packages. Here we give a brief overview of the standard plotting functions that are useful for quick data exploration. These are also referred to as R “base graphics” as no extra package is required.
+
