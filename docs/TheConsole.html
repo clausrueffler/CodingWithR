@@ -465,6 +465,9 @@ $(document).ready(function () {
 <pre class="r"><code>&gt; x[3]
 &gt; x[8]
 &gt; x[9] # what if the element does not exist?</code></pre>
+<p>Alternatively, you can access the elements of a vector by specifying using the logical <code>TRUE</code>:</p>
+<pre class="r"><code>&gt; x[c(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)]
+&gt; x[c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE)]</code></pre>
 <p>You can extract several elements at once (i.e., create another vector) using the colon (<code>:</code>) command, or by concatenating the indices:</p>
 <pre class="r"><code>&gt; x[1:3]
 &gt; x[4:7]
@@ -508,10 +511,10 @@ $(document).ready(function () {
 </div>
 <div id="matrices" class="section level3">
 <h3>Matrices</h3>
-<p>A matrix is a two-dimensional table of values. In the case of numeric values, you can perform common matrix operations (e.g., product, inverse, decomposition):</p>
+<p>A <code>matrix</code> is a two-dimensional table of values. In the case of numeric values, you can perform common matrix operations (e.g., product, inverse, decomposition):</p>
 <pre class="r"><code>&gt; # create matrix
 &gt; # indicate values, number of rows, number of columns
-&gt; A &lt;- matrix(c(1, 2, 3, 4), 2, 2)
+&gt; A &lt;- matrix(c(1, 2, 3, 4), nrow = 2, ncol = 2)
 &gt; A
 &gt; A %*% A # matrix product
 &gt; solve(A) # matrix inverse
@@ -544,12 +547,12 @@ $(document).ready(function () {
 </div>
 <div id="lists" class="section level3">
 <h3>Lists</h3>
-<p>Vectors are a good choice when each element is of the same type (e.g., numbers, strings). Lists are used when we want to store elements of dif- ferent types, or more complex objects (e.g., vectors, matrices, even lists of lists). Each element of the list can be referenced either by its index, or by a label:</p>
+<p>Vectors are a good choice when each element is of the same type (e.g., numbers, strings). Lists are used when we want to store elements of different types, or more complex objects (e.g., vectors, matrices, even lists of lists). Each element of the list can be referenced either by its index, or by a label:</p>
 <pre class="r"><code>&gt; # create list containing two vectors that are labelled Names and Values
 &gt; mylist &lt;- list(Names = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), Values = c(1, 2, 3))
 &gt; mylist # prints the content of mylist
 &gt; mylist[[1]] # access first entry within list by index
-&gt; # note that inorder to access entries in a list we have to use [[]]
+&gt; # note that in order to access entries in a list we have to use [[]]
 &gt; mylist[[2]] # access second entry by index
 &gt; mylist$Names # access first entry by label
 &gt; mylist[[&quot;Names&quot;]] # an alternative way to access by label
@@ -573,8 +576,10 @@ $(document).ready(function () {
 &gt; trees[1:3, ]$Volume
 &gt; trees &lt;- rbind(trees, c(13.25, 76, 30.17)) # add a row
 &gt; trees_double &lt;- cbind(trees, trees) # combine columns
+&gt; head(trees_double)
 &gt; # change column names
-&gt; colnames(trees) &lt;- c(&quot;girth&quot;, &quot;height&quot;, &quot;volume&quot;)</code></pre>
+&gt; colnames(trees) &lt;- c(&quot;girth&quot;, &quot;height&quot;, &quot;volume&quot;)
+&gt; head(trees)</code></pre>
 <div id="exercises-1" class="section level4">
 <h4>Exercises</h4>
 <ol style="list-style-type: lower-alpha">
