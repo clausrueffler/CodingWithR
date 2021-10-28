@@ -25,6 +25,8 @@ To install R and RStudio, you can follow [these instructions](https://rstudio-ed
 
 Each command in R comes with a manual page. To access it, type ```?[NAME OFCOMMAND]``` in the console (e.g., ```?lm```). Alternatively, search the command under the help-tab tin the bottom right window of RStudio.
 
+But really, if you need help with R the internet is your friend. Virtually any problem you might encounter has been described and solved somewhere on the internet. It's all about to phrase your question in the right manner in a Google search. Most often you will end up on [https://stackexchange.com/](https://stackexchange.com/), [https://stackoverflow.com](https://stackoverflow.com/questions) or [https://www.r-bloggers.com/](https://www.r-bloggers.com/).
+
 ## The Console
 
 We will first explore simple operations, assignments, and data types to get familiar with the R console. A "greater than sign" (>) at the **beginning of the line in the console** means that R is ready to accept your input. You can navigate the history of previously typed commands by using the arrows on your keyboard. A comment starts with the hash (#), and does not require a closing symbol.
@@ -40,7 +42,7 @@ log10(10)
 sqrt(9)
 ```
 
-The following box provides a list of arithmetic and logical operators in R:
+The following table provides a list of arithmetic and logical operators in R:
 
 Operators | Description
 ----------|------------
@@ -59,7 +61,7 @@ Operators | Description
 &#124; | Logical or
 ! | Logical not
 
-R is designed for statistical analysis, and therefore it provides many built-in mathematical functions. Some are listed in the next box.
+R is designed for statistical analysis, and therefore it provides many built-in mathematical functions. Some are listed in the next table.
 
 Function | Description
 ---------|------------
