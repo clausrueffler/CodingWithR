@@ -426,7 +426,8 @@ $(document).ready(function () {
 <p>When programming in R, you assign values to variables: a variable is a “box” that can contain a value or object. The assignment command in R is <code>&lt;-</code> (less-than sign, followed by a minus sign).</p>
 <pre class="r"><code>&gt; x &lt;- 5 # assign the value 5 to x
 &gt; x * 2 # use variable x to perform operations
-&gt; x &lt;- 7 # assign new value to variable &gt;x*2</code></pre>
+&gt; x &lt;- 7 # assign new value to variable
+&gt; x*2</code></pre>
 <p>Note that the previous value is overwritten whenever a new value is assigned to the variable. To list all the variables you have created, type <code>ls()</code>. To remove a variable <code>x</code> from the current R session, type <code>rm(x)</code>.</p>
 <p>R can handle different types of data. In the following, we assign a new value to the variable <code>x</code>, each time altering its <em>data type</em>. To determine the type of variable <code>x</code>, use the command <code>class</code>. You can also test whether a variable is of a certain type by using the functions <code>is.numeric</code>, <code>is.character</code>, etc.</p>
 <pre class="r"><code>&gt; # integer (natural numbers)
@@ -494,14 +495,14 @@ $(document).ready(function () {
 <div id="exercises" class="section level4">
 <h4>Exercises</h4>
 <ol style="list-style-type: lower-alpha">
-<li>Create a vector containing all the even numbers between 2 and 100 (inclusive) and store it in the variable z.</li>
-<li>Extractalltheelementsofzthataredivisibleby12.Howmanyelements match this criterion?</li>
-<li>What is the sum of all the elements of z?</li>
-<li>Is the sum of the elements of z equal to 51 × 50?</li>
-<li>What is the product of elements 5, 10, and 15 of z?</li>
-<li>Create a vector y that contains all numbers between 0 and 30 that are divisible by 3. Find the five elements of y that are also elements of z.</li>
-<li>Does seq(2, 100, by = 2) produce the same vector as (1:50) * 2?</li>
-<li>What happens if you type z ^ 2?</li>
+<li>Create a vector containing all the even numbers between 2 and 100 (inclusive) and store it in the variable <code>z</code>.</li>
+<li>Extract all the elements of <code>z</code> that are divisible by 12. How many elements match this criterion?</li>
+<li>What is the sum of all the elements of <code>z</code>?</li>
+<li>Is the sum of the elements of <code>z</code> equal to 51 × 50?</li>
+<li>What is the product of elements 5, 10, and 15 of <code>z</code>?</li>
+<li>Create a vector <code>y</code> that contains all numbers between 0 and 30 that are divisible by 3. Find the five elements of <code>y</code> that are also elements of <code>z</code>.</li>
+<li>Does <code>seq(2, 100, by = 2)</code> produce the same vector as <code>(1:50) * 2</code>?</li>
+<li>What happens if you type <code>z^2</code>?</li>
 </ol>
 </div>
 </div>
@@ -579,7 +580,7 @@ $(document).ready(function () {
 <ol style="list-style-type: lower-alpha">
 <li>What is the average height of the cherry trees?</li>
 <li>What is the average girth of those that are more than 75 ft tall?</li>
-<li>What is the maximum height of trees with a volume between 15 and 35 ft3?</li>
+<li>What is the maximum height of trees with a volume between 15 and 35 ft^3?</li>
 </ol>
 </div>
 </div>

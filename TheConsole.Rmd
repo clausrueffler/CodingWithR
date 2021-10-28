@@ -102,7 +102,8 @@ When programming in R, you assign values to variables: a variable is a "box" tha
 ```{r comment="", prompt=TRUE, eval=FALSE}
 x <- 5 # assign the value 5 to x
 x * 2 # use variable x to perform operations
-x <- 7 # assign new value to variable >x*2
+x <- 7 # assign new value to variable
+x*2
 ```
 
 Note that the previous value is overwritten whenever a new value is assigned to the variable. To list all the variables you have created, type ```ls()```. To remove a variable ```x``` from the current R session, type ```rm(x)```.
@@ -213,15 +214,15 @@ rep(c(1,2,3), 3)
 
 #### Exercises
 
-(a) Create a vector containing all the even numbers between 2 and 100 (inclusive) and store it in the variable z.
-(b) Extractalltheelementsofzthataredivisibleby12.Howmanyelements match this criterion?
-(c) What is the sum of all the elements of z?
-(d) Is the sum of the elements of z equal to 51 × 50?
-(e) What is the product of elements 5, 10, and 15 of z?
-(f) Create a vector y that contains all numbers between 0 and 30 that are
-divisible by 3. Find the five elements of y that are also elements of z.
-(g) Does seq(2, 100, by = 2) produce the same vector as (1:50) * 2?
-(h) What happens if you type z ^ 2?
+(a) Create a vector containing all the even numbers between 2 and 100 (inclusive) and store it in the variable ```z```.
+(b) Extract all the elements of ```z``` that are divisible by 12. How many elements match this criterion?
+(c) What is the sum of all the elements of ```z```?
+(d) Is the sum of the elements of ```z``` equal to 51 × 50?
+(e) What is the product of elements 5, 10, and 15 of ```z```?
+(f) Create a vector ```y``` that contains all numbers between 0 and 30 that are
+divisible by 3. Find the five elements of ```y``` that are also elements of ```z```.
+(g) Does ```seq(2, 100, by = 2)``` produce the same vector as ```(1:50) * 2```?
+(h) What happens if you type ```z^2```?
 
 ### Matrices
 
@@ -323,5 +324,5 @@ colnames(trees) <- c("girth", "height", "volume")
 (a) What is the average height of the cherry trees?
 (b) What is the average girth of those that are more than 75 ft tall?
 (c) What is the maximum height of trees with a volume between 15
-and 35 ft3?
+and 35 ft^3?
 
