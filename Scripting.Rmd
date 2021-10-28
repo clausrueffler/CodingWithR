@@ -9,7 +9,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Learning Coding in R {.tabset}
+# Programming in R {.tabset}
 
 ## Computing Using Scripts
 

@@ -9,7 +9,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Learning Coding in R {.tabset}
+# R as an Oversized Calculator: the Console {.tabset}
 
 ## Getting started
 

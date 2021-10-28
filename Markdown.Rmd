@@ -9,9 +9,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Learning Coding in R {.tabset}
-
-## Documenting Code
+# Documenting Code
 
 Properly documenting your code is important. R and RStudio provide special packages that make it easy to write very clear and pretty documentation for your code, without the need to put in any extra effort.
 
