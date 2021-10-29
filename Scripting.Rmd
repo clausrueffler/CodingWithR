@@ -23,7 +23,7 @@ You could actually accomplish almost everything you need for your research witho
 ---|---
 recycle | You will encounter similar problems in the future, and, having a script, you will be almost done before you even start.
 automate | You will need to repeat the analysis on a different data set, or slightly tweak it in response to comments. This will be quick if you have a script, while repeating the analysis from scratch would take considerably longer (not to mention the possibility of making mistakes).
-document | By organizing your code in a script, you will know exactly what you did to obtain your results. You will much appreciate this pre- cise documentation when you write the "Methods" section of your paper or thesis. More on documenting code later.
+document | By organizing your code in a script, you will know exactly what you did to obtain your results. You will much appreciate this precise documentation when you write the "Methods" section of your paper or thesis. More on documenting code later.
 share | Having a script makes it much easier to share your analysis with other scientists. You can ask your coauthors to examine your code for errors before you publish and eventually share it with other scientists who want to conduct their analysis exactly as described in your "Methods" section.
 
 ## Writing Good Code
@@ -60,7 +60,7 @@ Good function names (use verbs!)
 
 ````
 calculate_cv
-read_fasta
+random_time_series
 ````
 
 Bad (i.e., uninformative) function names are
@@ -100,7 +100,7 @@ m <- matrix(25 , 5 , 5)
 
 Another way to modify the flow of a program is to write a loop. A loop is a series of commands that are repeated a number of times. For example, you want to run the same analysis on different data sets that you have collected, or you want to plot the results contained in a set of files, or you want to test your simulation over a number of parameter sets, etc.
 
-R provides you with two ways to loop over blocks of commands: the ```for``` loop, and the ```while``` loop. Let’s start with the for loop, which is used to iterate over a vector (or a list): for each value of the vector, a series of commands will be run, as shown by the following example, which you can type in a script called forloop.R:
+R provides you with two ways to loop over blocks of commands: the ```for``` loop, and the ```while``` loop. Let’s start with the for loop, which is used to iterate over a vector (or a list): for each value of the vector, a series of commands will be run, as shown by the following example:
 
 ```{r eval=FALSE}
 myvec <- 1:10 # vector with numbers from 1 to 10
@@ -133,6 +133,16 @@ while (i <= 10) {
 ```
 
 This script performs exactly the same operations we wrote for the ```for``` loop above. Note that you need to update the value of ```i``` (using ```i <- i + 1```), otherwise the loop will run forever (infinite loop — to terminate click on the "Stop" button in the top-right corner of RStudio). The anatomy of the while statement is
+
+```{r echo=FALSE, eval=FALSE}
+# multiply numbers from 1 to six
+  result <- 1
+  for (i in 1:6){
+    result <- result * i
+    result
+  }
+```
+
 
 ````
 while (condition is TRUE) {
@@ -270,6 +280,8 @@ my_factorial <- function(n){
 
 my_factorial(4)
 ```
+
+
 
 ## Random Numbers
 

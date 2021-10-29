@@ -301,7 +301,7 @@ $(document).ready(function () {
 </tr>
 <tr class="odd">
 <td>document</td>
-<td>By organizing your code in a script, you will know exactly what you did to obtain your results. You will much appreciate this pre- cise documentation when you write the “Methods” section of your paper or thesis. More on documenting code later.</td>
+<td>By organizing your code in a script, you will know exactly what you did to obtain your results. You will much appreciate this precise documentation when you write the “Methods” section of your paper or thesis. More on documenting code later.</td>
 </tr>
 <tr class="even">
 <td>share</td>
@@ -333,7 +333,7 @@ o # lowercase O
 l # lowercase L</code></pre>
 <p>Good function names (use verbs!)</p>
 <pre><code>calculate_cv
-read_fasta</code></pre>
+random_time_series</code></pre>
 <p>Bad (i.e., uninformative) function names are</p>
 <pre><code>f1
 faster_version
@@ -365,7 +365,7 @@ m &lt;- matrix(25 , 5 , 5)</code></pre>
 <div id="loops" class="section level2">
 <h2>Loops</h2>
 <p>Another way to modify the flow of a program is to write a loop. A loop is a series of commands that are repeated a number of times. For example, you want to run the same analysis on different data sets that you have collected, or you want to plot the results contained in a set of files, or you want to test your simulation over a number of parameter sets, etc.</p>
-<p>R provides you with two ways to loop over blocks of commands: the <code>for</code> loop, and the <code>while</code> loop. Let’s start with the for loop, which is used to iterate over a vector (or a list): for each value of the vector, a series of commands will be run, as shown by the following example, which you can type in a script called forloop.R:</p>
+<p>R provides you with two ways to loop over blocks of commands: the <code>for</code> loop, and the <code>while</code> loop. Let’s start with the for loop, which is used to iterate over a vector (or a list): for each value of the vector, a series of commands will be run, as shown by the following example:</p>
 <pre class="r"><code>myvec &lt;- 1:10 # vector with numbers from 1 to 10
 for (i in myvec) {
   a &lt;- i ^ 2

@@ -1,11 +1,12 @@
 # first exercises
 # a
 z <- seq(2, 100, 2)
-# b
-z <- 12*1:8
 z
-z %in% y
-x <-y %in% z
+# b
+v <- 12*1:8
+v
+z %in% v
+x <-z %in% v
 q <- which(x==TRUE)*2
 q
 length(q)
