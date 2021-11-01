@@ -23,8 +23,8 @@ left:
 #        href: ./PredatorPreySolutions.html
       - text: "Documenting Code"
         href: ./Markdown.html
-#      - text: "5. Excercise: Solutions"
-#        href: ./PulliamSolutions.html
+      - text: "Solving ODEs"
+        href: ./SolvingODEs.html
 #- text: "Project"
 #    menu:
 #       - text: "Project part 1"

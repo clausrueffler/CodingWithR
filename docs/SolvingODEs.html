@@ -259,6 +259,9 @@ $(document).ready(function () {
     <li>
       <a href="./Markdown.html">Documenting Code</a>
     </li>
+    <li>
+      <a href="./SolvingODEs.html">Solving ODEs</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -279,7 +282,139 @@ $(document).ready(function () {
 
 <div id="solving-differential-equations-in-r" class="section level1 tabset">
 <h1>Solving differential equations in R</h1>
-<p>In R, you can choose different ways to plot your data and results. By default, R ships with built-in graphical functions. Other functions, or entirely different paradigms, can be enabled using different packages. Here we give a brief overview of the standard plotting functions that are useful for quick data exploration. These are also referred to as R “base graphics” as no extra package is required.</p>
+<div id="single-variable-logistic-growth" class="section level2">
+<h2>Single Variable: Logistic Growth</h2>
+<p>In order to study continuous population dynamics, we often would like to integrate complex nonlinear functions of population dynamics. To do this, we need to use numerical techniques that turn the infinitely small steps of calculus, <span class="math inline">\(\mathrm{d}x\)</span>, into very small, but finite steps, in order to approximate the change in <span class="math inline">\(x\)</span>, given the change in <span class="math inline">\(x\)</span>, or <span class="math inline">\(\mathrm{d}x/\mathrm{d}y\)</span>. Mathematicians and computer scientists have devised very clever ways of doing this very accurately and precisely. In R, a good (the best?) package for this is <code>deSolve</code>, which contains several solvers for differential equations that perform <a href="https://en.wikipedia.org/wiki/Numerical_methods_for_ordinary_differential_equations"><em>numerical integration</em></a>. We will access these solvers (i.e. numerical integraters) using the function <code>ode()</code> in the <code>deSolve</code> package.</p>
+<pre class="r"><code>install.packages(&quot;deSolve&quot;)</code></pre>
+<pre class="r"><code>library(deSolve)</code></pre>
+<p>When we have an ordinary differential equation (ODE) such as logistic growth, we say that we “solve” the equation for a particular time interval given a set of parameters and initial conditions or initial population size. For instance, we say that we solve the logistic growth model</p>
+<p><span class="math display">\[
+\frac{\mathrm{d}N}{\mathrm{d}t}=N r \left(1 - \frac{N}{K} \right)
+\]</span></p>
+<p>for time at <em>t = 0, 1… 20</em>, with parameters <em>r = 1, K = 1000</em>, and <em>N0 = 10</em>, where <em>r</em> denotes the intrinsic growth rate and where the equilibrium population size is given by <em>K</em>, often called the <em>carrying capacity</em>. Let us now define the function for logistic growth in a particular way and specify its parameters.</p>
+<pre class="r"><code>log_growth &lt;- function(t, N, parameters) {
+  with(as.list(c(N, parameters)), {
+    dN.dt &lt;- r * N * (1 - N /K)
+    return(list(dN.dt))  
+  })
+}
+
+parameters &lt;- c(r = 1, K = 1000)
+N &lt;- 10 # initial population size
+t &lt;- 1:10 # vector of time points</code></pre>
+<p>Note that we here stored the parameters and intial conditions in a <em>named vector</em>, which allows us to call their entries by their name. The R-statement with <code>with(as.list(c(state, parameters)), { }</code> ensures that the state variables and parameters can be addressed by their names.</p>
+<p>Now you put it all into the <code>deSolve</code>-function <code>ode(y, times, func, parms, ...)</code>, with the correct arguments. The output is a data frame, with the first column being the time steps, and the remaining being your state variables.</p>
+<pre class="r"><code>int_time_series &lt;- ode(y = N, times = t, func = log_growth, parms = parameters)
+int_time_series</code></pre>
+<pre><code>##    time         1
+## 1     1  10.00000
+## 2     2  26.72369
+## 3     3  69.45310
+## 4     4 168.66426
+## 5     5 355.46079
+## 6     6 599.85982
+## 7     7 802.95598
+## 8     8 917.19889
+## 9     9 967.85733
+## 10   10 987.93011</code></pre>
+<pre class="r"><code>plot(t, int_time_series[, 2], type = &quot;l&quot;, lty = 1:2, col=1, ylab = &quot;Population Density N&quot;, xlab=&quot;Time&quot;)</code></pre>
+<p><img src="SolvingODEs_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>This graph shows the solution of the ODE describing logistic growth. We can make two obervations. First, it seems that the dynamics might not have reached its equilibrium. We therefore might want run the model a bit longer, in other words, to increase the length of the time as specified in <code>t</code>. Second, the graph of the time series does not look <em>smooth</em> but rather a bit chunky. This is the result of computing the change of the dynamics only at each full time step. In order to get a smoother curve we can add time points between the full time steps.</p>
+<pre class="r"><code>t &lt;- seq(1, 15, 0.2)
+
+int_time_series &lt;- ode(y = N, times = t, func = log_growth, parms = parameters)
+plot(t, int_time_series[, 2], type = &quot;l&quot;, lty = 1:2, col=1, ylab = &quot;population size&quot;, xlab=&quot;time&quot;)</code></pre>
+<p><img src="SolvingODEs_files/figure-html/unnamed-chunk-6-1.png" width="672" /> With these changes the time series is long enough for the dynamics to equilibriate and it curve indeed looks smooth as it should be.</p>
+<p>For the logistic model it is in fact possible to compute the solution analytically,</p>
+<p><span class="math display">\[
+N(t) = \frac{N_0 \exp(r t)}{1 + \frac{N_0}{K}(\exp(r t) - 1)}
+\]</span></p>
+<p>which we can define as a R-function and plot</p>
+<pre class="r"><code>solution_logistic &lt;- function(t) { (N0 * exp(r * t)) /
+    (1 + (N0 / K) * (exp(r * t) - 1))
+}
+
+r &lt;- 1
+K &lt;- 1000
+N0 &lt;- 10
+
+curve(solution_logistic(x), from = 0, to = 15, xlab = &quot;time&quot;, ylab = &quot;population size N&quot;)</code></pre>
+<p>This graph is virtually indistinguishable from the one based on numerical integration.</p>
+</div>
+<div id="two-variables-lotka-volterra-competition" class="section level2">
+<h2>Two Variables: Lotka-Volterra Competition</h2>
+<p>In the lecture, you got to know the Lotka-Volterra competition model, which can be written as</p>
+<p><span class="math display">\[
+\frac{\mathrm{d}N_1}{\mathrm{d}t} = N_1 r_1 \left(1 − \frac{N_1 + \alpha N_2}{K_1}\right)\\
+\frac{\mathrm{d}N_2}{\mathrm{d}t} = N_2 r_2 \left(1 − \frac{N_2 + \beta N_1}{K_2}\right)
+\]</span></p>
+<p>Before we can apply the function <code>ode()</code> we feed this model into R using the following function:</p>
+<pre class="r"><code>LV_comp &lt;- function(t, N, parameters) {
+  with(as.list(c(N, parameters)), {
+  dN1.dt &lt;- r[1] * N[1] * (1 - (N[1] + a[1] * N[2]) / K[1])
+  dN2.dt &lt;- r[2] * N[2] * (1 - (N[2] + a[2] * N[1]) / K[2])
+  return(list(c(dN1.dt, dN2.dt)))
+  })
+}  </code></pre>
+<p>Note that <code>LV_comp</code> assumes that <code>N</code>, <code>r</code>, <code>a</code> and <code>K</code> are vectors. For instance, the function extracts the the first element of <code>r</code> for the first species <code>(r[1])</code>. The vector <code>N</code> of population sizes contains one value for each population at one time point. Thus here, the vector contains only two entries (one for each of the two species). It holds only these values, but will do so repeatedly, at each time point. Only the output will contain all of the population sizxes through time.</p>
+<p>To integrate these populations, we need to specify new initial conditions, and new parameters for the two-species model.</p>
+<pre class="r"><code>r &lt;- c(r1 = 1, r2 = 1)
+a &lt;- c(alpha = 0.9, beta = 0.5)
+K &lt;- c(K1 = 1000, K2 = 700)
+parameters &lt;- list(r, a, K)
+
+N &lt;- c(N1 = 10, N2 = 20)
+t &lt;- seq(1, 30, 1) # densities will be computed for 20 time steps; vary this vector to change the length of the time series or the smoothness of the graph
+
+LV_time_series &lt;- ode(y = N, times = t, func = LV_comp, parms = parameters)
+
+LV_time_series[1:5, ] # shows the two densities for the first five time steps</code></pre>
+<pre><code>##      time       N1        N2
+## [1,]    1  10.0000  20.00000
+## [2,]    2  25.9400  51.21843
+## [3,]    3  62.8157 120.22174
+## [4,]    4 132.6181 237.68058
+## [5,]    5 229.0203 367.84078</code></pre>
+<pre class="r"><code>matplot(t, (LV_time_series[, 2:3]), type = &quot;l&quot;, lty = 1:2, col=1, ylab = &quot;Population Density&quot;, xlab=&quot;Time&quot;)
+legend(&quot;bottomright&quot;, c(expression(&quot;species 1&quot;), expression(&quot;species 2&quot;)), lty = 1:2, bty = &quot;n&quot;)</code></pre>
+<p><img src="SolvingODEs_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>As expected, for the above parameter values the two competing species can coexist with each other.</p>
+<p>Instead of looking at these simulations as time series, we can also look at them in a phase-plane diagram.</p>
+<pre class="r"><code>plot(LV_time_series[, 2], LV_time_series[, 3], type = &quot;l&quot;,  lty = 1, xlab = &quot;species 1&quot;, ylab = &quot;species 2&quot;, asp = 1)
+points(N[1], N[2], cex = 1.5, pch = 19, col = &quot;red&quot;) # adds a dot to show the starting density</code></pre>
+<p><img src="SolvingODEs_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<!---
+STUFF TO ADD IN THE FUTURE
+The ```ode()``` function uses a superb ODE solver, ```lsoda```, which is a very powerful, well tested tool, superior to many other such solvers. One of the other solvers in the ```deSolve```-package, ```lsodar```, will also return roots (or equilibria), for a system of ODEs, if they exist. Here we find the roots (i.e. the solutions, or equilibria) for a two species competition model.
+
+To use ```lsodar``` to find equilibria, we need to specify a root finding function whose inputs are are the sme of the ODE function, and which returns a scalar (a single number) that determines whether the rate of change (dy/dx) is sufficiently close to zero that we can say that the system has stopped changed, that is, has reached a steady state or equilibrium. Here we sum the absolute rates of change of each species, and then subtract 10−10; if that difference is zero, we decide that, for all pratcial purposes, the system has stopped changing.
+
+#```{r}
+#rootfun <- function(t, y, p) {
+#  dstate <- unlist(LV_time_series(t, y, p))
+#  return(sum(abs(dstate)) - 1e-10)
+#}
+#```
+
+Note that ```unlist``` changes the ```list``` returned by EV into a simple vector, which can then be summed.
+
+Next we specify parameters, and time. Here all we want is the root, so we specify that we want the value of y after a really long time (t = 1010). The ```lsodar``` function will stop sooner than that, and return the equilibrium it finds, and the time step at which it occurred.
+
+#```{r}
+#p <- c(b = 0.5, a = 0.02, e = 0.1, s = 0.2)
+#t <- c(0, 1e+10)
+#```
+
+Now we run the function.
+
+#```{r}
+#out <- ode(y = c(45, 200), t, LV_time_series, parms = p, rootfun = #rootfun, method = "lsodar")
+#out[, ]
+#```
+
+Here we see that the steady state population sizes are V = 100 and E = 12.5, and that given our starting point, this steady state was achieved at t = 500.8. Other information is available; see ?lsodar after loading the deSolve package.
+--->
+</div>
 </div>
 
 
