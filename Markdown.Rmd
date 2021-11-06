@@ -11,25 +11,22 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Documenting Code
 
-Properly documenting your code is important. R and RStudio provide special packages that make it easy to write very clear and pretty documentation for your code, without the need to put in any extra effort.
+Properly documenting your code is important. It increases reproducibility and dissemination of your work. R and RStudio provide special packages that make it easy to write clear and eye-catching documentation of your code without the need to put in any extra effort.
 
-The easiet way is to use the "Compile Report" button that you can apply to any R-script to produce a report in html or pdf format. In this case explanatory text is added using the "#"-symbol.
+The easiet way is to use the "Compile Report" button to produce a report in html or pdf format. This you can apply to any R-script. With this method explanatory text is added using the "#"-symbol. However, such reports are not exaclty "pretty". R can do much better. Using the package ```rmarkdown``` enables you to document your code using the very easy typesetting language Markdown. This allows you to dynamically produce reports including the text describing the code, the code itself, and the results.
 
-However, such reports are not exaclty "pretty". R can do much better. Using the package ```knitr``` enables you to document your code using Markdown, LATEX, etc., and either run it as an R script, or dynamically produce reports including the text describing the code, the code itself, and the results!
+To give you an idea how elegant your code and documentation can look I note that all websites through which I provide exercises to you are produced using RMarkdown, e.g., [this one](https://clausrueffler.github.io/ecology-course/Competition.html) from the Ecology course. In fact, you could easily write a whole book using RMarkdown such as [this one](https://bookdown.org/yihui/rmarkdown-cookbook/) or make a personal website like [this one](https://clausrueffler.github.io/).
 
-To give you an idea how elegant your code and documentation could look I note that all websites through which I provide exercises to you are produced using Rmarkdown, e.g., [this one](https://clausrueffler.github.io/ecology-course/Competition.html) from the Ecology course. In fact, you could easily write a whole book using Rrarkdown such as [this one](https://bookdown.org/yihui/rmarkdown-cookbook/) or make a personal website like [this one](https://clausrueffler.github.io/).
+In order to create an RMarkdown document you have to first have to install the package ```rmarkdown```.
 
-As always, the internet is full with resources. [Here](https://bookdown.org/ndphillips/YaRrr/) the cheat sheet for Rmarkdown and [here](https://bookdown.org/yihui/rmarkdown/) a link to a comprehensive overview.
-
-In order to create Rmarkdown documents you have to first install a free of charge and open source package.
 ```{r eval=FALSE}
 install.packages("rmarkdown")
 library(rmarkdown)
 ```
 
-Once this package is installed, open a new RMarkdown document under the file menu: ->File ->New Document ->R Markdown. This will open an .Rmd file. You then have to decide on an output format (e.g., PDF or HTML among many others, HTML seems to be the most robust). You "knit" a file in RStudio to produce the desired output format. Hit Ctrl+Shift+K (Cmd on a Mac) to start the process (when launched for the first time, RStudio may prompt you to install some packages) or press the "Knit"-button.
+Once this package is installed, open a new RMarkdown document under the file menu: ->File ->New Document ->R Markdown. This will open an ```.Rmd``` file. You then have to choose an output format (e.g., PDF or HTML among many others, HTML seems to be the most robust). You compile the report in RStudio to produce the desired output by either typing Ctrl+Shift+K (Cmd on a Mac) (when launched for the first time, RStudio may prompt you to install some packages) or press the "Knit"-button that is located in the menu bar of the script window.
 
-Using Rmarkdown is an extremely easy method to write documents that contains extensive documentation of your code using plain text. You can alternate documentation and code chunks by using special Rmarkdown tags. Code chunks are set within triple tick marks, followed by {r}:
+Using RMarkdown is an  easy method to write documents that contains extensive documentation of your code using plain text. You can alternate documentation and code chunks by using special RMarkdown tags. Code chunks are set within triple tick marks, followed by {r}:
 
 ````
 ```{r}`r ''`
@@ -39,7 +36,7 @@ abline(h = 0)
 ```
 ````
 
-While working on you document, you can either execute code using the code section or evaluate all code in one step by presseing Ctrl+Shift*S (Cmd on a Mac). Text not enclosed in triple tick marks is not evaluated. This is the spot to write extensive documentation.
+While working on you document, you can either execute code using the code section or evaluate all code in one step by presseing Ctrl+Shift*S (Cmd on a Mac). Text not enclosed in triple tick marks is not evaluated and this is how you include normal text to your report.
 
 Below you can see a few examples of R Markdown syntax that allows you to format your text in different ways:
 
@@ -51,8 +48,7 @@ Below you can see a few examples of R Markdown syntax that allows you to format 
 
 **\*\*bold\*\***
 
-You can find an introduction to the basics of RMarkdown [here](https://rmarkdown.rstudio.com/lesson-1.html) and an overview of the most important commands [here](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf). There are dozens if not hundreds tutorials on Rmarkdown on the web. [This one](https://m-clark.github.io/Introduction-to-Rmarkdown/) seems nice and crisp.
+As said above, code chunks are enclosed by triple tick marks with an {r} at the beginning (indicating that the enclosed code is written in R and not some other programming language). You can enter new code chunks under the "Insert"-menu at the top of the script window. Several optional arguments can be added to the code chunk. For example, if you want to include R code but not its output write {r eval = FALSE}. If you want to include the output from code but not the code itself (for example, if you want to show figures produced with different parameter values without each time repeating th code that produces the figure) write {r echo=FALSE}.
 
-
-
+As always, the internet is full with resources. You can find an introduction to the basics of RMarkdown [here](https://rmarkdown.rstudio.com/lesson-1.html) and an overview of the most important commands on [this cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf). [This tutorial](https://m-clark.github.io/Introduction-to-Rmarkdown/) seems nice and crisp and more comprehensive overview can be found [here](https://bookdown.org/yihui/rmarkdown/).
 
