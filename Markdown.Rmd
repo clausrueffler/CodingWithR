@@ -48,7 +48,31 @@ Below you can see a few examples of R Markdown syntax that allows you to format 
 
 **\*\*bold\*\***
 
-As said above, code chunks are enclosed by triple tick marks with an {r} at the beginning (indicating that the enclosed code is written in R and not some other programming language). You can enter new code chunks under the "Insert"-menu at the top of the script window. Several optional arguments can be added to the code chunk. For example, if you want to include R code but not its output write {r eval = FALSE}. If you want to include the output from code but not the code itself (for example, if you want to show figures produced with different parameter values without each time repeating th code that produces the figure) write {r echo=FALSE}.
+As said above, code chunks are enclosed by triple tick marks with an ```{r}``` at the beginning (indicating that the enclosed code is written in R and not some other programming language). You can enter new code chunks under the "Insert"-menu at the top of the script window. Several optional arguments can be added to the code chunk. 
+
+If you do not add any optional argument your report will show both the code chunk and the output:
+
+```{r}
+curve(exp(x), from = -1, to = 1)
+```
+
+If you only want the code chunk the report but not the output start your code chunk with ```{r eval=FALSE}```:
+
+```{r eval=FALSE}
+curve(exp(x), from = -1, to = 1)
+```
+
+Finally, if you only want the output to show up in your report but not the code chunk you have to add the optional argument start the code chunk with ```{r echo=FALSE}```:
+
+```{r echo=FALSE}
+curve(exp(x), from = -1, to = 1)
+```
+
+It is also possible to import pictures into an Rmarkdown file. For this to be possible you need to place the picture file in a place where R can find it. In this example, I stored the file inside a folder "images" that is inside the same R-project as this .Rmd-file. To determine the size of the figure in the output file I here started the code chunk with ```{r out.width = '30%'}```, which sets the figure size to 30% of the page width. 
+
+```{r out.width = '30%'}
+knitr::include_graphics("images/Rmarkdown-logo.png")
+```
 
 As always, the internet is full with resources. You can find an introduction to the basics of RMarkdown [here](https://rmarkdown.rstudio.com/lesson-1.html) and an overview of the most important commands on [this cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf). [This tutorial](https://m-clark.github.io/Introduction-to-Rmarkdown/) seems nice and crisp and more comprehensive overview can be found [here](https://bookdown.org/yihui/rmarkdown/).
 

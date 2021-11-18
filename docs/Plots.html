@@ -314,6 +314,27 @@ logistic &lt;- function(n, r, k){# definition of the user-defined function givin
 curve(logistic(x , r = 1, k = 2), from = 0, to =2.5) # plot of the function logistic as a function of the population size n = x
 abline(h = 0) # adding a horizontal line at y = 0</code></pre>
 </div>
+<div id="plotting-matrix-columns" class="section level3">
+<h3>Plotting Matrix Columns</h3>
+<p>The plotting command <code>matplot(x, y, ...)</code> in R is an easy way to superimpose several data series. Here, <em>x</em> is a vector containing the values for the x-axes and <em>y</em> is a matrix containing the data that as a function of <em>x</em>.</p>
+<pre class="r"><code>x &lt;- 1:10 # creates a vector of length 10, this will become the x-axes
+y.1 &lt;- x^2 # two more vectors of length 10
+y.2 &lt;- x^2 - 2*x
+
+matplot(x, cbind(y.1, y.2), pch = c(16, 1), xlab = &quot;x&quot;, ylab = &quot;y.1 = x^2 and y.2 = x^2-2*x&quot;)
+legend(1, 100, legend = c(&quot;y.1&quot;,&quot;y.2&quot;), pch = c(16, 1)) </code></pre>
+<p><img src="Plots_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>The most common application is to plot data that are stored in different columns of a matrix.</p>
+<pre class="r"><code>x &lt;- 1:10 # creates a vector of length 10, this will become the x-axes
+y.1 &lt;- x^2 # two more vectors of length 10
+y.2 &lt;- x^2 - 2*x
+
+data_matrix &lt;- cbind(x, y.1, y.2) # combine the above three vectors into a matrix
+data_matrix
+
+matplot(data_matrix[ , 1], data_matrix[ , 2-3], pch = c(16, 1), xlab = &quot;x&quot;, ylab = &quot;y.1 = x^2 and y.2 = x^2-2*x&quot;)
+legend(1, 100, legend = c(&quot;y.1&quot;,&quot;y.2&quot;), pch = c(16, 1)) </code></pre>
+</div>
 <div id="histograms" class="section level3">
 <h3>Histograms</h3>
 <p>The function <code>hist(x, ...)</code> is used to produce simple histograms, where <code>x</code> is a vector of values for which the histogram is desired. Histograms show the abundance or frequency of data falling in certain discrete classes.</p>
