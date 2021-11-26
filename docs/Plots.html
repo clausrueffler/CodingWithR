@@ -316,7 +316,7 @@ abline(h = 0) # adding a horizontal line at y = 0</code></pre>
 </div>
 <div id="plotting-matrix-columns" class="section level3">
 <h3>Plotting Matrix Columns</h3>
-<p>The plotting command <code>matplot(x, y, ...)</code> in R is an easy way to superimpose several data series. Here, <em>x</em> is a vector containing the values for the x-axes and <em>y</em> is a matrix containing the data that as a function of <em>x</em>.</p>
+<p>The plotting command <code>matplot(x, y, ...)</code> in R is an easy way to superimpose several data series. Here, <em>x</em> is a vector containing the values for the x-axes and <em>y</em> is a matrix containing the data as a function of <em>x</em>. Note, that <code>matplot(x, y, ...)</code> plots each <em>column</em> of <em>y</em> as separate data series.</p>
 <pre class="r"><code>x &lt;- 1:10 # creates a vector of length 10, this will become the x-axes
 y.1 &lt;- x^2 # two more vectors of length 10
 y.2 &lt;- x^2 - 2*x
@@ -324,7 +324,7 @@ y.2 &lt;- x^2 - 2*x
 matplot(x, cbind(y.1, y.2), pch = c(16, 1), xlab = &quot;x&quot;, ylab = &quot;y.1 = x^2 and y.2 = x^2-2*x&quot;)
 legend(1, 100, legend = c(&quot;y.1&quot;,&quot;y.2&quot;), pch = c(16, 1)) </code></pre>
 <p><img src="Plots_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>The most common application is to plot data that are stored in different columns of a matrix.</p>
+<p>In the following example, the variable <em>x</em> is given by the first column of a matrix while the actual data are taken from the second and third column of that same matrix.</p>
 <pre class="r"><code>x &lt;- 1:10 # creates a vector of length 10, this will become the x-axes
 y.1 &lt;- x^2 # two more vectors of length 10
 y.2 &lt;- x^2 - 2*x
