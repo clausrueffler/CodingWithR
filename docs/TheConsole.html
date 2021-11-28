@@ -544,9 +544,13 @@ $(document).ready(function () {
 &gt; Z[1:2, 2:3]
 &gt; # concatenate positions to index nonadjacent rows/columns
 &gt; Z[c(1,3), c(1,3)]</code></pre>
-<p>Most functions consider all coefficients in the matrix:</p>
-<pre class="r"><code>&gt; sum(Z)
-&gt; mean(Z)</code></pre>
+<p>Several functions exist to compute sums and averages of matrices:</p>
+<pre class="r"><code>&gt; rowSums(Z) # sum of the values in each row
+&gt; rowMeans(Z) # arithmetic mean for each row
+&gt; colSums(Z) # sum of the values in each column
+&gt; colMeans(Z) # arithmetic mean for each column
+&gt; sum(Z) # sum of all matrix entries
+&gt; mean(Z) # arithmetic mean over all matric entries</code></pre>
 </div>
 <div id="lists" class="section level3">
 <h3>Lists</h3>

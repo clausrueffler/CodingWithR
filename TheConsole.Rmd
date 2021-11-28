@@ -275,11 +275,15 @@ Z[1:2, 2:3]
 Z[c(1,3), c(1,3)]
 ```
 
-Most functions consider all coefficients in the matrix:
+Several functions exist to compute sums and averages of matrices:
 
 ```{r comment="", prompt=TRUE, eval=FALSE}
-sum(Z)
-mean(Z)
+rowSums(Z) # sum of the values in each row
+rowMeans(Z) # arithmetic mean for each row
+colSums(Z) # sum of the values in each column
+colMeans(Z) # arithmetic mean for each column
+sum(Z) # sum of all matrix entries
+mean(Z) # arithmetic mean over all matric entries
 ```
 
 ### Lists
