@@ -21,10 +21,10 @@ left:
         href: ./Plots.html
 #      - text: "4. Excercise: Solutions"
 #        href: ./PredatorPreySolutions.html
-      - text: "Documenting Code"
-        href: ./Markdown.html
       - text: "Solving ODEs"
         href: ./SolvingODEs.html
+      - text: "Documenting Code"
+        href: ./Markdown.html
 #- text: "Project"
 #    menu:
 #       - text: "Project part 1"
