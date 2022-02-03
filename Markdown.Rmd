@@ -9,6 +9,10 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'))
+```
+
 # Documenting Code
 
 Properly documenting your code is important. It increases reproducibility and dissemination of your work. R and RStudio provide special packages that make it easy to write clear and eye-catching documentation of your code without the need to put in any extra effort.
