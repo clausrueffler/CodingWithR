@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 klippy::klippy(position = c('top', 'right'))
 ```
 
-# R as an Oversized Calculator: the Console {.tabset}
+# Coding with R: Exercises {.tabset}
 
 ## Getting started
 
