@@ -25,6 +25,8 @@ left:
         href: ./SolvingODEs.html
       - text: "Documenting Code"
         href: ./Markdown.html
+#      - text: "Exercises"
+#        href: ./Exercises.html
 #- text: "Project"
 #    menu:
 #       - text: "Project part 1"
