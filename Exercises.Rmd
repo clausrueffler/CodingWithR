@@ -1,0 +1,35 @@
+---
+pagetitle: 'Learning Coding in R - exercises'
+output: 
+  html_document:
+    toc: FALSE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'))
+```
+
+# R as an Oversized Calculator: the Console {.tabset}
+
+## Getting started
+
+You need to have the package *devtools* installed. If you haven't so you can do this with
+```{r}
+
+```
+
+Please install the following R-package from my Github account:
+
+```{r eval=FALSE}
+devtools::install_github("clausrueffler/CodingWithR.exercises")
+```
+
+Next, you have to run
+```{r eval=FALSE}
+learnr::run_tutorial("lesson1", "tutorialpackage")
+```
+
