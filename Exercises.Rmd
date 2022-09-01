@@ -17,7 +17,7 @@ klippy::klippy(position = c('top', 'right'))
 
 ## Getting started
 
-You need to have the packages *learnr* and *devtools* installed. If you haven't so you can do this with
+You need to have the packages *learnr* and *devtools* installed. You can do so by running the following code:
 ```{r eval=FALSE}
 install.packages("learnr")
 install.packages("devtools")
