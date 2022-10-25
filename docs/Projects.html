@@ -11,7 +11,7 @@
 
 
 
-<title>Population and community ecology @ Uppsala University</title>
+<title>Learning Coding in R</title>
 
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -31,6 +31,10 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -287,27 +291,60 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Population and community ecology @ Uppsala University</h1>
 
 </div>
 
 
-<p><em>Learning coding in R</em></p>
-<p>R has been developed as a tool for statistical analysis and might by now be the most popular tool in this area. However, R is also a language that we can use to program simulation models in order to investigate population dynamical models in ecology. As such, R can to some extend replace proprietary software packages like MatLab or Mathematica.</p>
-<p>This website contains an introduction to some R commands that are essential for coding simulations in R (and, in fact, pretty much everything else you might want to do in R…). Click the tab button and select from the differnt sections in the drop-down menu. You can work on this material by copying the R-code and pasting it in the skript window of your R-Studio application.</p>
-<p>This website borrows heavily from chapter 8 of the book</p>
-<p><a href="https://computingskillsforbiologists.com/"><em>S. Allesina and M. Wilmes (2019). Computing Skills for Biologists: A Toolbox (2019).</em></a></p>
-<p>In fact, several parts are produced by simply copy and paste parts from that chapter without further reference.</p>
-<p>Material on this website is also inspired by the introductions to R that you can find in these books:</p>
-<ol style="list-style-type: decimal">
-<li><p><a href="https://link.springer.com/book/10.1007%2F978-1-4020-8624-3">Karline Soetaert and Peter M. J. Herman (2009). A practical guide to ecological modelling: using R as a simulation platform.</a></p></li>
-<li><p><a href="http://link.springer.com/book/10.1007%2F978-0-387-89882-7">M. Henry H. Stevens (2010). A Primer of Ecology with R.</a></p></li>
-</ol>
-<p>Both these latter books can be downloaded for free from the Uppsala University Library</p>
-<p>An excellent and freely available systematic introduction to programming in R can be found <a href="https://rstudio-education.github.io/hopr/">here</a>. Also <a href="https://bookdown.org/ndphillips/YaRrr/">this on</a> seems to be a nice and gentle introduction. Several topics in R come with a cheat sheet, summarizing the most important elements of that topic, <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/master/base-r.pdf">here the one for base R</a>.</p>
-<p>If you are more of a YouTube-person ckeck out <a href="https://www.youtube.com/channel/UCCJJdmc4DlwiWmXVZnMPb0w/playlists">this series</a> of video tutorials.</p>
-<p><strong>Enjoy!</strong></p>
-<p>Claus</p>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<div id="organize-your-r-files" class="section level1 tabset">
+<h1>Organize your R-files</h1>
+<div id="where-do-r-files-live-on-your-computer" class="section level2">
+<h2>Where do R-files live on your computer?</h2>
+<p>All code you write in the console will leave its mark in the <em>workspace</em>, that is in the <em>Environment</em> and <em>History</em>-tabs in the top right of your RStudio working environment. Once you have finished your work and you close RStudio, everything you have done will be saved in two files called <em>.RData</em> and <em>.RHistory</em>. These files are located in your <em>home directory</em>. These files are not meant to be opened and read by you. Instead, R uses them to recover your previous work once you open R again.</p>
+</div>
+<div id="r-projects" class="section level2">
+<h2>R-projects</h2>
+<p>The best possible way to address all these issues is by working with <em>Projects</em> in RStudio. <em>Projects</em> is structure that comes with RStudio and that allows you to keep all the files associated with a project organized together – input data, R scripts, analytical results, figures.</p>
+<p>The advantage of working with projects is that the working directory is automatically given by the project folder and all path are <em>relative</em> to that folder.</p>
+<p>Let’s put some life into these abstract ideas by creating a project. You can do this by choosing <em>New Project</em> from the <em>File</em>-Menu in RStudio. Choose <em>New Directory</em> from the pop-up menu, then choose <em>New Project</em> at the next step and give it a name. The directory name you choose here will be the project name. Call it whatever you like (but keep in mind that good names are short and informative). Finally, choose a location for you project. You might want to have one location for all R-projects you work on. Alternatively, you might want to place directory in a folder where you have things related to the current course.</p>
+<p>In the bottom-right window you will now see in the file tab a new file called <em>YourFileName.Rproj</em>. Next let us add an R-script to this project and immediately safe it (for this you will have to name it). It will then appear in the file tab in the bottom right of your RStudio window.</p>
+<p>Download the following data file that contains two different measurements about trees to your computer.</p>
+<a href="data:text/csv;base64,IkhlaWdodCIsIlZvbHVtZSIKNzAsMTAuMwo2NSwxMC4zCjYzLDEwLjIKNzIsMTYuNAo4MSwxOC44CjgzLDE5LjcKNjYsMTUuNgo3NSwxOC4yCjgwLDIyLjYKNzUsMTkuOQo3OSwyNC4yCjc2LDIxCjc2LDIxLjQKNjksMjEuMwo3NSwxOS4xCjc0LDIyLjIKODUsMzMuOAo4NiwyNy40CjcxLDI1LjcKNjQsMjQuOQo3OCwzNC41CjgwLDMxLjcKNzQsMzYuMwo3MiwzOC4zCjc3LDQyLjYKODEsNTUuNAo4Miw1NS43CjgwLDU4LjMKODAsNTEuNQo4MCw1MQo4Nyw3Nwo=" download="trees.csv">Download trees.csv</a>
+<p>Save this file to your project folder. You should now see the file <em>trees.csv</em> in the files-tap at the bottom-right of your RStudio window.</p>
+<p>Next, load the data into your workspace using the command</p>
+<pre class="r"><code>tree.data &lt;- read.csv(&quot;trees.csv&quot;)</code></pre>
+<p>You might want to have a look at the data:</p>
+<pre class="r"><code>head(tree.data)</code></pre>
+<pre><code>##   Height Volume
+## 1     70   10.3
+## 2     65   10.3
+## 3     63   10.2
+## 4     72   16.4
+## 5     81   18.8
+## 6     83   19.7</code></pre>
+<p>Finally, let us plot volume of trees as a function of their height and export the resulting graph as a pdf.</p>
+<pre class="r"><code>plot(tree.data)</code></pre>
+<p><img src="Projects_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>dev.print(pdf, &quot;HeightVsVolume.pdf&quot;)</code></pre>
+<pre><code>## quartz_off_screen 
+##                 2</code></pre>
+<p>This will add a new file called <em>HeightVsVolume.pdf</em> to your project folder. Your RStudio environment should now look something like this:</p>
+<p><img src="screenshot.jpeg" /><!-- --></p>
+<p>The key point is that all you files (data, R-script, graphics output) related to this exercise are stored in the same project folder. <strong>Notice that at no point when loading or saving data did you have to specify a <em>path</em> </strong>. The reason is that when working with a <em>Project</em> the <em>working directory</em> is automatically set to the project folder.</p>
+<p>You can now save your R-script and close RStudio. If you want to continue to work on this project at a later time, you can open RStudio and choose the desired project by selecting it from <em>Recent Projects</em> under the <em>File</em>-menu or by simply opening the <em>.Rproj</em>-file from whereever you have stored it.</p>
+<div id="further-information" class="section level3">
+<h3>Further Information</h3>
+<p>I am not sure I managed to convince you that working with <em>Projects</em> is the way to go. In case I didn’t, I suggest you to believe me for the moment that this is indeed the <em>best practice</em>. The real utility of this will become more apparent once you work with larger projects that include lots of data files and as you collaborate with others or want to share your work in a manner so that your analysis is <em>reproducible</em> by others. I recommend the following source if you want to dig just a little bit deeper into this topic.</p>
+<ul>
+<li><p>RStudio provides more detailed instructions on how to use projects, which you can find <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">here</a>.</p></li>
+<li><p><a href="https://www.r-bloggers.com/2020/01/rstudio-projects-and-working-directories-a-beginners-guide/">This</a> blogpost explains in more detail why working with projects is the right thing to do.</p></li>
+</ul>
+</div>
+</div>
+</div>
 
 
 

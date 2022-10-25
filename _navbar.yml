@@ -11,6 +11,8 @@ left:
 #        href: ./PopulationDynamicsSolutions.html        
       - text: "Programming in R"
         href: ./Scripting.html
+      - text: "Organizing your R-files"
+        href: ./Projects.html
 #      - text: "2. Excercise: Solutions"
 #        href: ./StructuredPopulationsSolutions.html
 #      - text: "3. Excercise: Competition"
