@@ -307,15 +307,16 @@ $(document).ready(function () {
 </div>
 <div id="r-projects" class="section level2">
 <h2>R-projects</h2>
-<p>The best possible way to address all these issues is by working with <em>Projects</em> in RStudio. <em>Projects</em> is structure that comes with RStudio and that allows you to keep all the files associated with a project organized together – input data, R scripts, analytical results, figures.</p>
-<p>The advantage of working with projects is that the working directory is automatically given by the project folder and all path are <em>relative</em> to that folder.</p>
+<p>The best possible way to address all these issues is by working with <em>Projects</em> in RStudio. A <em>Project</em> is a structure that comes with RStudio and that helps you to keep all the files associated with a specific project organized – input data, R scripts, analytical results, figures.</p>
+<p>The advantage of working with projects is that the working directory is automatically given by the project folder and all path are <em>relative</em> to that folder (what is meant by this hopefully becomes clear later).</p>
 <p>Let’s put some life into these abstract ideas by creating a project. You can do this by choosing <em>New Project</em> from the <em>File</em>-Menu in RStudio. Choose <em>New Directory</em> from the pop-up menu, then choose <em>New Project</em> at the next step and give it a name. The directory name you choose here will be the project name. Call it whatever you like (but keep in mind that good names are short and informative). Finally, choose a location for you project. You might want to have one location for all R-projects you work on. Alternatively, you might want to place directory in a folder where you have things related to the current course.</p>
 <p>In the bottom-right window you will now see in the file tab a new file called <em>YourFileName.Rproj</em>. Next let us add an R-script to this project and immediately safe it (for this you will have to name it). It will then appear in the file tab in the bottom right of your RStudio window.</p>
-<p>Download the following data file that contains two different measurements about trees to your computer.</p>
+<p>Download the following data file that contains two different measurements about trees to your computer by clicking the following link:</p>
 <a href="data:text/csv;base64,IkhlaWdodCIsIlZvbHVtZSIKNzAsMTAuMwo2NSwxMC4zCjYzLDEwLjIKNzIsMTYuNAo4MSwxOC44CjgzLDE5LjcKNjYsMTUuNgo3NSwxOC4yCjgwLDIyLjYKNzUsMTkuOQo3OSwyNC4yCjc2LDIxCjc2LDIxLjQKNjksMjEuMwo3NSwxOS4xCjc0LDIyLjIKODUsMzMuOAo4NiwyNy40CjcxLDI1LjcKNjQsMjQuOQo3OCwzNC41CjgwLDMxLjcKNzQsMzYuMwo3MiwzOC4zCjc3LDQyLjYKODEsNTUuNAo4Miw1NS43CjgwLDU4LjMKODAsNTEuNQo4MCw1MQo4Nyw3Nwo=" download="trees.csv">Download trees.csv</a>
-<p>Save this file to your project folder. You should now see the file <em>trees.csv</em> in the files-tap at the bottom-right of your RStudio window.</p>
+<p>Save this file to your project folder. You should now see the file <em>trees.csv</em> in the files-tap at the bottom-right of your RStudio window. Let us move this file to a new folder called <em>data</em> (use the <em>add folder</em>-icon in the file-tab to create that folder and then move the data file to that folder by first ticking the box in front of that file and then choose <em>Move</em> under <em>gear wheel</em>-icon).</p>
 <p>Next, load the data into your workspace using the command</p>
 <pre class="r"><code>tree.data &lt;- read.csv(&quot;trees.csv&quot;)</code></pre>
+<p>Note that in this code <em>data/trees.csv</em> indicates the <em>path</em> to the data file <em>within</em> the project foler. In other words, the path is <em>relative</em> with respect to the project folder.</p>
 <p>You might want to have a look at the data:</p>
 <pre class="r"><code>head(tree.data)</code></pre>
 <pre><code>##   Height Volume
@@ -325,15 +326,16 @@ $(document).ready(function () {
 ## 4     72   16.4
 ## 5     81   18.8
 ## 6     83   19.7</code></pre>
-<p>Finally, let us plot volume of trees as a function of their height and export the resulting graph as a pdf.</p>
+<p>Finally, let us plot volume of trees as a function of their height and export the resulting graph as a pdf. Again, let us keep a clear structure in our project folder by keeping files of different types in different folders. Thus, before you run the following code create a new folder called <em>images</em>.</p>
 <pre class="r"><code>plot(tree.data)</code></pre>
 <p><img src="Projects_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<pre class="r"><code>dev.print(pdf, &quot;HeightVsVolume.pdf&quot;)</code></pre>
+<pre class="r"><code>dev.print(pdf, &quot;images/HeightVsVolume.pdf&quot;)</code></pre>
 <pre><code>## quartz_off_screen 
 ##                 2</code></pre>
-<p>This will add a new file called <em>HeightVsVolume.pdf</em> to your project folder. Your RStudio environment should now look something like this:</p>
-<p><img src="screenshot.jpeg" /><!-- --></p>
-<p>The key point is that all you files (data, R-script, graphics output) related to this exercise are stored in the same project folder. <strong>Notice that at no point when loading or saving data did you have to specify a <em>path</em> </strong>. The reason is that when working with a <em>Project</em> the <em>working directory</em> is automatically set to the project folder.</p>
+<p>In this code, <em>output/HeightVsVolume.pdf</em> is the complete path, relative to the project folder, to the location to which we store the newly created pdf.</p>
+<p>Your RStudio environment should now look something like this:</p>
+<p><img src="images/screenshot.jpeg" /><!-- --></p>
+<p>The key point is that all you files (data, R-script, graphics output) related to this exercise are stored in the same project folder. <strong>Notice that each time you loaded or saved data, you had to specify the <em>path</em> only relative to the project folder</strong>. The reason is that when working with a <em>Project</em> the <em>working directory</em> is automatically set to the project folder. It is exactly this feature that allows to rerun your code on whatever computer, that is, by another person or by you years later when you have a different computer. Your work becomes fully <strong>reproducible</strong>!</p>
 <p>You can now save your R-script and close RStudio. If you want to continue to work on this project at a later time, you can open RStudio and choose the desired project by selecting it from <em>Recent Projects</em> under the <em>File</em>-menu or by simply opening the <em>.Rproj</em>-file from whereever you have stored it.</p>
 <div id="further-information" class="section level3">
 <h3>Further Information</h3>

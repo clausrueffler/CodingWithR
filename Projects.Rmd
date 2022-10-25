@@ -24,27 +24,29 @@ All code you write in the console will leave its mark in the *workspace*, that i
 
 ## R-projects
 
-The best possible way to address all these issues is by working with *Projects* in RStudio. *Projects* is structure that comes with RStudio and that allows you to keep all the files associated with a project organized together -- input data, R scripts, analytical results, figures.
+The best possible way to address all these issues is by working with *Projects* in RStudio. A *Project* is a structure that comes with RStudio and that helps you to keep all the files associated with a specific project organized -- input data, R scripts, analytical results, figures.
 
-The advantage of working with projects is that the working directory is automatically given by the project folder and all path are *relative* to that folder.
+The advantage of working with projects is that the working directory is automatically given by the project folder and all path are *relative* to that folder (what is meant by this hopefully becomes clear later).
 
 Let's put some life into these abstract ideas by creating a project. You can do this by choosing *New Project* from the *File*-Menu in RStudio. Choose *New Directory* from the pop-up menu, then choose *New Project* at the next step and give it a name. The directory name you choose here will be the project name. Call it whatever you like (but keep in mind that good names are short and informative). Finally, choose a location for you project. You might want to have one location for all R-projects you work on. Alternatively, you might want to place directory in a folder where you have things related to the current course.
 
 In the bottom-right window you will now see in the file tab a new file called *YourFileName.Rproj*. Next let us add an R-script to this project and immediately safe it (for this you will have to name it). It will then appear in the file tab in the bottom right of your RStudio window.
 
-Download the following data file that contains two different measurements about trees to your computer.
+Download the following data file that contains two different measurements about trees to your computer by clicking the following link:
 
 ```{r, echo=FALSE}
-(xfun::embed_file("trees.csv"))
+(xfun::embed_file("data/trees.csv"))
 ```
 
-Save this file to your project folder. You should now see the file *trees.csv* in the files-tap at the bottom-right of your RStudio window.
+Save this file to your project folder. You should now see the file *trees.csv* in the files-tap at the bottom-right of your RStudio window. Let us move this file to a new folder called *data* (use the *add folder*-icon in the file-tab to create that folder and then move the data file to that folder by first ticking the box in front of that file and then choose *Move* under *gear wheel*-icon).
 
 Next, load the data into your workspace using the command
 
 ```{r}
 tree.data <- read.csv("trees.csv")
 ```
+
+Note that in this code *data/trees.csv* indicates the *path* to the data file *within* the project foler. In other words, the path is *relative* with respect to the project folder.
 
 You might want to have a look at the data:
 
@@ -53,19 +55,23 @@ head(tree.data)
 ```
 
 Finally, let us plot volume of trees as a function of their height and export the resulting graph as a pdf.
+Again, let us keep a clear structure in our project folder by keeping files of different types in different folders. Thus, before you run the following code create a new folder called *images*.
+
 
 ```{r}
 plot(tree.data)
-dev.print(pdf, "HeightVsVolume.pdf")
+dev.print(pdf, "images/HeightVsVolume.pdf")
 ```
 
-This will add a new file called *HeightVsVolume.pdf* to your project folder. Your RStudio environment should now look something like this:
+In this code, *output/HeightVsVolume.pdf* is the complete path, relative to the project folder, to the location to which we store the newly created pdf.
+
+Your RStudio environment should now look something like this:
 
 ```{r, echo=FALSE}
-knitr::include_graphics("screenshot.jpeg")
+knitr::include_graphics("images/screenshot.jpeg")
 ```
 
-The key point is that all you files (data, R-script, graphics output) related to this exercise are stored in the same project folder. **Notice that at no point when loading or saving data did you have to specify a *path* **. The reason is that when working with a *Project* the *working directory* is automatically set to the project folder.
+The key point is that all you files (data, R-script, graphics output) related to this exercise are stored in the same project folder. **Notice that each time you loaded or saved data, you had to specify the *path* only relative to the project folder**. The reason is that when working with a *Project* the *working directory* is automatically set to the project folder. It is exactly this feature that allows to rerun your code on whatever computer, that is, by another person or by you years later when you have a different computer. Your work becomes fully **reproducible**!
 
 You can now save your R-script and close RStudio. If you want to continue to work on this project at a later time, you can open RStudio and choose the desired project by selecting it from *Recent Projects* under the *File*-menu or by simply opening the *.Rproj*-file from whereever you have stored it.
 
