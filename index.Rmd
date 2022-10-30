@@ -12,7 +12,7 @@ This website contains an introduction to some R commands that are essential for 
 
 This website borrows heavily from chapter 8 of the book 
 
-[*S. Allesina and M. Wilmes (2019). Computing Skills for Biologists: A Toolbox (2019).*](https://computingskillsforbiologists.com/)
+[S. Allesina and M. Wilmes (2019). Computing Skills for Biologists: A Toolbox (2019).](https://computingskillsforbiologists.com/)
 
 In fact, several parts are produced by simply copy and paste parts from that chapter without further reference.
 
@@ -22,7 +22,9 @@ Material on this website is also inspired by the introductions to R that you can
 
 2) [M. Henry H. Stevens (2010). A Primer of Ecology with R.](http://link.springer.com/book/10.1007\%2F978-0-387-89882-7)
 
-Both these latter books can be downloaded for free from the Uppsala University Library
+3) [Clement Calenge. The *R* Software for Data Analysis and Modeling. *in* Dennis L. Murray and Brett K. Sandercock (2020). Population Ecology in Practice. Wiley-Blackwell.](https://www.wiley.com/en-se/Population+Ecology+in+Practice-p-9780470674147)
+
+The first two books are available as e-books at the Uppsala University Library.
 
 An excellent and freely available systematic introduction to programming in R can be found [here](https://rstudio-education.github.io/hopr/). Also [this on](https://bookdown.org/ndphillips/YaRrr/) seems to be a nice and gentle introduction. Several topics in R come with a cheat sheet, summarizing the most important elements of that topic, [here the one for base R](https://raw.githubusercontent.com/rstudio/cheatsheets/master/base-r.pdf).
 

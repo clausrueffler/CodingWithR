@@ -9,41 +9,41 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r klippy, echo=FALSE, include=TRUE}
+```{r klippy, eval=FALSE, echo=FALSE, include=TRUE}
 klippy::klippy(position = c('top', 'right'))
 ```
 
-# R as an Oversized Calculator: the Console {.tabset}
+# *R* as an Oversized Calculator: the Console {.tabset}
 
 ## Getting started
 
-R is a versatatile programming language for statistical analysis, data analysis and numerical calculationns. The main hurdle new users face when learning R is that it is based on a command-line interface: to make things happen, you write text commands in a “console,” and then the program executes them. This might seem unusual if you are used to software based on a graphical user interface, where you tend to work by clicking on windows and buttons. However, the command line is what makes it easy to automate your analysis - all you have to do is collect all the commands in a text file, and then run them in R.
+*R* is a versatile programming language for statistical analysis, data analysis and numerical calculations. The main hurdle new users face when learning *R* is that it is based on a command-line interface: to make things happen, you write text commands in a *console*, and then the program executes them. This might seem unusual if you are used to software based on a graphical user interface, where you tend to work by clicking on windows and buttons. However, the command line is what makes it easy to automate your analysis - all you have to do is collect all the commands in a text file, and then run them in *R*.
 
-### Installing R and RStudio
+### Installing *R* and *RStudio*
 
-For this introduction, we are going to use RStudio, a graphical interface that simplifies the use of R by giving you immediate access to the code, the console, and the graphics.
+For this introduction, we are going to use *RStudio*, a graphical interface that simplifies the use of *R* by giving you immediate access to the code, the console, and the graphics.
 
-To install R and RStudio, you can follow [these instructions](https://rstudio-education.github.io/hopr/starting.html).
+To install *R* and *RStudio*, you can follow [these instructions](https://rstudio-education.github.io/hopr/starting.html).
 
 ### Finding Help
 
-Each command in R comes with a manual page. To access it, type ```?[NAME OFCOMMAND]``` in the console (e.g., ```?lm```). Alternatively, search the command under the help-tab tin the bottom right window of RStudio.
+Each command in *R* comes with a manual page. To access it, type ```?[NAME OFCOMMAND]``` in the console (e.g., ```?lm```). Alternatively, search the command under the help-tab in the bottom right window of RStudio.
 
-But really, if you need help with R the internet is your friend. Virtually any problem you might encounter has been described and solved somewhere on the internet. It's all about to phrase your question in the right manner in a Google search. Most often you will end up on [https://stackexchange.com/](https://stackexchange.com/), [https://stackoverflow.com](https://stackoverflow.com/questions) or [https://www.r-bloggers.com/](https://www.r-bloggers.com/).
+But really, if you need help with *R* the internet is your friend. Virtually any problem you might encounter has been described and solved somewhere on the internet. It's all about to phrase your question in the right manner in a Google search. Most often you will end up on [https://stackexchange.com/](https://stackexchange.com/), [https://stackoverflow.com](https://stackoverflow.com/questions) or [https://www.r-bloggers.com/](https://www.r-bloggers.com/).
 
 ## The Console
 
-We will first explore simple operations, assignments, and data types to get familiar with the R console. A "greater than sign" (>) at the **beginning of the line in the console** means that R is ready to accept your input. You can navigate the history of previously typed commands by using the arrows on your keyboard. A comment starts with the hash (#), and does not require a closing symbol.
+We will first explore simple operations, assignments, and data types to get familiar with the *R* console. A "greater than sign" (>) at the **beginning of the line in the console** means that *R* is ready to accept your input. You can navigate the history of previously typed commands by using the arrows on your keyboard. A comment starts with the hash (#), and does not require a closing symbol.
 
-We can use R as an oversized calculator:
+We can use *R* as an oversized calculator:
 
 ```{r comment="", prompt=TRUE, eval=FALSE}
-1.7 * 2
-12 / 5
-2.1 ^ 5
-log(10)
-log10(10)
-sqrt(9)
+1.7 * 2 # multiplication
+12 / 5 # division
+2.1 ^ 5 # power
+log(10) # natural logarithm
+log10(10) # logarithm to base 10
+sqrt(9) # square root
 ```
 
 The following table provides a list of arithmetic and logical operators in R:
@@ -65,17 +65,6 @@ Operators | Description
 &#124; | Logical or
 ! | Logical not
 
-R is designed for statistical analysis, and therefore it provides many built-in mathematical functions. Some are listed in the next table.
-
-Function | Description
----------|------------
-abs(x) | Absolute value
-sqrt(x) | Square root
-cos(x), sin(x), tan(x) | Trigonometric functions
-log(x) | Natural logarithm
-log10(x) | Base 10 logarithm
-exp(x) | eponential function $e^x$
-
 Let’s have a closer look at the logical operators. They create a logical value by comparing two elements:
  
 ```{r comment="", prompt=TRUE, eval=FALSE}
@@ -87,12 +76,23 @@ Let’s have a closer look at the logical operators. They create a logical value
 (5 > 3) | (7 < 5) # logical OR
 ```
 
+*R* is designed for statistical analysis, and therefore it provides many built-in mathematical functions. Some are listed in the next table.
+
+Function | Description
+---------|------------
+abs(x) | Absolute value
+sqrt(x) | Square root
+cos(x), sin(x), tan(x) | Trigonometric functions
+log(x) | Natural logarithm
+log10(x) | Base 10 logarithm
+exp(x) | eponential function $e^x$
+
 We can use the operator ```%in%``` to search for matches. It returns a logical value (i.e., ```TRUE``` or ```FALSE```) indicating whether or not a match exists.
 
 ```{r comment="", prompt=TRUE, eval=FALSE}
 3 %in% 1:5 # 1:5 generates a sequence
 # c() combines values into a vector or list
-# all arguments are converted to the same type
+# all arguments are converted to the same type (here it is a character string)
 c(2, "good to be", TRUE)
 2 %in% c(2, "good to be", TRUE)
 # test for multiple elements at once
@@ -101,28 +101,25 @@ c(2, "good to be", TRUE)
 
 ## Assignment and Data Types
 
-When programming in R, you assign values to variables: a variable is a "box" that can contain a value or object. The assignment command in R is ```<-``` (less-than sign, followed by a minus sign).
+Everything in *R* is an *object*, where an object is a name that you can use to call up stored data.  When programming in R, you assign data to objects using the assignment command is ```<-``` (less-than sign, followed by a minus sign). Each new object will appear in the *environment*-pane in the top-right of *RStudio*.
 
 ```{r comment="", prompt=TRUE, eval=FALSE}
 x <- 5 # assign the value 5 to x
 x * 2 # use variable x to perform operations
-x <- 7 # assign new value to variable
+x <- 7 # assign new value to variable, this overwrites the previous assignment
 x*2
 ```
 
-Note that the previous value is overwritten whenever a new value is assigned to the variable. To list all the variables you have created, type ```ls()```. To remove a variable ```x``` from the current R session, type ```rm(x)```.
+Note that the previous value is overwritten whenever a new value is assigned to the variable. To list all the variables you have created, type ```ls()```. To remove a variable *x* from the current *R* session, type ```rm(x)```.
 
-R can handle different types of data. In the following, we assign a new value to the variable ```x```, each time altering its *data type*. To determine the type of variable ```x```, use the command ```class```. You can also test whether a variable is of a certain type by using the functions ```is.numeric```, ```is.character```, etc.
+*R* can handle different types or modes of data, the most important ones are *numeric* (numbers), *character* (strings of character, e.g., a word), and *logical* (TRUE and FALSE). In the following, we assign a new value to the variable *x*, each time altering its *type*. To determine the type of variable ```x```, use the command ```class```. You can also test whether a variable is of a certain type by using the functions ```is.numeric```, ```is.character```, etc.
 
 ```{r comment="", prompt=TRUE, eval=FALSE}
-# integer (natural numbers)
-x <- as.integer(5)
-class(x)
 # numeric (real numbers)
-x <- pi
+x <- 5
 class(x)
-# complex (complex number)
-x <- 1 + 3i
+X # note that R is cass sensitive, that is, x is different from X
+x <- pi # a numeric that R knows
 class(x)
 # logical (TRUE or FALSE)
 x <- (5 > 7)
@@ -133,27 +130,30 @@ class(x)
 is.numeric(x)
 ```
 
-If you need to change the type of a variable (an operation called *casting*), use the functions ```as.character```, ```as.integer```, ```as.numeric```, etc. In RStudio, if you type the first few letters of the name of a function or a variable, and hit Tab, you can see all the possible ways to complete the name; try typing ```as.``` and hit Tab to see all the available functions for type conversion. Some examples:
+If you need to change the type of a variable (an operation called *casting*), use the functions ```as.character``` or ```as.numeric```, etc. In *RStudio*, if you type the first few letters of the name of a function or a variable, you can see all the possible ways to complete the name; try typing ```as.``` to see all the available functions for type conversion. Some examples:
 
 ```{r comment="", prompt=TRUE, eval=FALSE}
-x <- 5
-as.character(x)
-as.logical(x) # only 0 is FALSE
-y <- "07.123" # assign a character string
-x < y # beware: comparing different types
-x < as.numeric(y) # cast string to numeric
+x <- "05.2" # assign a character string
+class(x)
+(x <- as.numeric(x)) # cast character string to numeric, round brackets around assignment produce output
+as.logical(x) # all x not equal 0 are TRUE
+as.logical(0) # only 0 is FALSE
 ```
 
-## Data Structures
+## Objects
 
-R ships with several data structures, which can be used to organize your data. Knowing the characteristics and specific operations of each data structure allows you to write better and more compact code.
+Everying in *R* is an *object*. Objects come in different types, the most important ones are *vectors*, *matrices*, *lists*, and *functions*.
 
 ### Vectors
 
-The most basic data structure in R is the vector, which is an ordered collection of values of the same type. Vectors can be created by concatenating different values with the command ```c```:
+The most basic data structure in *R* is the vector, which is an ordered collection of values of the same type. As such, vectors are *1-dimensional* objects. Vectors can be created by *concatenating* different values with the command ```c```:
 
 ```{r comment="", prompt=TRUE, eval=FALSE}
-x <- c(2, 3, 5, 2, 3, 13, 17, 3)
+x <- c(2, 3, 5, 2, 3, 13, 17, 3) # a numeric vector
+y <- c("a", "b", "c") # a vector of characters
+z <- c(1, "a") # entries in a vector have to be of the same type
+z # R coerces 1 into a charater
+class(z)
 ```
 
 You can access the elements of a vector by their index. You can access the elements of a vector by specifying their positions:
@@ -186,7 +186,7 @@ which(x > 5) # values larger than 5 occur at position 6 and 7
 length(which(x == 3)) # the value 3 occurs exactly three times within the vector x
 ```
 
-Given that R was born for statistics, there are many statistical functions you can perform on vectors:
+Given that *R* was born for statistics, there are many statistical functions you can perform on vectors:
 
 ```{r comment="", prompt=TRUE, eval=FALSE}
 length(x)
@@ -225,24 +225,25 @@ rep(c(1,2,3), 3)
 #### Exercises
 
 (a) Create a vector containing all the even numbers between 2 and 100 (inclusive) and store it in the variable ```z```.
-(b) Extract all the elements of ```z``` that are divisible by 12. How many elements match this criterion?
-(c) What is the sum of all the elements of ```z```?
-(d) Is the sum of the elements of ```z``` equal to 51 × 50?
-(e) What is the product of elements 5, 10, and 15 of ```z```?
+(b) What is the sum of all the elements of ```z```?
+(c) Is the sum of the elements of ```z``` equal to 51 × 50?
+(d) What is the product of entries at position 5, 10, and 15 of ```z```?
+(e) Does ```seq(2, 100, by = 2)``` produce the same vector as ```(1:50) * 2```?
+(f) What happens if you type ```z^2```?
+
+<!--(b) Extract all the elements of ```z``` that are divisible by 12. How many elements match this criterion?
 (f) Create a vector ```y``` that contains all numbers between 0 and 30 that are
-divisible by 3. Find the five elements of ```y``` that are also elements of ```z```.
-(g) Does ```seq(2, 100, by = 2)``` produce the same vector as ```(1:50) * 2```?
-(h) What happens if you type ```z^2```?
+divisible by 3. Find the five elements of ```y``` that are also elements of ```z```.-->
 
 ### Matrices
 
-A ```matrix``` is a two-dimensional table of values. In the case of numeric values, you can perform common matrix operations (e.g., product, inverse, decomposition):
+A ```matrix``` is a two-dimensional object where data are stored in a rectangular array with rows and columns. In the case of numeric values, you can perform common matrix operations (e.g., product, inverse, decomposition):
 
 ```{r comment="", prompt=TRUE, eval=FALSE}
-# create matrix
-# indicate values, number of rows, number of columns
+# create matrix by specifying values, number of rows, number of columns
 A <- matrix(c(1, 2, 3, 4), nrow = 2, ncol = 2)
-A
+A # by default, the matrix is filled column by column
+(A <- matrix(c(1, 2, 3, 4), nrow = 2, ncol = 2, byrow = TRUE)) # fill matrix by row
 A %*% A # matrix product
 solve(A) # matrix inverse
 A %*% solve(A)
@@ -252,9 +253,9 @@ B
 t(B) # transpose
 B %*% t(B)
 # by defaul, matrices are filled by column
-Z <- matrix(1:9, 3, 3)
-Z
-# to fill by rows specify matrix (1:9, 3, 3, byrow = TRUE)
+(C <- matrix(1:9, 3, 3))
+(D <- matrix(c("a", "b", "c", "d"), 2, 2))
+A %*% D # matrix operations are not defined for matrices with numeric entries
 ```
 
 Determine the dimensions of a matrix (the numbers of rows and
@@ -306,9 +307,13 @@ mylist[["Names"]] # an alternative way to access by label
 mylist[["Values"]][3] # third element of the second entry
 ```
 
+### Functions
+
+Functions are *R* objects designed to perform operations on other objects. Each time you write a command at the *R* prompt and hit the Enter-key, one or several functions are executed. An *R* function is typically called by its name followed by parentheses. Inside the parentheses, the user must pass the arguments required by the function. We have already described several built-in functions previously, such as ```c()```, ```log()```, and ```matrix()```. What makes *R* a powerful programming language is that you can define your own functions, something we will do later.
+
 ### Data Frames
 
-Data frames contain data organized like in a spreadsheet. The columns (typically representing different measurements) can be of different types (e.g., one column could be the date of measurement, another the weight of the individual, or the volume of the cell, or the treatment of the sample), while the rows typically represent different samples.
+Data frames are special matrices that contain additional information about its content such as row and column names. In short, data frames are *R*s equivalent to a an EXCEL preadsheet. The columns (typically representing different measurements) can be of different types (e.g., one column could be the date of measurement, another the weight of the individual, or the volume of the cell, or the treatment of the sample), while the rows typically represent different samples.
 
 When you import a spreadsheet file into R, it is automatically stored as a data frame. The difference between a matrix and a data frame is that in a matrix all the values are of the same type (e.g., all numeric), while in a data frame each column can be of a different type.
 
@@ -336,8 +341,8 @@ head(trees)
 
 #### Exercises
 
-(a) What is the average height of the cherry trees?
-(b) What is the average girth of those that are more than 75 ft tall?
+(a) What is the average tree height?
+(b) What is the average girth of those trees that are more than 75 ft tall?
 (c) What is the maximum height of trees with a volume between 15
 and 35 ft^3?
 
