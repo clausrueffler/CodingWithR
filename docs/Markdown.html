@@ -331,7 +331,7 @@ abline(h = 0)
 <pre class="r"><code>curve(exp(x), from = -1, to = 1)</code></pre>
 <p>Finally, if you only want the output to show up in your report but not the code chunk you have to add the optional argument start the code chunk with <code>{r echo=FALSE}</code>:</p>
 <p><img src="Markdown_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>It is also possible to import pictures into an Rmarkdown file. For this to be possible, you need to place the picture file in a place where R can find it. In this example, I stored the image file <code>Rmarkdown-logo.png</code> inside a folder called “images”, which is located inside the same <em>R</em>-project as this .Rmd-file. To determine the size of the figure in the output file, I here start the code chunk with <code>{r out.width = '30%'}</code>, which sets the figure size to 30% of the page width.</p>
+<p>It is also possible to import pictures into an Rmarkdown file. For this to be possible, you need to place the picture file in a place where R can find it. In this example, I stored the image file <em>Rmarkdown-logo.png</em> inside a folder called <em>images</em>, which is located inside the same <em>R</em>-project as this .Rmd-file. To determine the size of the figure in the output file, I here start the code chunk with <code>{r out.width = '30%'}</code>, which sets the figure size to 30% of the page width.</p>
 <pre class="r"><code>knitr::include_graphics(&quot;images/Rmarkdown-logo.png&quot;)</code></pre>
 <p><img src="images/Rmarkdown-logo.png" width="30%" /></p>
 <div id="additional-resources" class="section level4">
