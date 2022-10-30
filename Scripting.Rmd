@@ -9,15 +9,17 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+<!--
 ```{r klippy, echo=FALSE, include=TRUE}
 klippy::klippy(position = c('top', 'right'))
 ```
+-->
 
 # Programming in R {.tabset}
 
 ## Computing Using Scripts
 
-Now that we are more familiar with the basics of R, we turn to writing programs. Typically, you will write more complex programs in a text file (called a script), with extension ```.R```. Before writing our first programs, this section will demonstrate how to organize your code to make it readable and easy to understand.
+Now that we are more familiar with the basics of *R*, we turn to writing *programs*. Typically, you will write more complex programs in a text file (called a script), with extension ```.R```. Before writing our first programs, this section will demonstrate how to organize your code to make it readable and easy to understand.
 
 ### Why Write a Script?
 
@@ -36,9 +38,7 @@ Before we start writing scripts, we have a few suggestions on how to organize an
 
 ##### Names
 
-Use descriptive file names for your scripts; use underscore (_) or dots (.) to separate words.
-
-Likewise, choose informative names for your objects and functions:
+Use *descriptive* and *short* file names for your scripts. Likewise, choose informative names for your objects and functions; use underscore (_) or dots (.) to separate words.
 
 ````
 # good object names (use nouns!)
@@ -60,7 +60,7 @@ o # lowercase O
 l # lowercase L
 ````
 
-Good function names (use verbs if it makes sense)
+Good function names are informative:
 
 ````
 calculate_cv
@@ -84,7 +84,8 @@ Put a space before and after an operator (the only exception is a colon), and be
 x <- 5 * 7
 y <- 7 * (x ^ 2)
 m <- matrix(25, 5, 5)
-z <- mean(x, na.rm == TRUE) i <- t + 1
+z <- mean(x, na.rm == TRUE)
+i <- t + 1
 z <- (x * y) + (x2 * y2)
 
 if (b == 5) {
@@ -94,24 +95,23 @@ if (b == 5) {
 }
 
 # bad
-z = "bad_assignment_style"
-x<-5*7
+x<-5*7 # hard to read
 y <- 7*x^2
-m <- matrix(25 , 5 , 5)
+m <- matrix(25 , 5 , 5) # m is not very informative
 ```
 
 ## Loops
 
-Another way to modify the flow of a program is to write a loop. A loop is a series of commands that are repeated a number of times. For example, you want to run the same analysis on different data sets that you have collected, or you want to plot the results contained in a set of files, or you want to test your simulation over a number of parameter sets, etc.
+An important way modify the flow of a program is to write a loop. A loop is a series of commands that are repeated a number of times. For example, you want to run the same analysis on different data sets that you have collected, or you want to plot the results contained in a set of files, or you want to test your simulation over a number of parameter sets, etc.
 
-R provides you with two ways to loop over blocks of commands: the ```for``` loop, and the ```while``` loop. Let’s start with the ```for``` loop, which is used to iterate over a vector (or a list): for each value of the vector, a series of commands will be run.
+R provides you with two ways to loop over blocks of commands: the ```for``` loop, and the ```while```-loop. Let’s start with the ```for```-loop, which is used to iterate over a vector (or a list): for each value of the vector, a series of commands will be run.
 This is the anatomy of a ```for``` statement:
 
 ````
 for (variable in list_or_vector) {
   execute these commands # if there is more than one command each has to start on a new line
 ````
-For example
+Example
 
 ```{r eval=FALSE}
 myvec <- 1:10 # vector with numbers from 1 to 10
@@ -121,9 +121,9 @@ for (i in myvec) {
 }
 ```
 
-In the code above, the variable ```i``` takes the value of each element of ```myvec``` in sequence. Inside the block defined by the for loop, you can use the variable ```i``` to perform operations. Note that ```i``` is only an example of a variable name. Note also that in this ```for``` loop each new command starts on a new line. This is essential! the same applies to the other looping constructions and to functions.
+In the code above, the variable *i* takes the value of each element of *myvec* in sequence. Inside the block defined by the for-loop, you can use the variable *i* to perform operations. Note that *i* is only an example of a variable name. Note also that in this for-loop each new command starts on a new line. This is essential! The same applies to the other looping constructions and to functions.
 
-As a slightly less trivial example, let us calculate the factorias of *n*, $n! = 1 * 2 * ... * (n-1) * n$ using a ```for```-loop.
+As a slightly less trivial example, let us calculate the factorials of *n*, $n! = 1 * 2 * ... * (n-1) * n$ using a for-loop.
 
 ```{r}
 result <- 1
@@ -133,7 +133,7 @@ for(i in 1:6) {
 }
 ```
 
-We also use the ```for```-loop to compute the time series of an exponentially growing population.
+We also use the for-loop to compute the time series of an exponentially growing population.
 
 ```{r}
 lambda <- 1.1
@@ -146,10 +146,9 @@ for(i in 1:t) {
 }
 ```
 
-In summary, ```for```-loop is used when you know that you want to perform the analysis using a given set of values (e.g., run over for a fixed number of iterations).
+In summary, for-loop is used when you know that you want to perform the analysis using a given set of values (e.g., run over for a fixed number of iterations).
 
-The ```while``` loop is used when the commands need to be repeated while a certain condition is true.
-The anatomy of the while statement is
+The ```while```-loop is used when the commands need to be repeated while a certain condition is true. The anatomy of the while-loop is
 
 ````
 while (test expression is TRUE) {
@@ -174,21 +173,9 @@ while (i <= 10) {
 }
 ```
 
-This script performs exactly the same operations we wrote for the ```for``` loop above. Note that you need to update the value of ```i``` (using ```i <- i + 1```), otherwise the loop will run forever (infinite loop — to terminate click on the "Stop" button in the top-right corner of RStudio). 
+This script performs exactly the same operations we wrote with the for-loop above. Note that you need to update the value of *i* (using ```i <- i + 1```), otherwise the loop will run forever (infinite loop — to terminate click on the "Stop" button in the top-right corner of *RStudio*). 
 
-In the next example we calculate again the factorial $n!$, but this time using a ```while```-loop.
-
-```{r echo=FALSE, eval=FALSE}
-# multiply numbers from 1 to six
-  result <- 1
-  for (i in 1:6){
-    result <- result * i
-    result
-  }
-```
-
-You can exit a loop by using the command break in an ```if
-```-construction. For example,
+<!--In the next example, we calculate again the factorial $n!$, but this time using a while-loop.
 
 ```{r eval=FALSE}
 i <- 1
@@ -203,24 +190,14 @@ while (i <= 10) {
 }
 ```
 
-#### Exercises
+You can exit a loop by using the command break in an ```if
+```-construction. For example,-->
 
-What does this codes do? Try to guess what the loop does, and then create and run a script to confirm your intuition.
-
-```{r eval=FALSE}
-z <- seq(1, 100, by = 3)
-for (k in z) {
-   if (k / 4 < 10) {
-    print(k)
-  }
-}
-```
-
-Last but not least, ```ifelse```-constructs allows us to make to the execution of commands conditional. The function ```ifelse(test, yes, no)``` contains a logical ```test```, and ```yes``` and ```no``` are output conditional of whether the logical test results in ```TRUE``` or ```FALSE```.
+Not a loop but another important way to modify the flow of your program: *ifelse*-constructs allows us to make the execution of commands conditional. The function ```ifelse(test, yes, no)``` contains a logical *test*, and *yes* and *no* are output conditional of whether the logical test results in *TRUE* or *FALSE*.
 
 ```{r eval=FALSE}
 x <- 2
-ifelse (x > 0, "positive", "negative, 0")
+ifelse (x > 0, "positive", "negative or 0")
 ```
 
 If we want to incorporate more than one logical test we can use ```if``` and ```else``` as in the following example:
@@ -238,6 +215,20 @@ We can achieve the same result by nesting the ```ifelse``` command but this can 
 x <- 2
 ifelse (x > 0, "positive", ifelse(x < 0, "negative", "zero"))
 ```
+\
+
+#### Exercises
+
+What does this code do? Try to understand what the loop does, and then create and run a script to confirm your intuition.
+
+```{r eval=FALSE}
+z <- seq(1, 100, by = 3)
+for (k in z) {
+   if (k / 4 < 10) {
+    print(k)
+  }
+}
+```
 
 ## Functions
 
@@ -254,20 +245,21 @@ my_func_name <- function([optional arguments]) {
 
 For instance,
 
-```{r eval=FALSE}
-circle_surface <- function(radius) {
+```{r}
+circle.area <- function(radius) {
   pi * radius^2
 }
 ```
 
-defines a function called ```circlesurface``` which takes as input argument a variable called ```radius```  and returns the value ```pi*radius^2``` (here ```pi``` is the constant $\pi=3.14\ldots$), which is indeed the formula for the surface area of a surface. The code of the function is contained between the curly brackets. At the end, a value may be returned.
+defines a function called ```circle.area``` which takes as input argument a variable called *radius*  and returns the value *pi*radius^2* (here *pi* is the constant $\pi=3.14\ldots$), which is indeed the formula for the surface area of a surface. The code of the function is contained between the curly brackets. At the end, a value may be returned.
 
-After submitting the function to R, we can *call* this function to calculate the surface of circles with given radius.
+After submitting the function to *R*, we can *call* this function to calculate the surface of circles with given radius.
+
 
 ```{r eval=FALSE}
-circle_surface(2)
+circle.area(2)
 # apply the function to a vector of radii
-circle_surface(1:5) # applies the function to the numbers 1 to 5 in a single step; thus, we apply functions to vectors
+circle.area(1:5) # We can apply the function to the numbers 1 to 5 in a single step; thus, we apply functions to a vector.
 ```
 
 Some functions may have more than one argument and may return more than one value:
@@ -284,14 +276,19 @@ rectangle(2, 3)
 
 Here, the output of the function is presented in a named list.
 
-It is often useful to eplore functions by plotting them (see next section):
+It is often useful to explore functions by plotting them (see next section):
 
-```{r eval=FALSE}
-curve(circle_surface(x), from = 0, to = 2, xlab = "radius",  ylab = "circle surface")
+```{r}
+curve(circle.area(x), from = 0, to = 2, xlab = "radius",  ylab = "circle area")
+```
+
+Exercise: Plot the area of a rectangle with as a function of *side_1* (with *side_1* between 0 and 2) given that *side_2=2*.
+
+```{r, echo=FALSE, eval=FALSE}
 curve(rectangle(x, side_2 = 2)$surface, from = 0, to = 2, xlab = "side_1", ylab = "rectangle surface")
 ```
 
-Functions can be arbitrarily complicated and most simulation models will have a more or less complex function at its heart. For instance, we can incorporate ```loops``` and ```iflese```-constructs into functions.
+Functions can be arbitrarily complicated and most simulation models will have a more or less complex function at its heart. For instance, we can incorporate loops and *iflese'```'-constructs into functions.
 
 ```{r eval=FALSE}
 sign_of_a_number <- function(x){
@@ -306,7 +303,7 @@ sign_of_a_number(2.3)
 To calculate the factorial more easily we can wrap a function arount the while loop from the previous section:
 
 ```{r eval=FALSE}
-my_factorial <- function(n){
+my.factorial <- function(n){
   result <- 1
   i <- 1
   while (i <=  n){
@@ -316,36 +313,69 @@ my_factorial <- function(n){
   result
 }
 
-my_factorial(4)
+my.factorial(4)
 ```
 
 ## Random Numbers
 
-R can sample (pseudo)random numbers from many distributions. This is very useful for simulations! For example,
+*R* can sample (pseudo)random numbers from many distributions. This is very useful for simulations. Important *continuous* probability distributions are the [*uniform distribution*](https://en.wikipedia.org/wiki/Continuous_uniform_distribution) and [*normal distribution*](https://en.wikipedia.org/wiki/Normal_distribution).
 
-```{r comment="", prompt=TRUE, eval=FALSE}
-runif(3) # samples three numbers from uniform distribution over the interval (0, 1)
-runif(10, -1, 1) # samples ten numbers from uniform distribution over the interval (-1, 1)
+```{r eval=FALSE}
+# samples three numbers from uniform distribution over the interval (0, 1)
+runif(3)
+# samples ten numbers from uniform distribution over the interval (-1, 1)
+runif(10, -1, 1)
 # samples four values from normal distribution with mean 1 and standard deviation 5
 rnorm(4, mean = 1, sd = 5)
-# draws five values from Poisson distribution with mean lambda
-rpois(5, lambda = 5)
 ```
 
-You can easily sample with or without replacement from a vector using the function ```sample(x, size, prob, replace, ...)```. To get to know this function, let us simulate the outcome of throwing a dice. The possible outcomes of throwing a dice are the numbers 1 to 6. This we encode in a vector of possible outcomes: ```possible_outcomes <- c(1, 2, 3, 4, 5, 6)```, or, for short, ```possible_outcomes <- 1:6```. If the dice is *fair* each number occurs with probability 1/6. This we encode in the vector ```probabilities <- c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)```, or, for short, ```probabilities <- rep(1/6, 6)```. Since the outcome of any particular throw is independent of all previous throws we *sample without replacement*. We have to specify this in the function ```sample``` by adding ```replace = TRUE```. Finally, we have to add how often we throw the dice by specifying a value for ```size```, for example, ```size = 1``` if we throw the dice only once.
+A commonly encountered *discrete* probability distributions is the [*Poisson distrib ution*](https://en.wikipedia.org/wiki/Poisson_distribution). For example, it is often assume that the number of offspring per female is Poisson distributed.
+
+```{r eval=FALSE}
+# draws five values from Poisson distribution with mean lambda
+rpois(5, lambda = 1)
+```
+
+<!--
+Another important discrete distribution is the [*binomial distribution*](https://en.wikipedia.org/wiki/Binomial_distribution).
+The binomial distribution is slightly more complicated. It
+describes the number of successes in a sequence of *n* independent trials, each asking a yes–no question, and each with its own Boolean-valued outcome: success (with probability p) or failure (with probability *q = 1 − p*). 
+
+```{r}
+rbinom(n = 1, size = 1, prob = 0.5) # samples one value
+rbinom(n = 1, size = 5, prob = 0.5)
+```
+-->
+
+You can easily draw a sample your own probability distribution using the function
+
+```
+sample(x, size, prob, replace, ...)
+```
+
+To get to know this function, let us simulate the outcome of throwing a dice. The possible outcomes of throwing a dice are the numbers 1 to 6. This we encode in a vector of possible outcomes: ```possible_outcomes <- c(1, 2, 3, 4, 5, 6)```, or, for short, ```possible_outcomes <- 1:6```. If the dice is *fair* each number occurs with probability 1/6. This we encode in the vector ```probabilities <- c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)```, or, for short, ```probabilities <- rep(1/6, 6)```. Since the outcome of any particular throw is independent of all previous throws we *sample without replacement*. We have to specify this in the function *sample* by adding *replace = TRUE*. Finally, we have to add how often we throw the dice by specifying a value for *size*, for example, *size = 1* if we throw the dice only once.
 
 ```{r eval=FALSE}
 possible_outcomes <- 1:6
 probabilities <- rep(1/6, 6)
 
-sample(x = possible_outcomes, size = 1, prob = probabilities <- rep(1/6, 6), replace = TRUE)
+sample(x = possible_outcomes, size = 1, prob = probabilities, replace = TRUE)
 
-sample(possible_outcomes, 10, probabilities <- rep(1/6, 6), replace = TRUE) # simulating the outcome of ten throws
+sample(possible_outcomes, 10, probabilities, replace = TRUE) # simulating the outcome of ten throws
 ```
 
-Can you code a function that simulates the sum of the eyes when throwing two dice together?
+Often we want to simulate the outcome of a *coin-toss*, for example, to determine in a simulation whether or not an individual dies from one time step to the next.
 
 ```{r eval=FALSE}
+prob.death <- 0.2
+sample(c(0, 1), 1, c(prob.death, 1 -prob.death), replace = TRUE) # returns a 0 if the individuals dies and a 1 if the individual survives where death occurs with probability 0.2
+```
+
+#### Exercises
+
+(a) Code a function that simulates the sum of the eyes when throwing two dice together.
+
+```{r eval=FALSE, echo=FALSE}
 two_dice_sum <- function() {
   outcome <- sample(x = possible_outcomes, size = 2, prob = probabilities <- rep(1/6, 6), replace = TRUE)
   sum(outcome)
@@ -354,10 +384,7 @@ two_dice_sum <- function() {
 two_dice_sum()
 ```
 
-#### Exercises
-
-(a) Can you write a function that gives the frequency for the different outcomes of throwing a dise as a function ```size```, that is, the number of times a dice is thrown. Present the results in a histogram. How do the results change if you increase ```size```?
-(b) Do the same for the sum of the eyes when throwing two dice simultaneously. Thus, here the question is how the distribution of this sum changes when we increase the number of times we throw two dice together?
+(b) Code a function that gives the frequency for the different outcomes of throwing a dice as a function *size*, that is, the number of times a dice is thrown. Present the results in a histogram. How do the results change if you increase *size*?
 
 ```{r eval=FALSE, echo=FALSE}
 freq_dice <- function(n) {
@@ -368,6 +395,8 @@ freq_dice <- function(n) {
 frequencies <- freq_dice(100000)
 barplot(frequencies, xlab = "result of a dice throw")
 ```
+
+(c) Do the same for the sum of the eyes when throwing two dice simultaneously. Thus, here the question is how the distribution of this sum changes when we increase the number of times we throw two dice together?
 
 ```{r eval=FALSE, echo=FALSE}
 freq_dice_2sum <- function(n) {

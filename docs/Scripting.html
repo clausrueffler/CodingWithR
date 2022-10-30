@@ -295,15 +295,20 @@ $(document).ready(function () {
 </div>
 
 
+<!--
+
+```{=html}
 <script>
   addClassKlippyTo("pre.r, pre.markdown");
   addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
 </script>
+```
+-->
 <div id="programming-in-r" class="section level1 tabset">
 <h1>Programming in R</h1>
 <div id="computing-using-scripts" class="section level2">
 <h2>Computing Using Scripts</h2>
-<p>Now that we are more familiar with the basics of R, we turn to writing programs. Typically, you will write more complex programs in a text file (called a script), with extension <code>.R</code>. Before writing our first programs, this section will demonstrate how to organize your code to make it readable and easy to understand.</p>
+<p>Now that we are more familiar with the basics of <em>R</em>, we turn to writing <em>programs</em>. Typically, you will write more complex programs in a text file (called a script), with extension <code>.R</code>. Before writing our first programs, this section will demonstrate how to organize your code to make it readable and easy to understand.</p>
 <div id="why-write-a-script" class="section level3">
 <h3>Why Write a Script?</h3>
 <p>You could actually accomplish almost everything you need for your research without writing any scripts — simply type the commands in the console one at a time. However, by organizing your work into well-documented scripts, you can</p>
@@ -338,8 +343,7 @@ $(document).ready(function () {
 <p>Before we start writing scripts, we have a few suggestions on how to organize and format your code:</p>
 <div id="names" class="section level5">
 <h5>Names</h5>
-<p>Use descriptive file names for your scripts; use underscore (_) or dots (.) to separate words.</p>
-<p>Likewise, choose informative names for your objects and functions:</p>
+<p>Use <em>descriptive</em> and <em>short</em> file names for your scripts. Likewise, choose informative names for your objects and functions; use underscore (_) or dots (.) to separate words.</p>
 <pre><code># good object names (use nouns!)
 my_variance 
 radius
@@ -353,7 +357,7 @@ good</code></pre>
 O # uppercase o
 o # lowercase O
 l # lowercase L</code></pre>
-<p>Good function names (use verbs if it makes sense)</p>
+<p>Good function names are informative:</p>
 <pre><code>calculate_cv
 random_time_series</code></pre>
 <p>Bad (i.e., uninformative) function names are</p>
@@ -368,7 +372,8 @@ this_works_well</code></pre>
 x &lt;- 5 * 7
 y &lt;- 7 * (x ^ 2)
 m &lt;- matrix(25, 5, 5)
-z &lt;- mean(x, na.rm == TRUE) i &lt;- t + 1
+z &lt;- mean(x, na.rm == TRUE)
+i &lt;- t + 1
 z &lt;- (x * y) + (x2 * y2)
 
 if (b == 5) {
@@ -378,26 +383,25 @@ if (b == 5) {
 }
 
 # bad
-z = &quot;bad_assignment_style&quot;
-x&lt;-5*7
+x&lt;-5*7 # hard to read
 y &lt;- 7*x^2
-m &lt;- matrix(25 , 5 , 5)</code></pre>
+m &lt;- matrix(25 , 5 , 5) # m is not very informative</code></pre>
 </div>
 </div>
 <div id="loops" class="section level2">
 <h2>Loops</h2>
-<p>Another way to modify the flow of a program is to write a loop. A loop is a series of commands that are repeated a number of times. For example, you want to run the same analysis on different data sets that you have collected, or you want to plot the results contained in a set of files, or you want to test your simulation over a number of parameter sets, etc.</p>
-<p>R provides you with two ways to loop over blocks of commands: the <code>for</code> loop, and the <code>while</code> loop. Let’s start with the <code>for</code> loop, which is used to iterate over a vector (or a list): for each value of the vector, a series of commands will be run. This is the anatomy of a <code>for</code> statement:</p>
+<p>An important way modify the flow of a program is to write a loop. A loop is a series of commands that are repeated a number of times. For example, you want to run the same analysis on different data sets that you have collected, or you want to plot the results contained in a set of files, or you want to test your simulation over a number of parameter sets, etc.</p>
+<p>R provides you with two ways to loop over blocks of commands: the <code>for</code> loop, and the <code>while</code>-loop. Let’s start with the <code>for</code>-loop, which is used to iterate over a vector (or a list): for each value of the vector, a series of commands will be run. This is the anatomy of a <code>for</code> statement:</p>
 <pre><code>for (variable in list_or_vector) {
   execute these commands # if there is more than one command each has to start on a new line</code></pre>
-<p>For example</p>
+<p>Example</p>
 <pre class="r"><code>myvec &lt;- 1:10 # vector with numbers from 1 to 10
 for (i in myvec) {
   a &lt;- i ^ 2
   print(a)
 }</code></pre>
-<p>In the code above, the variable <code>i</code> takes the value of each element of <code>myvec</code> in sequence. Inside the block defined by the for loop, you can use the variable <code>i</code> to perform operations. Note that <code>i</code> is only an example of a variable name. Note also that in this <code>for</code> loop each new command starts on a new line. This is essential! the same applies to the other looping constructions and to functions.</p>
-<p>As a slightly less trivial example, let us calculate the factorias of <em>n</em>, <span class="math inline">\(n! = 1 * 2 * ... * (n-1) * n\)</span> using a <code>for</code>-loop.</p>
+<p>In the code above, the variable <em>i</em> takes the value of each element of <em>myvec</em> in sequence. Inside the block defined by the for-loop, you can use the variable <em>i</em> to perform operations. Note that <em>i</em> is only an example of a variable name. Note also that in this for-loop each new command starts on a new line. This is essential! The same applies to the other looping constructions and to functions.</p>
+<p>As a slightly less trivial example, let us calculate the factorials of <em>n</em>, <span class="math inline">\(n! = 1 * 2 * ... * (n-1) * n\)</span> using a for-loop.</p>
 <pre class="r"><code>result &lt;- 1
 for(i in 1:6) {
   result &lt;- result * i
@@ -409,7 +413,7 @@ for(i in 1:6) {
 ## [1] 24
 ## [1] 120
 ## [1] 720</code></pre>
-<p>We also use the <code>for</code>-loop to compute the time series of an exponentially growing population.</p>
+<p>We also use the for-loop to compute the time series of an exponentially growing population.</p>
 <pre class="r"><code>lambda &lt;- 1.1
 N0 &lt;- 10
 t &lt;- 8 # lenght of the time series
@@ -426,8 +430,8 @@ for(i in 1:t) {
 ## [1] 17.71561
 ## [1] 19.48717
 ## [1] 21.43589</code></pre>
-<p>In summary, <code>for</code>-loop is used when you know that you want to perform the analysis using a given set of values (e.g., run over for a fixed number of iterations).</p>
-<p>The <code>while</code> loop is used when the commands need to be repeated while a certain condition is true. The anatomy of the while statement is</p>
+<p>In summary, for-loop is used when you know that you want to perform the analysis using a given set of values (e.g., run over for a fixed number of iterations).</p>
+<p>The <code>while</code>-loop is used when the commands need to be repeated while a certain condition is true. The anatomy of the while-loop is</p>
 <pre><code>while (test expression is TRUE) {
   execute these commands and update the test expression (body of the while loop)
 }</code></pre>
@@ -440,31 +444,28 @@ while (i &lt;= 10) {
   print(a)
   i &lt;- i + 1
 }</code></pre>
-<p>This script performs exactly the same operations we wrote for the <code>for</code> loop above. Note that you need to update the value of <code>i</code> (using <code>i &lt;- i + 1</code>), otherwise the loop will run forever (infinite loop — to terminate click on the “Stop” button in the top-right corner of RStudio).</p>
-<p>In the next example we calculate again the factorial <span class="math inline">\(n!\)</span>, but this time using a <code>while</code>-loop.</p>
-<p>You can exit a loop by using the command break in an <code>if</code>-construction. For example,</p>
-<pre class="r"><code>i &lt;- 1
+<p>This script performs exactly the same operations we wrote with the for-loop above. Note that you need to update the value of <em>i</em> (using <code>i &lt;- i + 1</code>), otherwise the loop will run forever (infinite loop — to terminate click on the “Stop” button in the top-right corner of <em>RStudio</em>).</p>
+<!--In the next example, we calculate again the factorial $n!$, but this time using a while-loop.
 
-while (i &lt;= 10) {
-  if (i &gt; 5) {
+
+```r
+i <- 1
+
+while (i <= 10) {
+  if (i > 5) {
     break
   }
-  a &lt;- i ^ 2
+  a <- i ^ 2
   print(a)
-  i &lt;- i + 1
-}</code></pre>
-<div id="exercises" class="section level4">
-<h4>Exercises</h4>
-<p>What does this codes do? Try to guess what the loop does, and then create and run a script to confirm your intuition.</p>
-<pre class="r"><code>z &lt;- seq(1, 100, by = 3)
-for (k in z) {
-   if (k / 4 &lt; 10) {
-    print(k)
-  }
-}</code></pre>
-<p>Last but not least, <code>ifelse</code>-constructs allows us to make to the execution of commands conditional. The function <code>ifelse(test, yes, no)</code> contains a logical <code>test</code>, and <code>yes</code> and <code>no</code> are output conditional of whether the logical test results in <code>TRUE</code> or <code>FALSE</code>.</p>
+  i <- i + 1
+}
+```
+
+You can exit a loop by using the command break in an ```if
+```-construction. For example,-->
+<p>Not a loop but another important way to modify the flow of your program: <em>ifelse</em>-constructs allows us to make the execution of commands conditional. The function <code>ifelse(test, yes, no)</code> contains a logical <em>test</em>, and <em>yes</em> and <em>no</em> are output conditional of whether the logical test results in <em>TRUE</em> or <em>FALSE</em>.</p>
 <pre class="r"><code>x &lt;- 2
-ifelse (x &gt; 0, &quot;positive&quot;, &quot;negative, 0&quot;)</code></pre>
+ifelse (x &gt; 0, &quot;positive&quot;, &quot;negative or 0&quot;)</code></pre>
 <p>If we want to incorporate more than one logical test we can use <code>if</code> and <code>else</code> as in the following example:</p>
 <pre class="r"><code>x &lt;- 0
 if (x &lt; 0) {print(&quot;Negative number&quot;)} else
@@ -473,6 +474,17 @@ if (x &lt; 0) {print(&quot;Negative number&quot;)} else
 <p>We can achieve the same result by nesting the <code>ifelse</code> command but this can become a bit hard to read if done repeatedly.</p>
 <pre class="r"><code>x &lt;- 2
 ifelse (x &gt; 0, &quot;positive&quot;, ifelse(x &lt; 0, &quot;negative&quot;, &quot;zero&quot;))</code></pre>
+<p><br />
+</p>
+<div id="exercises" class="section level4">
+<h4>Exercises</h4>
+<p>What does this code do? Try to understand what the loop does, and then create and run a script to confirm your intuition.</p>
+<pre class="r"><code>z &lt;- seq(1, 100, by = 3)
+for (k in z) {
+   if (k / 4 &lt; 10) {
+    print(k)
+  }
+}</code></pre>
 </div>
 </div>
 <div id="functions" class="section level2">
@@ -484,14 +496,14 @@ ifelse (x &gt; 0, &quot;positive&quot;, ifelse(x &lt; 0, &quot;negative&quot;, &
   return(value) [optional]
 }</code></pre>
 <p>For instance,</p>
-<pre class="r"><code>circle_surface &lt;- function(radius) {
+<pre class="r"><code>circle.area &lt;- function(radius) {
   pi * radius^2
 }</code></pre>
-<p>defines a function called <code>circlesurface</code> which takes as input argument a variable called <code>radius</code> and returns the value <code>pi*radius^2</code> (here <code>pi</code> is the constant <span class="math inline">\(\pi=3.14\ldots\)</span>), which is indeed the formula for the surface area of a surface. The code of the function is contained between the curly brackets. At the end, a value may be returned.</p>
-<p>After submitting the function to R, we can <em>call</em> this function to calculate the surface of circles with given radius.</p>
-<pre class="r"><code>circle_surface(2)
+<p>defines a function called <code>circle.area</code> which takes as input argument a variable called <em>radius</em> and returns the value <em>pi</em>radius^2* (here <em>pi</em> is the constant <span class="math inline">\(\pi=3.14\ldots\)</span>), which is indeed the formula for the surface area of a surface. The code of the function is contained between the curly brackets. At the end, a value may be returned.</p>
+<p>After submitting the function to <em>R</em>, we can <em>call</em> this function to calculate the surface of circles with given radius.</p>
+<pre class="r"><code>circle.area(2)
 # apply the function to a vector of radii
-circle_surface(1:5) # applies the function to the numbers 1 to 5 in a single step; thus, we apply functions to vectors</code></pre>
+circle.area(1:5) # We can apply the function to the numbers 1 to 5 in a single step; thus, we apply functions to a vector.</code></pre>
 <p>Some functions may have more than one argument and may return more than one value:</p>
 <pre class="r"><code>rectangle &lt;- function(side_1, side_2){
   circumference &lt;- 2 * side_1 + 2 * side_2
@@ -501,10 +513,11 @@ circle_surface(1:5) # applies the function to the numbers 1 to 5 in a single ste
 
 rectangle(2, 3)</code></pre>
 <p>Here, the output of the function is presented in a named list.</p>
-<p>It is often useful to eplore functions by plotting them (see next section):</p>
-<pre class="r"><code>curve(circle_surface(x), from = 0, to = 2, xlab = &quot;radius&quot;,  ylab = &quot;circle surface&quot;)
-curve(rectangle(x, side_2 = 2)$surface, from = 0, to = 2, xlab = &quot;side_1&quot;, ylab = &quot;rectangle surface&quot;)</code></pre>
-<p>Functions can be arbitrarily complicated and most simulation models will have a more or less complex function at its heart. For instance, we can incorporate <code>loops</code> and <code>iflese</code>-constructs into functions.</p>
+<p>It is often useful to explore functions by plotting them (see next section):</p>
+<pre class="r"><code>curve(circle.area(x), from = 0, to = 2, xlab = &quot;radius&quot;,  ylab = &quot;circle area&quot;)</code></pre>
+<p><img src="Scripting_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Exercise: Plot the area of a rectangle with as a function of <em>side_1</em> (with <em>side_1</em> between 0 and 2) given that <em>side_2=2</em>.</p>
+<p>Functions can be arbitrarily complicated and most simulation models will have a more or less complex function at its heart. For instance, we can incorporate loops and *iflese’```’-constructs into functions.</p>
 <pre class="r"><code>sign_of_a_number &lt;- function(x){
   if (x &lt; 0) {print(&quot;Negative number&quot;)} else
     if (x &gt; 0) {print(&quot;Positive number&quot;)} else
@@ -513,7 +526,7 @@ curve(rectangle(x, side_2 = 2)$surface, from = 0, to = 2, xlab = &quot;side_1&qu
 
 sign_of_a_number(2.3)</code></pre>
 <p>To calculate the factorial more easily we can wrap a function arount the while loop from the previous section:</p>
-<pre class="r"><code>my_factorial &lt;- function(n){
+<pre class="r"><code>my.factorial &lt;- function(n){
   result &lt;- 1
   i &lt;- 1
   while (i &lt;=  n){
@@ -523,36 +536,60 @@ sign_of_a_number(2.3)</code></pre>
   result
 }
 
-my_factorial(4)</code></pre>
+my.factorial(4)</code></pre>
 </div>
 <div id="random-numbers" class="section level2">
 <h2>Random Numbers</h2>
-<p>R can sample (pseudo)random numbers from many distributions. This is very useful for simulations! For example,</p>
-<pre class="r"><code>&gt; runif(3) # samples three numbers from uniform distribution over the interval (0, 1)
-&gt; runif(10, -1, 1) # samples ten numbers from uniform distribution over the interval (-1, 1)
-&gt; # samples four values from normal distribution with mean 1 and standard deviation 5
-&gt; rnorm(4, mean = 1, sd = 5)
-&gt; # draws five values from Poisson distribution with mean lambda
-&gt; rpois(5, lambda = 5)</code></pre>
-<p>You can easily sample with or without replacement from a vector using the function <code>sample(x, size, prob, replace, ...)</code>. To get to know this function, let us simulate the outcome of throwing a dice. The possible outcomes of throwing a dice are the numbers 1 to 6. This we encode in a vector of possible outcomes: <code>possible_outcomes &lt;- c(1, 2, 3, 4, 5, 6)</code>, or, for short, <code>possible_outcomes &lt;- 1:6</code>. If the dice is <em>fair</em> each number occurs with probability 1/6. This we encode in the vector <code>probabilities &lt;- c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)</code>, or, for short, <code>probabilities &lt;- rep(1/6, 6)</code>. Since the outcome of any particular throw is independent of all previous throws we <em>sample without replacement</em>. We have to specify this in the function <code>sample</code> by adding <code>replace = TRUE</code>. Finally, we have to add how often we throw the dice by specifying a value for <code>size</code>, for example, <code>size = 1</code> if we throw the dice only once.</p>
+<p><em>R</em> can sample (pseudo)random numbers from many distributions. This is very useful for simulations. Important <em>continuous</em> probability distributions are the <a href="https://en.wikipedia.org/wiki/Continuous_uniform_distribution"><em>uniform distribution</em></a> and <a href="https://en.wikipedia.org/wiki/Normal_distribution"><em>normal distribution</em></a>.</p>
+<pre class="r"><code># samples three numbers from uniform distribution over the interval (0, 1)
+runif(3)
+# samples ten numbers from uniform distribution over the interval (-1, 1)
+runif(10, -1, 1)
+# samples four values from normal distribution with mean 1 and standard deviation 5
+rnorm(4, mean = 1, sd = 5)</code></pre>
+<p>A commonly encountered <em>discrete</em> probability distributions is the <a href="https://en.wikipedia.org/wiki/Poisson_distribution"><em>Poisson distrib ution</em></a>. For example, it is often assume that the number of offspring per female is Poisson distributed.</p>
+<pre class="r"><code># draws five values from Poisson distribution with mean lambda
+rpois(5, lambda = 1)</code></pre>
+<!--
+Another important discrete distribution is the [*binomial distribution*](https://en.wikipedia.org/wiki/Binomial_distribution).
+The binomial distribution is slightly more complicated. It
+describes the number of successes in a sequence of *n* independent trials, each asking a yes–no question, and each with its own Boolean-valued outcome: success (with probability p) or failure (with probability *q = 1 − p*). 
+
+
+```r
+rbinom(n = 1, size = 1, prob = 0.5) # samples one value
+```
+
+```
+## [1] 1
+```
+
+```r
+rbinom(n = 1, size = 5, prob = 0.5)
+```
+
+```
+## [1] 0
+```
+-->
+<p>You can easily draw a sample your own probability distribution using the function</p>
+<pre><code>sample(x, size, prob, replace, ...)</code></pre>
+<p>To get to know this function, let us simulate the outcome of throwing a dice. The possible outcomes of throwing a dice are the numbers 1 to 6. This we encode in a vector of possible outcomes: <code>possible_outcomes &lt;- c(1, 2, 3, 4, 5, 6)</code>, or, for short, <code>possible_outcomes &lt;- 1:6</code>. If the dice is <em>fair</em> each number occurs with probability 1/6. This we encode in the vector <code>probabilities &lt;- c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)</code>, or, for short, <code>probabilities &lt;- rep(1/6, 6)</code>. Since the outcome of any particular throw is independent of all previous throws we <em>sample without replacement</em>. We have to specify this in the function <em>sample</em> by adding <em>replace = TRUE</em>. Finally, we have to add how often we throw the dice by specifying a value for <em>size</em>, for example, <em>size = 1</em> if we throw the dice only once.</p>
 <pre class="r"><code>possible_outcomes &lt;- 1:6
 probabilities &lt;- rep(1/6, 6)
 
-sample(x = possible_outcomes, size = 1, prob = probabilities &lt;- rep(1/6, 6), replace = TRUE)
+sample(x = possible_outcomes, size = 1, prob = probabilities, replace = TRUE)
 
-sample(possible_outcomes, 10, probabilities &lt;- rep(1/6, 6), replace = TRUE) # simulating the outcome of ten throws</code></pre>
-<p>Can you code a function that simulates the sum of the eyes when throwing two dice together?</p>
-<pre class="r"><code>two_dice_sum &lt;- function() {
-  outcome &lt;- sample(x = possible_outcomes, size = 2, prob = probabilities &lt;- rep(1/6, 6), replace = TRUE)
-  sum(outcome)
-}
-
-two_dice_sum()</code></pre>
+sample(possible_outcomes, 10, probabilities, replace = TRUE) # simulating the outcome of ten throws</code></pre>
+<p>Often we want to simulate the outcome of a <em>coin-toss</em>, for example, to determine in a simulation whether or not an individual dies from one time step to the next.</p>
+<pre class="r"><code>prob.death &lt;- 0.2
+sample(c(0, 1), 1, c(prob.death, 1 -prob.death), replace = TRUE) # returns a 0 if the individuals dies and a 1 if the individual survives where death occurs with probability 0.2</code></pre>
 <div id="exercises-1" class="section level4">
 <h4>Exercises</h4>
 <ol style="list-style-type: lower-alpha">
-<li>Can you write a function that gives the frequency for the different outcomes of throwing a dise as a function <code>size</code>, that is, the number of times a dice is thrown. Present the results in a histogram. How do the results change if you increase <code>size</code>?</li>
-<li>Do the same for the sum of the eyes when throwing two dice simultaneously. Thus, here the question is how the distribution of this sum changes when we increase the number of times we throw two dice together?</li>
+<li><p>Code a function that simulates the sum of the eyes when throwing two dice together.</p></li>
+<li><p>Code a function that gives the frequency for the different outcomes of throwing a dice as a function <em>size</em>, that is, the number of times a dice is thrown. Present the results in a histogram. How do the results change if you increase <em>size</em>?</p></li>
+<li><p>Do the same for the sum of the eyes when throwing two dice simultaneously. Thus, here the question is how the distribution of this sum changes when we increase the number of times we throw two dice together?</p></li>
 </ol>
 </div>
 </div>
