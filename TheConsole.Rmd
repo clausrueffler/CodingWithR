@@ -29,7 +29,21 @@ To install *R* and *RStudio*, you can follow [these instructions](https://rstudi
 
 Each command in *R* comes with a manual page. To access it, type ```?[NAME OFCOMMAND]``` in the console (e.g., ```?lm```). Alternatively, search the command under the help-tab in the bottom right window of RStudio.
 
-But really, if you need help with *R* the internet is your friend. Virtually any problem you might encounter has been described and solved somewhere on the internet. It's all about to phrase your question in the right manner in a Google search. Most often you will end up on [https://stackexchange.com/](https://stackexchange.com/), [https://stackoverflow.com](https://stackoverflow.com/questions) or [https://www.r-bloggers.com/](https://www.r-bloggers.com/).
+But really, if you need help with *R* the internet is your friend. Virtually any problem you might encounter has been described and solved somewhere on the internet. It's all about to phrase your question in the right manner in a Google search. Most often you will end up on [stackexchange](https://stackexchange.com/), [stackoverflow](https://stackoverflow.com/questions) or [r-bloggers](https://www.r-bloggers.com/).
+
+### The Anatomy of *RStudio*
+
+*RStudio* is a so-called *integrated development environment*, *IDE* for short, developed to facilitate your interaction with *R*. By default the *RStudio* window consists of four sub-windows (as shown below, figure taken from [here](https://r-unimelb.gitbook.io/rbook/)):
+
+1) The interactive *R* console (lower left)
+2) Environment/History (tabs in the upper right window)
+3) Files/Plots/Packages/Help/Viewer (tabs in the lower right window)
+4) Editor panel for *R*-scripts. This window appears in the top right once you opened an *R*-script.
+
+```{r out.width='100%', echo=FALSE}
+knitr::include_graphics("images/anatomy of rstudio.png")
+```
+
 
 ## The Console
 
