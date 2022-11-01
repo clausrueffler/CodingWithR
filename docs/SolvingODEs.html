@@ -13,6 +13,7 @@
 
 <title>Learning Coding in R</title>
 
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
@@ -300,7 +301,7 @@ $(document).ready(function () {
   addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
 </script>
 <div id="solving-differential-equations-in-r" class="section level1 tabset">
-<h1>Solving differential equations in R</h1>
+<h1 class="tabset">Solving differential equations in R</h1>
 <div id="single-variable-logistic-growth" class="section level2">
 <h2>Single Variable: Logistic Growth</h2>
 <p>In order to study continuous population dynamics, we often would like to integrate complex nonlinear functions of population dynamics. To do this, we need to use numerical techniques that turn the infinitely small steps of calculus, <span class="math inline">\(\mathrm{d}x\)</span>, into very small, but finite steps, in order to approximate the change in <span class="math inline">\(x\)</span>, given the change in <span class="math inline">\(x\)</span>, or <span class="math inline">\(\mathrm{d}x/\mathrm{d}y\)</span>. Mathematicians and computer scientists have devised very clever ways of doing this very accurately and precisely. In R, a good (the best?) package for this is <code>deSolve</code>, which contains several solvers for differential equations that perform <a href="https://en.wikipedia.org/wiki/Numerical_methods_for_ordinary_differential_equations"><em>numerical integration</em></a>. We will access these solvers (i.e. numerical integraters) using the function <code>ode()</code> in the <code>deSolve</code> package.</p>
