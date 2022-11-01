@@ -402,7 +402,7 @@ $(document).ready(function () {
 &gt; 6 &gt;= (2 * 3)
 &gt; (5 &gt; 3) &amp; (7 &lt; 5) # logical AND
 &gt; (5 &gt; 3) | (7 &lt; 5) # logical OR</code></pre>
-<p><em>R</em> is designed for statistical analysis, and therefore it provides many built-in mathematical functions. Some are listed in the next table.</p>
+<p><em>R</em> comes with many built-in mathematical functions. Some are listed in the next table.</p>
 <table>
 <thead>
 <tr class="header">
@@ -437,7 +437,7 @@ $(document).ready(function () {
 </tr>
 </tbody>
 </table>
-<p>We can use the operator <code>%in%</code> to search for matches. It returns a logical value (i.e., <code>TRUE</code> or <code>FALSE</code>) indicating whether or not a match exists.</p>
+<p>We can use the operator <code>%in%</code> to search for matches. It returns a logical value (i.e. <code>TRUE</code> or <code>FALSE</code>) indicating whether or not a match exists.</p>
 <pre class="r"><code>&gt; 3 %in% 1:5 # 1:5 generates a sequence
 &gt; # c() combines values into a vector or list
 &gt; # all arguments are converted to the same type (here it is a character string)
@@ -490,6 +490,10 @@ $(document).ready(function () {
 <pre class="r"><code>&gt; x[3]
 &gt; x[8]
 &gt; x[9] # what if the element does not exist?</code></pre>
+<p>You can add entries to a vector by gluing to the end of an existing vector.</p>
+<pre class="r"><code>&gt; x &lt;- 1:3
+&gt; x &lt;- append(x, c(4, 5)) # gluing two vectors together
+&gt; x[7] &lt;- 7 # inserting a value at a certain position of the vector</code></pre>
 <p>Alternatively, you can access the elements of a vector by specifying using the logical <code>TRUE</code>:</p>
 <pre class="r"><code>&gt; x[c(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)]
 &gt; x[c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE)]</code></pre>

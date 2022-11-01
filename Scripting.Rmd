@@ -146,6 +146,20 @@ for(i in 1:t) {
 }
 ```
 
+```{r echo=FALSE, eval=FALSE}
+lambda <- 0.9
+N0 <- 10
+t <- 20 # lenght of the time series
+time.series <- c()
+time.series[1] <- N0
+
+for(i in 1:t) {
+  time.series[i+1] <- time.series[i] * lambda
+}
+time.series
+plot(1:(t+1), time.series)
+```
+
 In summary, for-loop is used when you know that you want to perform the analysis using a given set of values (e.g., run over for a fixed number of iterations).
 
 The ```while```-loop is used when the commands need to be repeated while a certain condition is true. The anatomy of the while-loop is
