@@ -17,7 +17,7 @@ klippy::klippy(position = c('top', 'right'))
 
 ## Single Variable: Logistic Growth
 
-In order to study continuous population dynamics, we often would like to integrate complex nonlinear functions of population dynamics. To do this, we need to use numerical techniques that turn the infinitely small steps of calculus, $\mathrm{d}x$, into very small, but finite steps, in order to approximate the change in $x$, given the change in $x$, or $\mathrm{d}x/\mathrm{d}y$. Mathematicians and computer scientists have devised very clever ways of doing this very accurately and precisely. In R, a good (the best?) package for this is ```deSolve```, which contains several solvers for differential equations that perform [*numerical integration*](https://en.wikipedia.org/wiki/Numerical_methods_for_ordinary_differential_equations). We will access these solvers (i.e. numerical integraters) using the function ```ode()``` in the ```deSolve``` package.
+In order to study continuous population dynamics, we often would like to integrate complex nonlinear functions of population dynamics. To do this, we need to use numerical techniques that turn the infinitely small steps of calculus, $\mathrm{d}x$, into very small, but finite steps, in order to approximate the change in $x$, given the change in $x$, or $\mathrm{d}x/\mathrm{d}y$. Mathematicians and computer scientists have devised very clever ways of doing this very accurately and precisely. In R, a good (the best?) package for this is *deSolve*, which contains several solvers for differential equations that perform [*numerical integration*](https://en.wikipedia.org/wiki/Numerical_methods_for_ordinary_differential_equations). We will access these solvers (i.e. numerical integraters) using the function *ode()* in the *deSolve* package.
 
 ```{r eval=FALSE}
 install.packages("deSolve")
@@ -37,8 +37,6 @@ $$
 
 for time at *t = 0, 1... 20*, with parameters *r = 1, K = 1000*, and *N0 = 10*, where *r* denotes the intrinsic growth rate and where the equilibrium population size is given by *K*, often called the *carrying capacity*. Let us now define the function for logistic growth in a particular way and specify its parameters.
 
-
-
 ```{r}
 log_growth <- function(t, N, parameters) {
   with(as.list(c(N, parameters)), {
@@ -52,9 +50,9 @@ N <- 10 # initial population size
 t <- 1:10 # vector of time points
 ```
 
-Note that we here stored the parameters and intial conditions in a *named vector*, which allows us to call their entries by their name. The R-statement with ```with(as.list(c(state, parameters)), { }``` ensures that the state variables and parameters can be addressed by their names.
+Note that we here stored the parameters and intial conditions in a *named vector*, which allows us to call their entries by their name. The *R*-statement with ```with(as.list(c(state, parameters)), { }``` ensures that the state variables and parameters can be addressed by their names.
 
-Now you put it all into the ```deSolve```-function ```ode(y, times, func, parms, ...)```, with the correct arguments. The output is a data frame, with the first column being the time steps, and the remaining being your state variables.
+Now you put it all into the *deSolve*-function ```ode(y, times, func, parms, ...)```, with the correct arguments. The output is a data frame, with the first column being the time steps, and the remaining being your state variables.
 
 ```{r}
 int_time_series <- ode(y = N, times = t, func = log_growth, parms = parameters)
@@ -65,7 +63,7 @@ int_time_series
 plot(t, int_time_series[, 2], type = "l", lty = 1:2, col=1, ylab = "Population Density N", xlab="Time")
 ```
 
-This graph shows the solution of the ODE describing logistic growth. We can make two obervations. First, it seems that the dynamics might not have reached its equilibrium. We therefore might want run the model a bit longer, in other words, to increase the length of the time as specified in ```t```.
+This graph shows the solution of the ODE describing logistic growth. We can make two observations. First, it seems that the dynamics might not have reached its equilibrium. We therefore might want run the model a bit longer, in other words, to increase the length of the time as specified in *t*.
 Second, the graph of the time series does not look *smooth* but rather a bit chunky. This is the result of computing the change of the dynamics only at each full time step. In order to get a smoother curve we can add time points between the full time steps.
 
 ```{r}
@@ -74,15 +72,16 @@ t <- seq(1, 15, 0.2)
 int_time_series <- ode(y = N, times = t, func = log_growth, parms = parameters)
 plot(t, int_time_series[, 2], type = "l", lty = 1:2, col=1, ylab = "population size", xlab="time")
 ```
-With these changes the time series is long enough for the dynamics to equilibriate and it curve indeed looks smooth as it should be.
+
+With these changes the time series is long enough for the dynamics to equilibriate and the curve indeed looks smooth as it should be.
 
 For the logistic model it is in fact possible to compute the solution analytically, 
 
 $$
-N(t) = \frac{N_0 \exp(r t)}{1 + \frac{N_0}{K}(\exp(r t) - 1)}
+N(t) = \frac{N_0 \exp(r t)}{1 + \frac{N_0}{K}(\exp(r t) - 1)},
 $$
 
-which we can define as a R-function and plot
+which we can define as an *R*-function and plot using the function *curve*:
 
 ```{r eval=FALSE}
 solution_logistic <- function(t) { (N0 * exp(r * t)) /
@@ -120,7 +119,7 @@ LV_comp <- function(t, N, parameters) {
 }  
 ```
 
-Note that ```LV_comp``` assumes that ```N```, ```r```, ```a``` and ```K``` are vectors. For instance, the function extracts the the first element of ```r``` for the first species ```(r[1])```. The vector ```N``` of population sizes contains one value for each population at one time point. Thus here, the vector contains only two entries (one for each of the two species). It holds only these values, but will do so repeatedly, at each time point. Only the output will contain all of the population sizxes through time.
+Note that *LV_comp* assumes that *N*, *r*, *a* and *K* are vectors. For instance, the function extracts the first element of *r* for the first species *(r[1])*. The vector *N* of population sizes contains one value for each population at one time point. Thus here, the vector contains only two entries (one for each of the two species). It holds only these values, but will do so repeatedly, at each time point. Only the output will contain all of the population sizes through time.
 
 To integrate these populations, we need to specify new initial conditions, and new parameters for the two-species model.
 

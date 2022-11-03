@@ -304,7 +304,7 @@ $(document).ready(function () {
 <h1 class="tabset">Solving differential equations in R</h1>
 <div id="single-variable-logistic-growth" class="section level2">
 <h2>Single Variable: Logistic Growth</h2>
-<p>In order to study continuous population dynamics, we often would like to integrate complex nonlinear functions of population dynamics. To do this, we need to use numerical techniques that turn the infinitely small steps of calculus, <span class="math inline">\(\mathrm{d}x\)</span>, into very small, but finite steps, in order to approximate the change in <span class="math inline">\(x\)</span>, given the change in <span class="math inline">\(x\)</span>, or <span class="math inline">\(\mathrm{d}x/\mathrm{d}y\)</span>. Mathematicians and computer scientists have devised very clever ways of doing this very accurately and precisely. In R, a good (the best?) package for this is <code>deSolve</code>, which contains several solvers for differential equations that perform <a href="https://en.wikipedia.org/wiki/Numerical_methods_for_ordinary_differential_equations"><em>numerical integration</em></a>. We will access these solvers (i.e. numerical integraters) using the function <code>ode()</code> in the <code>deSolve</code> package.</p>
+<p>In order to study continuous population dynamics, we often would like to integrate complex nonlinear functions of population dynamics. To do this, we need to use numerical techniques that turn the infinitely small steps of calculus, <span class="math inline">\(\mathrm{d}x\)</span>, into very small, but finite steps, in order to approximate the change in <span class="math inline">\(x\)</span>, given the change in <span class="math inline">\(x\)</span>, or <span class="math inline">\(\mathrm{d}x/\mathrm{d}y\)</span>. Mathematicians and computer scientists have devised very clever ways of doing this very accurately and precisely. In R, a good (the best?) package for this is <em>deSolve</em>, which contains several solvers for differential equations that perform <a href="https://en.wikipedia.org/wiki/Numerical_methods_for_ordinary_differential_equations"><em>numerical integration</em></a>. We will access these solvers (i.e. numerical integraters) using the function <em>ode()</em> in the <em>deSolve</em> package.</p>
 <pre class="r"><code>install.packages(&quot;deSolve&quot;)</code></pre>
 <pre class="r"><code>library(deSolve)</code></pre>
 <p>When we have an ordinary differential equation (ODE) such as logistic growth, we say that we “solve” the equation for a particular time interval given a set of parameters and initial conditions or initial population size. For instance, we say that we solve the logistic growth model</p>
@@ -322,8 +322,8 @@ $(document).ready(function () {
 parameters &lt;- c(r = 1, K = 1000)
 N &lt;- 10 # initial population size
 t &lt;- 1:10 # vector of time points</code></pre>
-<p>Note that we here stored the parameters and intial conditions in a <em>named vector</em>, which allows us to call their entries by their name. The R-statement with <code>with(as.list(c(state, parameters)), { }</code> ensures that the state variables and parameters can be addressed by their names.</p>
-<p>Now you put it all into the <code>deSolve</code>-function <code>ode(y, times, func, parms, ...)</code>, with the correct arguments. The output is a data frame, with the first column being the time steps, and the remaining being your state variables.</p>
+<p>Note that we here stored the parameters and intial conditions in a <em>named vector</em>, which allows us to call their entries by their name. The <em>R</em>-statement with <code>with(as.list(c(state, parameters)), { }</code> ensures that the state variables and parameters can be addressed by their names.</p>
+<p>Now you put it all into the <em>deSolve</em>-function <code>ode(y, times, func, parms, ...)</code>, with the correct arguments. The output is a data frame, with the first column being the time steps, and the remaining being your state variables.</p>
 <pre class="r"><code>int_time_series &lt;- ode(y = N, times = t, func = log_growth, parms = parameters)
 int_time_series</code></pre>
 <pre><code>##    time         1
@@ -339,17 +339,18 @@ int_time_series</code></pre>
 ## 10   10 987.93011</code></pre>
 <pre class="r"><code>plot(t, int_time_series[, 2], type = &quot;l&quot;, lty = 1:2, col=1, ylab = &quot;Population Density N&quot;, xlab=&quot;Time&quot;)</code></pre>
 <p><img src="SolvingODEs_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p>This graph shows the solution of the ODE describing logistic growth. We can make two obervations. First, it seems that the dynamics might not have reached its equilibrium. We therefore might want run the model a bit longer, in other words, to increase the length of the time as specified in <code>t</code>. Second, the graph of the time series does not look <em>smooth</em> but rather a bit chunky. This is the result of computing the change of the dynamics only at each full time step. In order to get a smoother curve we can add time points between the full time steps.</p>
+<p>This graph shows the solution of the ODE describing logistic growth. We can make two observations. First, it seems that the dynamics might not have reached its equilibrium. We therefore might want run the model a bit longer, in other words, to increase the length of the time as specified in <em>t</em>. Second, the graph of the time series does not look <em>smooth</em> but rather a bit chunky. This is the result of computing the change of the dynamics only at each full time step. In order to get a smoother curve we can add time points between the full time steps.</p>
 <pre class="r"><code>t &lt;- seq(1, 15, 0.2)
 
 int_time_series &lt;- ode(y = N, times = t, func = log_growth, parms = parameters)
 plot(t, int_time_series[, 2], type = &quot;l&quot;, lty = 1:2, col=1, ylab = &quot;population size&quot;, xlab=&quot;time&quot;)</code></pre>
-<p><img src="SolvingODEs_files/figure-html/unnamed-chunk-6-1.png" width="672" /> With these changes the time series is long enough for the dynamics to equilibriate and it curve indeed looks smooth as it should be.</p>
+<p><img src="SolvingODEs_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>With these changes the time series is long enough for the dynamics to equilibriate and the curve indeed looks smooth as it should be.</p>
 <p>For the logistic model it is in fact possible to compute the solution analytically,</p>
 <p><span class="math display">\[
-N(t) = \frac{N_0 \exp(r t)}{1 + \frac{N_0}{K}(\exp(r t) - 1)}
+N(t) = \frac{N_0 \exp(r t)}{1 + \frac{N_0}{K}(\exp(r t) - 1)},
 \]</span></p>
-<p>which we can define as a R-function and plot</p>
+<p>which we can define as an <em>R</em>-function and plot using the function <em>curve</em>:</p>
 <pre class="r"><code>solution_logistic &lt;- function(t) { (N0 * exp(r * t)) /
     (1 + (N0 / K) * (exp(r * t) - 1))
 }
@@ -376,7 +377,7 @@ curve(solution_logistic(x), from = 0, to = 15, xlab = &quot;time&quot;, ylab = &
   return(list(c(dN1.dt, dN2.dt)))
   })
 }  </code></pre>
-<p>Note that <code>LV_comp</code> assumes that <code>N</code>, <code>r</code>, <code>a</code> and <code>K</code> are vectors. For instance, the function extracts the the first element of <code>r</code> for the first species <code>(r[1])</code>. The vector <code>N</code> of population sizes contains one value for each population at one time point. Thus here, the vector contains only two entries (one for each of the two species). It holds only these values, but will do so repeatedly, at each time point. Only the output will contain all of the population sizxes through time.</p>
+<p>Note that <em>LV_comp</em> assumes that <em>N</em>, <em>r</em>, <em>a</em> and <em>K</em> are vectors. For instance, the function extracts the first element of <em>r</em> for the first species <em>(r[1])</em>. The vector <em>N</em> of population sizes contains one value for each population at one time point. Thus here, the vector contains only two entries (one for each of the two species). It holds only these values, but will do so repeatedly, at each time point. Only the output will contain all of the population sizes through time.</p>
 <p>To integrate these populations, we need to specify new initial conditions, and new parameters for the two-species model.</p>
 <pre class="r"><code>r &lt;- c(r1 = 1, r2 = 1)
 a &lt;- c(alpha = 0.9, beta = 0.5)
