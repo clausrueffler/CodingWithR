@@ -335,11 +335,11 @@ Functions are *R* objects designed to perform operations on other objects. Each 
 
 ### Data Frames
 
-Data frames are special matrices that contain additional information about its content such as row and column names. In short, data frames are *R*s equivalent to a an EXCEL preadsheet. The columns (typically representing different measurements) can be of different types (e.g., one column could be the date of measurement, another the weight of the individual, or the volume of the cell, or the treatment of the sample), while the rows typically represent different samples.
+Data frames are special matrices that contain additional information about its content such as row and column names. In short, data frames are *R*s equivalent to a an EXCEL spreadsheet. The columns (typically representing different measurements) can be of different types (e.g., one column could be the date of measurement, another the weight of the individual, or the volume of the cell, or the treatment of the sample), while the rows typically represent different samples.
 
-When you import a spreadsheet file into R, it is automatically stored as a data frame. The difference between a matrix and a data frame is that in a matrix all the values are of the same type (e.g., all numeric), while in a data frame each column can be of a different type.
+When you import a spreadsheet file into *R*, it is automatically stored as a data frame. The difference between a matrix and a data frame is that in a matrix all the values are of the same type (e.g., all numeric), while in a data frame each column can be of a different type.
 
-Because typing a data frame by hand would be tedious, let’s use a data set that is already available in R:
+Let us look at a data set that comes with *R*, called *trees*.
 
 ```{r comment="", prompt=TRUE, eval=FALSE}
 data(trees) # load data set "trees"
@@ -367,4 +367,24 @@ head(trees)
 (b) What is the average girth of those trees that are more than 75 ft tall?
 (c) What is the maximum height of trees with a volume between 15
 and 35 ft^3?
+
+
+We can also create our own data frame within *R*:
+
+```{r}
+height <- c(2.2, 2.4, 2.7)
+width <- c(0.7, 0.75, 0.85)
+(my.trees <- data.frame(height, width))
+```
+
+To *glue* additional rows and columns to a data frame we use the functions *rbind* and *cbind*, respectively.
+
+```{r}
+(my.trees <- rbind(my.trees, c(1.9, 0.55))) # adding a new row to the data frame my.trees
+dead <- c("yes", "no", "no", "no") 
+(my.trees <- cbind(my.trees, dead)) # adding a new column with the name dead to the data frame
+```
+
+
+
 

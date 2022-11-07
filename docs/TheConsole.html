@@ -599,9 +599,9 @@ divisible by 3. Find the five elements of ```y``` that are also elements of ```z
 </div>
 <div id="data-frames" class="section level3">
 <h3>Data Frames</h3>
-<p>Data frames are special matrices that contain additional information about its content such as row and column names. In short, data frames are <em>R</em>s equivalent to a an EXCEL preadsheet. The columns (typically representing different measurements) can be of different types (e.g., one column could be the date of measurement, another the weight of the individual, or the volume of the cell, or the treatment of the sample), while the rows typically represent different samples.</p>
-<p>When you import a spreadsheet file into R, it is automatically stored as a data frame. The difference between a matrix and a data frame is that in a matrix all the values are of the same type (e.g., all numeric), while in a data frame each column can be of a different type.</p>
-<p>Because typing a data frame by hand would be tedious, let’s use a data set that is already available in R:</p>
+<p>Data frames are special matrices that contain additional information about its content such as row and column names. In short, data frames are <em>R</em>s equivalent to a an EXCEL spreadsheet. The columns (typically representing different measurements) can be of different types (e.g., one column could be the date of measurement, another the weight of the individual, or the volume of the cell, or the treatment of the sample), while the rows typically represent different samples.</p>
+<p>When you import a spreadsheet file into <em>R</em>, it is automatically stored as a data frame. The difference between a matrix and a data frame is that in a matrix all the values are of the same type (e.g., all numeric), while in a data frame each column can be of a different type.</p>
+<p>Let us look at a data set that comes with <em>R</em>, called <em>trees</em>.</p>
 <pre class="r"><code>&gt; data(trees) # load data set &quot;trees&quot;
 &gt; str(trees) # structure of data frame ’data.frame’
 &gt; ncol(trees) # number of columns
@@ -626,6 +626,28 @@ divisible by 3. Find the five elements of ```y``` that are also elements of ```z
 <li>What is the average girth of those trees that are more than 75 ft tall?</li>
 <li>What is the maximum height of trees with a volume between 15 and 35 ft^3?</li>
 </ol>
+<p>We can also create our own data frame within <em>R</em>:</p>
+<pre class="r"><code>height &lt;- c(2.2, 2.4, 2.7)
+width &lt;- c(0.7, 0.75, 0.85)
+(my.trees &lt;- data.frame(height, width))</code></pre>
+<pre><code>##   height width
+## 1    2.2  0.70
+## 2    2.4  0.75
+## 3    2.7  0.85</code></pre>
+<p>To <em>glue</em> additional rows and columns to a data frame we use the functions <em>rbind</em> and <em>cbind</em>, respectively.</p>
+<pre class="r"><code>(my.trees &lt;- rbind(my.trees, c(1.9, 0.55))) # adding a new row to the data frame my.trees</code></pre>
+<pre><code>##   height width
+## 1    2.2  0.70
+## 2    2.4  0.75
+## 3    2.7  0.85
+## 4    1.9  0.55</code></pre>
+<pre class="r"><code>dead &lt;- c(&quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;) 
+(my.trees &lt;- cbind(my.trees, dead)) # adding a new column with the name dead to the data frame</code></pre>
+<pre><code>##   height width dead
+## 1    2.2  0.70  yes
+## 2    2.4  0.75   no
+## 3    2.7  0.85   no
+## 4    1.9  0.55   no</code></pre>
 </div>
 </div>
 </div>
