@@ -332,11 +332,24 @@ abline(h = 0)
 <pre class="r"><code>curve(exp(x), from = -1, to = 1)</code></pre>
 <p>Finally, if you only want the output to show up in your report but not the code chunk you have to add the optional argument start the code chunk with <code>{r echo=FALSE}</code>:</p>
 <p><img src="Markdown_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div id="mathematics-witin-rmarkdown-documents" class="section level3">
+<h3>Mathematics witin <em>Rmarkdown</em>-documents</h3>
+<p><a href="https://www.latex-project.org/"><span class="math inline">\(\LaTeX\)</span></a> is a free type-setting languge to produce beautiful documents that include lots of mathematics. <em>Rmarkdown</em> allows you to include latex-code such as</p>
+<pre class="r"><code>$$
+N(t + 1) = N(t)(1 + \beta - \delta)
+$$</code></pre>
+<p>producing <span class="math display">\[
+N(t + 1) = N(t)(1 + \beta - \delta).
+\]</span> Here, the the two dollar-symbols before and after the equation open and close a <em>Latex</em>-environment, respectively. Whatever is in between will be interpreted as <em>Latex</em>-code. If you want to write math that is within a line, such as <span class="math inline">\(N(t + 1) = N(t)(1 + \beta - \delta)\)</span>, then open and close the latex environment with only a single $-sign. <a href="https://rpruim.github.io/s341/S19/from-class/MathinRmd.html">This website</a> provides a very concise overview of how you can use <em>Latex</em> within a <em>Rmarkdown</em>-document.</p>
+</div>
+<div id="import-figures-into-rmarkdown-documents" class="section level3">
+<h3>Import figures into <em>Rmarkdown</em> documents</h3>
 <p>It is also possible to import pictures into an Rmarkdown file. For this to be possible, you need to place the picture file in a place where R can find it. In this example, I stored the image file <em>Rmarkdown-logo.png</em> inside a folder called <em>images</em>, which is located inside the same <em>R</em>-project as this .Rmd-file. To determine the size of the figure in the output file, I here start the code chunk with <code>{r out.width = '30%'}</code>, which sets the figure size to 30% of the page width.</p>
 <pre class="r"><code>knitr::include_graphics(&quot;images/Rmarkdown-logo.png&quot;)</code></pre>
 <p><img src="images/Rmarkdown-logo.png" width="30%" /></p>
-<div id="additional-resources" class="section level4">
-<h4>Additional resources</h4>
+</div>
+<div id="additional-resources" class="section level3">
+<h3>Additional resources</h3>
 <p>As always, the internet is full with resources. One gets a long way using <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">this cheatsheet</a>.You can find an introduction to the basics of RMarkdown <a href="https://rmarkdown.rstudio.com/lesson-1.html">here</a>. <a href="https://m-clark.github.io/Introduction-to-Rmarkdown/">This tutorial</a> seems nice and crisp and more comprehensive overview can be found <a href="https://bookdown.org/yihui/rmarkdown/">here</a>.</p>
 </div>
 </div>
