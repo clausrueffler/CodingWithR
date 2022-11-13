@@ -301,109 +301,130 @@ $(document).ready(function () {
   addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
 </script>
 <div id="solving-differential-equations-in-r" class="section level1 tabset">
-<h1 class="tabset">Solving differential equations in R</h1>
-<div id="single-variable-logistic-growth" class="section level2">
-<h2>Single Variable: Logistic Growth</h2>
-<p>In order to study continuous population dynamics, we often would like to integrate complex nonlinear functions of population dynamics. To do this, we need to use numerical techniques that turn the infinitely small steps of calculus, <span class="math inline">\(\mathrm{d}x\)</span>, into very small, but finite steps, in order to approximate the change in <span class="math inline">\(x\)</span>, given the change in <span class="math inline">\(x\)</span>, or <span class="math inline">\(\mathrm{d}x/\mathrm{d}y\)</span>. Mathematicians and computer scientists have devised very clever ways of doing this very accurately and precisely. In R, a good (the best?) package for this is <em>deSolve</em>, which contains several solvers for differential equations that perform <a href="https://en.wikipedia.org/wiki/Numerical_methods_for_ordinary_differential_equations"><em>numerical integration</em></a>. We will access these solvers (i.e. numerical integraters) using the function <em>ode()</em> in the <em>deSolve</em> package.</p>
-<pre class="r"><code>install.packages(&quot;deSolve&quot;)</code></pre>
-<pre class="r"><code>library(deSolve)</code></pre>
-<p>When we have an ordinary differential equation (ODE) such as logistic growth, we say that we “solve” the equation for a particular time interval given a set of parameters and initial conditions or initial population size. For instance, we say that we solve the logistic growth model</p>
+<h1 class="tabset">Solving differential equations in <em>R</em></h1>
+<div id="numerical-integration-and-the-r-package-desolve" class="section level2">
+<h2>Numerical integration and the <em>R</em>-package <em>deSolve</em></h2>
+<p>Almost all ecological models formulated as <em>ordinary differential equations</em> (ODEs) cannot be solved explicitly. That is to say, no explicit formula can be derived that gives population size as a function of time (logistic growth is a notable exception, see below). However, ODE models can in general very easily be analyzed in <em>R</em> with a method called *numerical <a href="https://en.wikipedia.org/wiki/Numerical_methods_for_ordinary_differential_equations">integration*</a>. What does that mean?</p>
+<p>The easiest method is called the <em>Euler method</em> and works as follows. Let us consider the ordinary differential equation</p>
 <p><span class="math display">\[
-\frac{\mathrm{d}N}{\mathrm{d}t}=N r \left(1 - \frac{N}{K} \right)
+\frac{\mathrm{d}x}{\mathrm{d}t} = f(x(t)),
 \]</span></p>
-<p>for time at <em>t = 0, 1… 20</em>, with parameters <em>r = 1, K = 1000</em>, and <em>N0 = 10</em>, where <em>r</em> denotes the intrinsic growth rate and where the equilibrium population size is given by <em>K</em>, often called the <em>carrying capacity</em>. Let us now define the function for logistic growth in a particular way and specify its parameters.</p>
-<pre class="r"><code>log_growth &lt;- function(t, N, parameters) {
-  with(as.list(c(N, parameters)), {
-    dN.dt &lt;- r * N * (1 - N /K)
-    return(list(dN.dt))  
-  })
-}
-
-parameters &lt;- c(r = 1, K = 1000)
-N &lt;- 10 # initial population size
-t &lt;- 1:10 # vector of time points</code></pre>
-<p>Note that we here stored the parameters and intial conditions in a <em>named vector</em>, which allows us to call their entries by their name. The <em>R</em>-statement with <code>with(as.list(c(state, parameters)), { }</code> ensures that the state variables and parameters can be addressed by their names.</p>
-<p>Now you put it all into the <em>deSolve</em>-function <code>ode(y, times, func, parms, ...)</code>, with the correct arguments. The output is a data frame, with the first column being the time steps, and the remaining being your state variables.</p>
-<pre class="r"><code>int_time_series &lt;- ode(y = N, times = t, func = log_growth, parms = parameters)
-int_time_series</code></pre>
-<pre><code>##    time         1
-## 1     1  10.00000
-## 2     2  26.72369
-## 3     3  69.45310
-## 4     4 168.66426
-## 5     5 355.46079
-## 6     6 599.85982
-## 7     7 802.95598
-## 8     8 917.19889
-## 9     9 967.85733
-## 10   10 987.93011</code></pre>
-<pre class="r"><code>plot(t, int_time_series[, 2], type = &quot;l&quot;, lty = 1:2, col=1, ylab = &quot;Population Density N&quot;, xlab=&quot;Time&quot;)</code></pre>
-<p><img src="SolvingODEs_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p>This graph shows the solution of the ODE describing logistic growth. We can make two observations. First, it seems that the dynamics might not have reached its equilibrium. We therefore might want run the model a bit longer, in other words, to increase the length of the time as specified in <em>t</em>. Second, the graph of the time series does not look <em>smooth</em> but rather a bit chunky. This is the result of computing the change of the dynamics only at each full time step. In order to get a smoother curve we can add time points between the full time steps.</p>
-<pre class="r"><code>t &lt;- seq(1, 15, 0.2)
-
-int_time_series &lt;- ode(y = N, times = t, func = log_growth, parms = parameters)
-plot(t, int_time_series[, 2], type = &quot;l&quot;, lty = 1:2, col=1, ylab = &quot;population size&quot;, xlab=&quot;time&quot;)</code></pre>
-<p><img src="SolvingODEs_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>With these changes the time series is long enough for the dynamics to equilibriate and the curve indeed looks smooth as it should be.</p>
-<p>For the logistic model it is in fact possible to compute the solution analytically,</p>
+<p>where <span class="math inline">\(x\)</span> could stand for population size and <span class="math inline">\(f\)</span> is a function describing the rate of change. From any starting population size <span class="math inline">\(x_0\)</span>, we can find an approximation of the value of <span class="math inline">\(x\)</span> a short time <span class="math inline">\(\Delta t\)</span> later through the through the finite time difference equation</p>
 <p><span class="math display">\[
-N(t) = \frac{N_0 \exp(r t)}{1 + \frac{N_0}{K}(\exp(r t) - 1)},
+\frac{\mathrm{d}x}{\mathrm{d}t} \approx \frac{x(t + \Delta t) − x(t)}{\Delta t},
+\]</span> which can be rearranged as <span class="math display">\[
+x(t + \Delta t) \approx x(t) + \Delta t * \frac{\mathrm{d}x}{\mathrm{d}t},
+\]</span> or, using the the right-hand side of the differential equation, as which can be rearranged as <span class="math display">\[
+x(t + \Delta t) \approx x(t) + \Delta t * f(x(t)).
+\]</span> In words, the value of the dynamic variable <span class="math inline">\(x\)</span> a short time <span class="math inline">\(\Delta t\)</span> later can be approximated by the current value <span class="math inline">\(x(t)\)</span> plus the slope of the curve, given by <span class="math inline">\(f(x(t))\)</span> multiplied by the length of the time interval <span class="math inline">\(\Delta t\)</span>. Thus, we locally approximate the function <span class="math inline">\(x(t)\)</span> with its tangent line.</p>
+<p>This formula is usually applied in the following way. We choose a step size <span class="math inline">\(\Delta t\)</span>, and then construct the sequence <span class="math inline">\(t_0\)</span>, <span class="math inline">\(t_1 = t_0 + \Delta t\)</span>, <span class="math inline">\(t_2 = t_0 + 2\Delta t\)</span>, . We denote by <span class="math inline">\(x_n\)</span> a numerical estimate of the exact solution <span class="math inline">\(x(t_n)\)</span>, which are computed following recursive scheme <span class="math display">\[
+x_{n+1} = x_n + \Delta t * f(x_n).
+\]</span> The smaller the length of the time interval <span class="math inline">\(\Delta t\)</span>, the better the approximation, and <span class="math inline">\(\Delta t\)</span> will indeed be an important parameter when solving ODEs in the next section. The Euler method is the easiest method to numerically solve an ordinary differential equation but far more accurate methods exist and are implemented in the package <em>deSolve</em>.</p>
+<div id="the-r-package-desolve" class="section level3">
+<h3>The <em>R</em>-package <em>deSolve</em></h3>
+<p>The <em>R</em>-package <em>deSolve</em> allows us to numerically solve ecological ODE models. A detailed documentation for this package and tutorials can be found <a href="https://desolve.r-forge.r-project.org/">here</a>. Start by installing the package via the <em>Install</em>-tab in the bottom-right of your <em>RStudio</em> window and load it using</p>
+<pre class="r"><code>library(deSolve)</code></pre>
+<p>As a first example, let us use the model for logistic growth in the <span class="math inline">\(r/\alpha\)</span> formulation:</p>
+<p><span class="math display">\[
+\frac{\mathrm{d}N}{\mathrm{d}t}=N \left(r  - \alpha N \right)
+\]</span> This model has the stable equilibrium <span class="math inline">\(\hat N = r/\alpha\)</span>, often referred to as carrying capacity. In order to analyze an ODE, we need to do four things:</p>
+<ol style="list-style-type: decimal">
+<li>Specify the initial values of the dynamics variables.</li>
+</ol>
+<pre class="r"><code>N0 &lt;- c(N = 1)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Specify the parameters of the model</li>
+</ol>
+<pre class="r"><code>parameters &lt;- c(r = 1, a = 0.01)</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Specify the vector of time-steps at the which the ODE will be evaluated.</li>
+</ol>
+<pre class="r"><code>time.steps &lt;- seq(0, 10, 2) # this creates the vector (0, 2, 4, 6, 8, 10). Thus, here Delta t equals 1.</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Specify a function containing the differential equation model.</li>
+</ol>
+<pre class="r"><code>log.growth &lt;- function(time.steps, N0, parameters) {
+  with(as.list(c(N0, parameters)), {
+    dN.dt &lt;- N * r*(1 - a * N)
+    return(list(dN.dt))
+  })
+}</code></pre>
+<p>Note that we here stored the parameters and initial conditions in a <em>named vector</em>, which allows us to call their entries by their name. The <em>R</em>-statement with <code>with(as.list(c(y, parms)), { }</code> ensures that the state variables and parameters can be addressed by their names.</p>
+<p>Now we are ready to apply the <em>deSolve</em>-function <code>ode(y, times, func, parms, ...)</code>. This function has four obligatory arguments, the initial values <em>y</em>, the vector of time steps <em>times</em>, the name of the function that is going to be solved <em>func</em>, and the vector of parameters <em>parms</em>. The output is a data frame, with the first column being the time steps, and the remaining being the state variables.</p>
+<pre class="r"><code>time.series &lt;- ode(y = N0, times = time.steps, func = log.growth, parms = parameters)
+time.series # let us have a look at the resulting data</code></pre>
+<pre><code>##   time         N
+## 1    0  1.000000
+## 2    2  6.945318
+## 3    4 35.546104
+## 4    6 80.295627
+## 5    8 96.785647
+## 6   10 99.552541</code></pre>
+<pre class="r"><code>plot(time.steps, time.series[, 2], type = &quot;l&quot;, lty = 1:2, col=1, ylab = &quot;Population Density N&quot;, xlab=&quot;Time&quot;)</code></pre>
+<p><img src="SolvingODEs_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>This graph shows the solution of the ODE for logistic growth. We can make two observations. First, it seems that the dynamics might not have quite reached its equilibrium (given by <span class="math inline">\(\hat N = r/a = 1/0.01 = 100\)</span>). We therefore should run the model a bit longer, in other words, increase the length of the time as specified in <em>time.steps</em>. Second, the graph of the time series does not look smooth but rather a bit choppy. This is due to the fact that we calculate the solution at only 6 different points, as determined by <em>time.steps &lt;- seq(1, 10, 2)</em>. Let us quadruple the number of time points at which the solution is calculated.</p>
+<pre class="r"><code>time.steps.2 &lt;- seq(0, 15, 0.5) # this creates the vector (0, 0.5, 1.5, 2, 2.5, ..., 15). Thus, here Delta t equals 0.5.
+time.series.2 &lt;- ode(N0, time.steps.2, log.growth, parameters)
+
+plot(time.steps.2, time.series.2[, 2], type = &quot;l&quot;, lty = 1, col=1, ylab = &quot;Population Density N&quot;, xlab=&quot;Time&quot;) 
+lines(time.steps, time.series[, 2], type = &quot;l&quot;, lty = 2, col=2)
+legend(&quot;topleft&quot;, legend = c(&quot;high resolution&quot;,&quot;low resolution&quot;),  col =c(1, 2), lty = c(1, 2))</code></pre>
+<p><img src="SolvingODEs_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>And indeed, the new curve looks very smooth. For the logistic model it is in fact possible to compute the solution <em>analytically</em>,</p>
+<p><span class="math display">\[
+N(t) = \frac{N_0 \exp(r t)}{1 + \alpha r^{-1} N_0 (\exp(r t) - 1)},
 \]</span></p>
 <p>which we can define as an <em>R</em>-function and plot using the function <em>curve</em>:</p>
 <pre class="r"><code>solution_logistic &lt;- function(t) { (N0 * exp(r * t)) /
-    (1 + (N0 / K) * (exp(r * t) - 1))
+    (1 + (a * N0 / r) * (exp(r * t) - 1))
 }
 
 r &lt;- 1
-K &lt;- 1000
-N0 &lt;- 10
+a &lt;- 0.01
+N0 &lt;- 1
 
 curve(solution_logistic(x), from = 0, to = 15, xlab = &quot;time&quot;, ylab = &quot;population size N&quot;)</code></pre>
 <p>This graph is virtually indistinguishable from the one based on numerical integration.</p>
 </div>
-<div id="two-variables-lotka-volterra-competition" class="section level2">
-<h2>Two Variables: Lotka-Volterra Competition</h2>
-<p>In the lecture, you got to know the Lotka-Volterra competition model, which can be written as</p>
+</div>
+<div id="solving-systems-of-coupled-odes" class="section level2">
+<h2>Solving systems of coupled ODEs</h2>
+<p>Many ecological models describe the rate of change of more than one variable, such as a predator and its prey, or two competing species. The package <em>deSolve</em> can also solve such <em>systems of coupled ordinary differential equations</em>. As case in point, let us analyze the continuous time Lotka-Volterra competition model, which can be written as</p>
 <p><span class="math display">\[
-\frac{\mathrm{d}N_1}{\mathrm{d}t} = N_1 r_1 \left(1 − \frac{N_1 + \alpha N_2}{K_1}\right)\\
-\frac{\mathrm{d}N_2}{\mathrm{d}t} = N_2 r_2 \left(1 − \frac{N_2 + \beta N_1}{K_2}\right)
-\]</span></p>
-<p>Before we can apply the function <code>ode()</code> we feed this model into R using the following function:</p>
-<pre class="r"><code>LV_comp &lt;- function(t, N, parameters) {
+\frac{\mathrm{d}N_1}{\mathrm{d}t} = N_1 \left(r_1 - \alpha_{11} N_1 - \alpha_{21} N_2 \right)\\
+\frac{\mathrm{d}N_2}{\mathrm{d}t} = N_2 \left(r_2 − \alpha_{22} N_2 - \alpha_{21} N_1 \right),
+\]</span> where <span class="math inline">\(\alpha_{ij}\)</span> describes the sensitivity of competition of species <span class="math inline">\(i\)</span> to the presence of species <span class="math inline">\(i\)</span>.</p>
+<p>To solve this system of equations numerically, we again start by specifying (i) the initial population sizes, (ii) the parameter values and (iii) the sequence of time steps for which to calculate population sizes.</p>
+<pre class="r"><code>N &lt;- c(N1 = 5, N2 = 1) # vector of initial population sizes
+r &lt;- c(r1 = 1, r2 = 1) # vector of r-values
+a &lt;- c(a11 = 0.01, a12 = 0.008, a22 = 0.009, a21 = 0.007) # vector of sensitivities
+parameters &lt;- list(r, a) # all parameters collected in one list
+time.steps &lt;- seq(1, 50, 0.5) # sequence of times steps</code></pre>
+<p>Next, we specify the function with the two differential equations.</p>
+<pre class="r"><code>LV.comp &lt;- function(time.steps, N, parameters) {
   with(as.list(c(N, parameters)), {
-  dN1.dt &lt;- r[1] * N[1] * (1 - (N[1] + a[1] * N[2]) / K[1])
-  dN2.dt &lt;- r[2] * N[2] * (1 - (N[2] + a[2] * N[1]) / K[2])
+  dN1.dt &lt;- N[1] * (r[1] - a[1] * N[1] - a[2] * N[2]) # here [i] indicates the ith position in the corresponding vector
+  dN2.dt &lt;- N[2] * (r[2] - a[3] * N[2] - a[4] * N[1])
   return(list(c(dN1.dt, dN2.dt)))
   })
 }  </code></pre>
-<p>Note that <em>LV_comp</em> assumes that <em>N</em>, <em>r</em>, <em>a</em> and <em>K</em> are vectors. For instance, the function extracts the first element of <em>r</em> for the first species <em>(r[1])</em>. The vector <em>N</em> of population sizes contains one value for each population at one time point. Thus here, the vector contains only two entries (one for each of the two species). It holds only these values, but will do so repeatedly, at each time point. Only the output will contain all of the population sizes through time.</p>
-<p>To integrate these populations, we need to specify new initial conditions, and new parameters for the two-species model.</p>
-<pre class="r"><code>r &lt;- c(r1 = 1, r2 = 1)
-a &lt;- c(alpha = 0.9, beta = 0.5)
-K &lt;- c(K1 = 1000, K2 = 700)
-parameters &lt;- list(r, a, K)
-
-N &lt;- c(N1 = 10, N2 = 20)
-t &lt;- seq(1, 30, 1) # densities will be computed for 20 time steps; vary this vector to change the length of the time series or the smoothness of the graph
-
-LV_time_series &lt;- ode(y = N, times = t, func = LV_comp, parms = parameters)
-
-LV_time_series[1:5, ] # shows the two densities for the first five time steps</code></pre>
-<pre><code>##      time       N1        N2
-## [1,]    1  10.0000  20.00000
-## [2,]    2  25.9400  51.21843
-## [3,]    3  62.8157 120.22174
-## [4,]    4 132.6181 237.68058
-## [5,]    5 229.0203 367.84078</code></pre>
-<pre class="r"><code>matplot(t, (LV_time_series[, 2:3]), type = &quot;l&quot;, lty = 1:2, col=1, ylab = &quot;Population Density&quot;, xlab=&quot;Time&quot;)
-legend(&quot;bottomright&quot;, c(expression(&quot;species 1&quot;), expression(&quot;species 2&quot;)), lty = 1:2, bty = &quot;n&quot;)</code></pre>
-<p><img src="SolvingODEs_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>As expected, for the above parameter values the two competing species can coexist with each other.</p>
-<p>Instead of looking at these simulations as time series, we can also look at them in a phase-plane diagram.</p>
-<pre class="r"><code>plot(LV_time_series[, 2], LV_time_series[, 3], type = &quot;l&quot;,  lty = 1, xlab = &quot;species 1&quot;, ylab = &quot;species 2&quot;, asp = 1)
-points(N[1], N[2], cex = 1.5, pch = 19, col = &quot;red&quot;) # adds a dot to show the starting density</code></pre>
-<p><img src="SolvingODEs_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Note that <em>LV.comp</em> assumes that <em>N</em>, <em>r</em>, <em>a</em> and <em>K</em> are vectors. For instance, the function extracts the first entry of <em>r</em> for the first species <em>(r[1])</em>. The vector <em>N</em> of population sizes contains one value for each population. To solve the population dynamics, we again use the function <em>ode</em> just as in the previous example.</p>
+<pre class="r"><code>time.series &lt;- ode(y = N, times = time.steps, func = LV.comp, parms = parameters)
+time.series[1:5, ] # shows the two densities for the first five time steps</code></pre>
+<pre><code>##      time        N1       N2
+## [1,]  1.0  5.000000 1.000000
+## [2,]  1.5  7.944503 1.603126
+## [3,]  2.0 12.357817 2.528846
+## [4,]  2.5 18.633562 3.895593
+## [5,]  3.0 26.915081 5.807127</code></pre>
+<pre class="r"><code>matplot(time.steps, (time.series[, 2:3]), type = &quot;l&quot;, lty = 1:2, col=1, ylab = &quot;Population Density N&quot;, xlab=&quot;Time&quot;)
+legend(&quot;bottomright&quot;, c(&quot;species 1&quot;, &quot;species 2&quot;), lty = 1:2)</code></pre>
+<p><img src="SolvingODEs_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>For the above parameter values, the two competing species can coexist with each other. It seems that the sequence of time steps is both long enough and sufficiently fine grained for the solution to look smooth and reach its equilibrium.</p>
+<p>Instead plotting these simulations as a time series, we can also plot them as a phase-plane diagram.</p>
+<pre class="r"><code>plot(time.series[, 2], time.series[, 3], xlim = c(0, 80), ylim = c(0, 100), type = &quot;l&quot;,  lty = 1, xlab = &quot;species 1&quot;, ylab = &quot;species 2&quot;)
+points(N[1], N[2], cex = 1.5, pch = 19, col = &quot;red&quot;) # adds a dot to show the starting densities</code></pre>
+<p><img src="SolvingODEs_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <!---
 STUFF TO ADD IN THE FUTURE
 The ```ode()``` function uses a superb ODE solver, ```lsoda```, which is a very powerful, well tested tool, superior to many other such solvers. One of the other solvers in the ```deSolve```-package, ```lsodar```, will also return roots (or equilibria), for a system of ODEs, if they exist. Here we find the roots (i.e. the solutions, or equilibria) for a two species competition model.
