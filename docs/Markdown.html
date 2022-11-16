@@ -338,15 +338,90 @@ abline(h = 0)
 <pre class="r"><code>$$
 N(t + 1) = N(t)(1 + \beta - \delta)
 $$</code></pre>
-<p>producing <span class="math display">\[
+<p><span class="math display">\[
 N(t + 1) = N(t)(1 + \beta - \delta).
 \]</span> Here, the the two dollar-symbols before and after the equation open and close a <em>Latex</em>-environment, respectively. Whatever is in between will be interpreted as <em>Latex</em>-code. If you want to write math that is within a line, such as <span class="math inline">\(N(t + 1) = N(t)(1 + \beta - \delta)\)</span>, then open and close the latex environment with only a single $-sign. <a href="https://rpruim.github.io/s341/S19/from-class/MathinRmd.html">This website</a> provides a very concise overview of how you can use <em>Latex</em> within a <em>Rmarkdown</em>-document.</p>
 </div>
 <div id="import-figures-into-rmarkdown-documents" class="section level3">
 <h3>Import figures into <em>Rmarkdown</em> documents</h3>
-<p>It is also possible to import pictures into an Rmarkdown file. For this to be possible, you need to place the picture file in a place where R can find it. In this example, I stored the image file <em>Rmarkdown-logo.png</em> inside a folder called <em>images</em>, which is located inside the same <em>R</em>-project as this .Rmd-file. To determine the size of the figure in the output file, I here start the code chunk with <code>{r out.width = '30%'}</code>, which sets the figure size to 30% of the page width.</p>
+<p>It is also possible to import pictures into an Rmarkdown file. For this to be possible, you need to place the picture file in a place where <em>R</em> can find it. In this example, I stored the image file <em>Rmarkdown-logo.png</em> inside a folder called <em>images</em>, which is located inside the same <em>R</em>-project as this <em>.Rmd</em>-file. The picture is then included by writing <code>![Caption for the image](images/Rmarkdown-logo.png)</code>.</p>
+<div class="figure">
+<img src="images/Rmarkdown-logo.png" alt="" />
+<p class="caption">Caption for the image</p>
+</div>
+<p>If the optional argument [Caption for the image] is left empty, the caption is omitted. A more powerful method for including pictures exists in the form of the function <code>knitr::include_graphics()</code>:</p>
 <pre class="r"><code>knitr::include_graphics(&quot;images/Rmarkdown-logo.png&quot;)</code></pre>
-<p><img src="images/Rmarkdown-logo.png" width="30%" /></p>
+<p>The advantages of this method are for example discussed <a href="https://bookdown.org/yihui/bookdown/figures.html">here</a>.</p>
+</div>
+<div id="tables" class="section level3">
+<h3>Tables</h3>
+<p>It is easy to include simple tables into an <em>Rmarkdown</em> document using the function <code>knitr::kable()</code>. As an example, let us create a simple data frame and then present it as a table.</p>
+<pre class="r"><code>Height &lt;- c(70, 65, 63, 72, 81)
+Volume &lt;- c(10.3, 10.3, 10.2, 16.4, 18.8)
+tree.data &lt;- data.frame(Height, Volume) # a data frame with two columns and five rows
+
+knitr::kable(
+  tree.data, format = &quot;html&quot;, table.attr = &quot;style=&#39;width:30%;&#39;&quot;, caption = &#39;Table caption&#39;
+)</code></pre>
+<table style="width:30%;">
+<caption>
+Table caption
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+Height
+</th>
+<th style="text-align:right;">
+Volume
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+10.3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+10.3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+10.2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+72
+</td>
+<td style="text-align:right;">
+16.4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+81
+</td>
+<td style="text-align:right;">
+18.8
+</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+This is the simplest possible option to make a table and countless possibilities exist to fine tune tables, see for example <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html">here</a> and <a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html">here</a>.</p>
 </div>
 <div id="additional-resources" class="section level3">
 <h3>Additional resources</h3>

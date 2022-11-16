@@ -82,7 +82,6 @@ N(t + 1) = N(t)(1 + \beta - \delta)
 $$
 ```
 
-producing
 $$
 N(t + 1) = N(t)(1 + \beta - \delta).
 $$
@@ -90,11 +89,35 @@ Here, the the two dollar-symbols before and after the equation open and close a 
 
 ### Import figures into *Rmarkdown* documents
 
-It is also possible to import pictures into an Rmarkdown file. For this to be possible, you need to place the picture file in a place where R can find it. In this example, I stored the image file *Rmarkdown-logo.png* inside a folder called *images*, which is located inside the same *R*-project as this .Rmd-file. To determine the size of the figure in the output file, I here start the code chunk with ```{r out.width = '30%'}```, which sets the figure size to 30% of the page width. 
+It is also possible to import pictures into an Rmarkdown file. For this to be possible, you need to place the picture file in a place where *R* can find it. In this example, I stored the image file *Rmarkdown-logo.png* inside a folder called *images*, which is located inside the same *R*-project as this *.Rmd*-file. The picture is then included by writing
+```![Caption for the image](images/Rmarkdown-logo.png)```.
 
-```{r out.width = '30%'}
+![Caption for the image](images/Rmarkdown-logo.png)
+
+If the optional argument [Caption for the image] is left empty, the caption is omitted. A more powerful method for including pictures exists in the form of the function ```knitr::include_graphics()```:
+
+```{r out.width = '30%', eval=FALSE}
 knitr::include_graphics("images/Rmarkdown-logo.png")
 ```
+
+The advantages of this method are for example discussed [here](https://bookdown.org/yihui/bookdown/figures.html).
+
+### Tables
+
+It is easy to include simple tables into an *Rmarkdown* document using the function ```knitr::kable()```. As an example, let us create a simple data frame and then present it as a table.
+
+```{r}
+Height <- c(70, 65, 63, 72, 81)
+Volume <- c(10.3, 10.3, 10.2, 16.4, 18.8)
+tree.data <- data.frame(Height, Volume) # a data frame with two columns and five rows
+
+knitr::kable(
+  tree.data, format = "html", table.attr = "style='width:30%;'", caption = 'Table caption'
+)
+```
+
+\
+This is the simplest possible option to make a table and countless possibilities exist to fine tune tables, see for example [here](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) and [here](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html).
 
 ### Additional resources
 
