@@ -43,7 +43,7 @@ plot(x, y, xlim = c(1,35), ylim = c(1,40)) # set plot ranges
 
 ### Function Plots
 
-We can plot the graphs of functions using the command ```curve(expr, from, to, ...)```, where *expr* is a mathematical expression containing an argument *x* or function name, and *from* and *to* defines the range of *x-values for which the function is plotted. This is a useful tool for visually exploring the shape of a function.
+We can plot the graphs of functions using the command ```curve(expr, from, to, ...)```, where *expr* is a mathematical expression containing an argument *x* or function name, and *from* and *to* defines the range of *x*-values for which the function is plotted. This is a useful tool to visually explore the shape of functions.
 
 ```{r eval=FALSE}
 curve(exp, from = -3, to = 3) # plot of the exponential function in the interval (-3, 3)
@@ -51,7 +51,9 @@ abline(v = 0) # adding a vertical line at x = 0
 logistic <- function(n, r, k){# definition of the user-defined function giving the population growth rate of a logistically growing population as a function the current population size n, the intrinsic growth rate r and the carrying capacity k
   n*r*(1-n/k)
 }
+
 curve(logistic(x , r = 1, k = 2), from = 0, to =2.5) # plot of the function logistic as a function of the population size n = x
+# note that the function curve requires that you name the argument that you use for plotting x
 abline(h = 0) # adding a horizontal line at y = 0
 ```
 

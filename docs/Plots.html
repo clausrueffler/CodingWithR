@@ -325,13 +325,15 @@ plot(x, y, xlim = c(1,35), ylim = c(1,40)) # set plot ranges</code></pre>
 </div>
 <div id="function-plots" class="section level3">
 <h3>Function Plots</h3>
-<p>We can plot the graphs of functions using the command <code>curve(expr, from, to, ...)</code>, where <em>expr</em> is a mathematical expression containing an argument <em>x</em> or function name, and <em>from</em> and <em>to</em> defines the range of *x-values for which the function is plotted. This is a useful tool for visually exploring the shape of a function.</p>
+<p>We can plot the graphs of functions using the command <code>curve(expr, from, to, ...)</code>, where <em>expr</em> is a mathematical expression containing an argument <em>x</em> or function name, and <em>from</em> and <em>to</em> defines the range of <em>x</em>-values for which the function is plotted. This is a useful tool to visually explore the shape of functions.</p>
 <pre class="r"><code>curve(exp, from = -3, to = 3) # plot of the exponential function in the interval (-3, 3)
 abline(v = 0) # adding a vertical line at x = 0
 logistic &lt;- function(n, r, k){# definition of the user-defined function giving the population growth rate of a logistically growing population as a function the current population size n, the intrinsic growth rate r and the carrying capacity k
   n*r*(1-n/k)
 }
+
 curve(logistic(x , r = 1, k = 2), from = 0, to =2.5) # plot of the function logistic as a function of the population size n = x
+# note that the function curve requires that you name the argument that you use for plotting x
 abline(h = 0) # adding a horizontal line at y = 0</code></pre>
 </div>
 <div id="plotting-matrix-columns" class="section level3">
