@@ -328,7 +328,7 @@ Exercise: Plot the area of a rectangle with as a function of *side_1* (with *sid
 curve(rectangle(x, side_2 = 2)$surface, from = 0, to = 2, xlab = "side_1", ylab = "rectangle surface")
 ```
 
-Functions can be arbitrarily complicated and most simulation models will have a more or less complex function at its heart. For instance, we can incorporate loops and *iflese'```'-constructs into functions.
+Functions can be arbitrarily complicated and most simulation models will have a more or less complex function at its heart. For instance, we can incorporate loops and ```iflese```-constructs into functions.
 
 ```{r eval=FALSE}
 sign_of_a_number <- function(x){
@@ -394,22 +394,22 @@ result # this will show that the result is equal to 9
  
 ## Random Numbers
 
-*R* can sample (pseudo)random numbers from many distributions. This is very useful for simulations. Important *continuous* probability distributions are the [*uniform distribution*](https://en.wikipedia.org/wiki/Continuous_uniform_distribution) and [*normal distribution*](https://en.wikipedia.org/wiki/Normal_distribution).
+*R* can sample (pseudo)random numbers from many distributions. This is very useful for *stochastic* simulations.
+
+Important *discrete* probability distributions are the [*Binomial distribution*](https://en.wikipedia.org/wiki/Binomial_distribution) and the [*Poisson distribution*](https://en.wikipedia.org/wiki/Poisson_distribution). 
+
+The binomial distribution is used to model any process that we could envisage as a repeated and weighted coin flip. Assume, for example, that a population consists of *size=100* individuals and that each individual dies with probability *p=0.3* from one time step to the next. The outcome of a single experiment, describing the number of surviving individuals, can then be modeled using
 
 ```{r eval=FALSE}
-# samples three numbers from uniform distribution over the interval (0, 1)
-runif(3)
-# samples ten numbers from uniform distribution over the interval (-1, 1)
-runif(10, -1, 1)
-# samples four values from normal distribution with mean 1 and standard deviation 5
-rnorm(4, mean = 1, sd = 5)
+# draws one value of a random variable from binomial distribution with parameters size=100 and p=0.7=1-0.3
+rbinom(n = 1, size = 100, p = 1-0.3)
 ```
 
-A commonly encountered *discrete* probability distributions is the [*Poisson distribution*](https://en.wikipedia.org/wiki/Poisson_distribution). For example, it is often assume that the number of offspring per female is Poisson distributed.
+In population ecology, it is often assumed that the number of offspring per female is Poisson distributed with a mean value given by the parameter $\lambda$. For example, if on average each female has $\lambda=2$ offspring, then the stochastic realization of this process can be modeled using
 
 ```{r eval=FALSE}
-# draws five values from Poisson distribution with mean lambda
-rpois(5, lambda = 1)
+# draws five values of a random variable that is Poisson distributed with a mean given by lambda = 2
+rpois(5, lambda = 2)
 ```
 
 <!--
@@ -423,13 +423,24 @@ rbinom(n = 1, size = 5, prob = 0.5)
 ```
 -->
 
-You can easily draw a sample your own probability distribution using the function
+Important *continuous* probability distributions are the [*uniform distribution*](https://en.wikipedia.org/wiki/Continuous_uniform_distribution) and [*normal distribution*](https://en.wikipedia.org/wiki/Normal_distribution).
+
+```{r eval=FALSE}
+# draws three values of a random variable that is uniformly distributed over the interval (0, 1)
+runif(3)
+# draws ten values from uniform distribution over the interval (-1, 1)
+runif(10, -1, 1)
+# draws four values from normal distribution with mean 1 and standard deviation 5
+rnorm(4, mean = 1, sd = 5)
+```
+
+You can also define your *own* probability distribution and then draw values from is using the function
 
 ```
 sample(x, size, prob, replace, ...)
 ```
 
-To get to know this function, let us simulate the outcome of throwing a dice. The possible outcomes of throwing a dice are the numbers 1 to 6. This we encode in a vector of possible outcomes: ```possible_outcomes <- c(1, 2, 3, 4, 5, 6)```, or, for short, ```possible_outcomes <- 1:6```. If the dice is *fair* each number occurs with probability 1/6. This we encode in the vector ```probabilities <- c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)```, or, for short, ```probabilities <- rep(1/6, 6)```. Since the outcome of any particular throw is independent of all previous throws we *sample without replacement*. We have to specify this in the function *sample* by adding *replace = TRUE*. Finally, we have to add how often we throw the dice by specifying a value for *size*, for example, *size = 1* if we throw the dice only once.
+To get to know this function, let us simulate the outcome of throwing a dice. The possible outcomes of throwing a dice are the numbers 1 to 6. This we encode in a vector of possible outcomes: ```possible_outcomes <- c(1, 2, 3, 4, 5, 6)```, or, for short, ```possible_outcomes <- 1:6```. If the dice is *fair* each number occurs with probability 1/6. This we encode in the vector ```probabilities <- c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)```, or, for short, ```probabilities <- rep(1/6, 6)```. Since the outcome of any particular throw is independent of all previous throws we *sample with replacement*. We have to specify this in the function *sample* by adding *replace = TRUE*. Finally, we have to add how often we throw the dice by specifying a value for *size*, for example, *size = 1* if we throw the dice only once.
 
 ```{r eval=FALSE}
 possible_outcomes <- 1:6
@@ -440,11 +451,19 @@ sample(x = possible_outcomes, size = 1, prob = probabilities, replace = TRUE)
 sample(possible_outcomes, 10, probabilities, replace = TRUE) # simulating the outcome of ten throws
 ```
 
-Often we want to simulate the outcome of a *coin-toss*, for example, to determine in a simulation whether or not an individual dies from one time step to the next.
+We can use the function ```sample``` to program the binomial distribution ourselves.
+The outcome of single a *coin-toss*, for example, to determine in a simulation whether an individual dies from one time step to the next can be programmed as
 
 ```{r eval=FALSE}
-prob.death <- 0.2
+prob.death <- 0.3
 sample(c(0, 1), 1, c(prob.death, 1 -prob.death), replace = TRUE) # returns a 0 if the individuals dies and a 1 if the individual survives where death occurs with probability 0.2
+```
+
+We obtain the number of survivors in a population of 100 individuals by repeating this experiment 100 times and sum over the outcome:
+
+```{r eval=FALSE}
+prob.death <- 0.3
+sum(sample(c(0, 1), 100, c(prob.death, 1 -prob.death), replace = TRUE))
 ```
 
 #### Exercises
@@ -460,7 +479,7 @@ two_dice_sum <- function() {
 two_dice_sum()
 ```
 
-(b) Code a function that gives the frequency for the different outcomes of throwing a dice as a function *size*, that is, the number of times a dice is thrown. Present the results in a histogram. How do the results change if you increase *size*?
+(b) Code a function that gives the frequency for the different outcomes of throwing a dice as a function of *size*, that is, the number of times a dice is thrown. Present the results in a histogram. How do the results change if you increase *size*?
 
 ```{r eval=FALSE, echo=FALSE}
 freq_dice <- function(n) {

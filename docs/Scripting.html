@@ -524,7 +524,7 @@ rectangle(2, 3)</code></pre>
 <pre class="r"><code>curve(circle.area(x), from = 0, to = 2, xlab = &quot;radius&quot;,  ylab = &quot;circle area&quot;)</code></pre>
 <p><img src="Scripting_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Exercise: Plot the area of a rectangle with as a function of <em>side_1</em> (with <em>side_1</em> between 0 and 2) given that <em>side_2=2</em>.</p>
-<p>Functions can be arbitrarily complicated and most simulation models will have a more or less complex function at its heart. For instance, we can incorporate loops and *iflese’```’-constructs into functions.</p>
+<p>Functions can be arbitrarily complicated and most simulation models will have a more or less complex function at its heart. For instance, we can incorporate loops and <code>iflese</code>-constructs into functions.</p>
 <pre class="r"><code>sign_of_a_number &lt;- function(x){
   if (x &lt; 0) {print(&quot;Negative number&quot;)} else
     if (x &gt; 0) {print(&quot;Positive number&quot;)} else
@@ -575,16 +575,14 @@ result # this will show that the result is equal to 9</code></pre>
 </div>
 <div id="random-numbers" class="section level2">
 <h2>Random Numbers</h2>
-<p><em>R</em> can sample (pseudo)random numbers from many distributions. This is very useful for simulations. Important <em>continuous</em> probability distributions are the <a href="https://en.wikipedia.org/wiki/Continuous_uniform_distribution"><em>uniform distribution</em></a> and <a href="https://en.wikipedia.org/wiki/Normal_distribution"><em>normal distribution</em></a>.</p>
-<pre class="r"><code># samples three numbers from uniform distribution over the interval (0, 1)
-runif(3)
-# samples ten numbers from uniform distribution over the interval (-1, 1)
-runif(10, -1, 1)
-# samples four values from normal distribution with mean 1 and standard deviation 5
-rnorm(4, mean = 1, sd = 5)</code></pre>
-<p>A commonly encountered <em>discrete</em> probability distributions is the <a href="https://en.wikipedia.org/wiki/Poisson_distribution"><em>Poisson distribution</em></a>. For example, it is often assume that the number of offspring per female is Poisson distributed.</p>
-<pre class="r"><code># draws five values from Poisson distribution with mean lambda
-rpois(5, lambda = 1)</code></pre>
+<p><em>R</em> can sample (pseudo)random numbers from many distributions. This is very useful for <em>stochastic</em> simulations.</p>
+<p>Important <em>discrete</em> probability distributions are the <a href="https://en.wikipedia.org/wiki/Binomial_distribution"><em>Binomial distribution</em></a> and the <a href="https://en.wikipedia.org/wiki/Poisson_distribution"><em>Poisson distribution</em></a>.</p>
+<p>The binomial distribution is used to model any process that we could envisage as a repeated and weighted coin flip. Assume, for example, that a population consists of <em>size=100</em> individuals and that each individual dies with probability <em>p=0.3</em> from one time step to the next. The outcome of a single experiment, describing the number of surviving individuals, can then be modeled using</p>
+<pre class="r"><code># draws one value of a random variable from binomial distribution with parameters size=100 and p=0.7=1-0.3
+rbinom(n = 1, size = 100, p = 1-0.3)</code></pre>
+<p>In population ecology, it is often assumed that the number of offspring per female is Poisson distributed with a mean value given by the parameter <span class="math inline">\(\lambda\)</span>. For example, if on average each female has <span class="math inline">\(\lambda=2\)</span> offspring, then the stochastic realization of this process can be modeled using</p>
+<pre class="r"><code># draws five values of a random variable that is Poisson distributed with a mean given by lambda = 2
+rpois(5, lambda = 2)</code></pre>
 <!--
 Another important discrete distribution is the [*binomial distribution*](https://en.wikipedia.org/wiki/Binomial_distribution).
 The binomial distribution is slightly more complicated. It
@@ -607,23 +605,33 @@ rbinom(n = 1, size = 5, prob = 0.5)
 ## [1] 0
 ```
 -->
-<p>You can easily draw a sample your own probability distribution using the function</p>
+<p>Important <em>continuous</em> probability distributions are the <a href="https://en.wikipedia.org/wiki/Continuous_uniform_distribution"><em>uniform distribution</em></a> and <a href="https://en.wikipedia.org/wiki/Normal_distribution"><em>normal distribution</em></a>.</p>
+<pre class="r"><code># draws three values of a random variable that is uniformly distributed over the interval (0, 1)
+runif(3)
+# draws ten values from uniform distribution over the interval (-1, 1)
+runif(10, -1, 1)
+# draws four values from normal distribution with mean 1 and standard deviation 5
+rnorm(4, mean = 1, sd = 5)</code></pre>
+<p>You can also define your <em>own</em> probability distribution and then draw values from is using the function</p>
 <pre><code>sample(x, size, prob, replace, ...)</code></pre>
-<p>To get to know this function, let us simulate the outcome of throwing a dice. The possible outcomes of throwing a dice are the numbers 1 to 6. This we encode in a vector of possible outcomes: <code>possible_outcomes &lt;- c(1, 2, 3, 4, 5, 6)</code>, or, for short, <code>possible_outcomes &lt;- 1:6</code>. If the dice is <em>fair</em> each number occurs with probability 1/6. This we encode in the vector <code>probabilities &lt;- c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)</code>, or, for short, <code>probabilities &lt;- rep(1/6, 6)</code>. Since the outcome of any particular throw is independent of all previous throws we <em>sample without replacement</em>. We have to specify this in the function <em>sample</em> by adding <em>replace = TRUE</em>. Finally, we have to add how often we throw the dice by specifying a value for <em>size</em>, for example, <em>size = 1</em> if we throw the dice only once.</p>
+<p>To get to know this function, let us simulate the outcome of throwing a dice. The possible outcomes of throwing a dice are the numbers 1 to 6. This we encode in a vector of possible outcomes: <code>possible_outcomes &lt;- c(1, 2, 3, 4, 5, 6)</code>, or, for short, <code>possible_outcomes &lt;- 1:6</code>. If the dice is <em>fair</em> each number occurs with probability 1/6. This we encode in the vector <code>probabilities &lt;- c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)</code>, or, for short, <code>probabilities &lt;- rep(1/6, 6)</code>. Since the outcome of any particular throw is independent of all previous throws we <em>sample with replacement</em>. We have to specify this in the function <em>sample</em> by adding <em>replace = TRUE</em>. Finally, we have to add how often we throw the dice by specifying a value for <em>size</em>, for example, <em>size = 1</em> if we throw the dice only once.</p>
 <pre class="r"><code>possible_outcomes &lt;- 1:6
 probabilities &lt;- rep(1/6, 6)
 
 sample(x = possible_outcomes, size = 1, prob = probabilities, replace = TRUE)
 
 sample(possible_outcomes, 10, probabilities, replace = TRUE) # simulating the outcome of ten throws</code></pre>
-<p>Often we want to simulate the outcome of a <em>coin-toss</em>, for example, to determine in a simulation whether or not an individual dies from one time step to the next.</p>
-<pre class="r"><code>prob.death &lt;- 0.2
+<p>We can use the function <code>sample</code> to program the binomial distribution ourselves. The outcome of single a <em>coin-toss</em>, for example, to determine in a simulation whether an individual dies from one time step to the next can be programmed as</p>
+<pre class="r"><code>prob.death &lt;- 0.3
 sample(c(0, 1), 1, c(prob.death, 1 -prob.death), replace = TRUE) # returns a 0 if the individuals dies and a 1 if the individual survives where death occurs with probability 0.2</code></pre>
+<p>We obtain the number of survivors in a population of 100 individuals by repeating this experiment 100 times and sum over the outcome:</p>
+<pre class="r"><code>prob.death &lt;- 0.3
+sum(sample(c(0, 1), 100, c(prob.death, 1 -prob.death), replace = TRUE))</code></pre>
 <div id="exercises-1" class="section level4">
 <h4>Exercises</h4>
 <ol style="list-style-type: lower-alpha">
 <li><p>Code a function that simulates the sum of the eyes when throwing two dice together.</p></li>
-<li><p>Code a function that gives the frequency for the different outcomes of throwing a dice as a function <em>size</em>, that is, the number of times a dice is thrown. Present the results in a histogram. How do the results change if you increase <em>size</em>?</p></li>
+<li><p>Code a function that gives the frequency for the different outcomes of throwing a dice as a function of <em>size</em>, that is, the number of times a dice is thrown. Present the results in a histogram. How do the results change if you increase <em>size</em>?</p></li>
 <li><p>Do the same for the sum of the eyes when throwing two dice simultaneously. Thus, here the question is how the distribution of this sum changes when we increase the number of times we throw two dice together?</p></li>
 </ol>
 </div>
