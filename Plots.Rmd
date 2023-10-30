@@ -17,8 +17,6 @@ klippy::klippy(position = c('top', 'right'))
 
 In *R*, you can choose different ways to plot your data and results. By default, *R* comes with built-in graphical functions. Other functions, or entirely different paradigms, can be enabled using different packages. Here we give a brief overview of the standard plotting functions that are useful for quick data exploration. These are also referred to as R “base graphics” as no extra package is required.
 
-*R* base graphics are drawn interactively: you can start with a plot, and then overlay other elements on the existing plot.
-
 ### Scatter Plots
 
 The function ```plot(x, y, ...)``` is the most basic way to plot points defined by their x- and y-coordinates. Here, *x* and *y* are vectors of equal length containing the x- and y-coordinates of the points to be plotted. For example,
@@ -41,6 +39,18 @@ plot(x, y, col = "orange", xlab = "my x-label", ylab = "a y-label") # add axes l
 plot(x, y, xlim = c(1,35), ylim = c(1,40)) # set plot ranges
 ```
 
+*R* base graphics are drawn interactively: you can start with a plot, and then overlay other elements on the existing plot.
+
+```{r eval=FALSE}
+x <- 1:30
+y <- rnorm(30, mean = x)
+
+plot(x, y, type = "l", ylim = c(1,60), col = "orange", ylab = "f(x)") 
+lines(x, 2*y, type = "l", col = "blue") # adds a line to the previous plot
+legend("topleft", legend = c("f(x)=y","f(x)=2y"), lty = c(1,1), col = c("orange", "blue")) # adds a plot legend
+```
+
+
 ### Function Plots
 
 We can plot the graphs of functions using the command ```curve(expr, from, to, ...)```, where *expr* is a mathematical expression containing an argument *x* or function name, and *from* and *to* defines the range of *x*-values for which the function is plotted. This is a useful tool to visually explore the shape of functions.
@@ -61,13 +71,13 @@ abline(h = 0) # adding a horizontal line at y = 0
 
 The plotting command ```matplot(x, y, ...)``` is an easy way to superimpose several data series. Here, *x* is a vector containing the values for the x-axes and *y* is a matrix containing the data as a function of *x*. Note, that ```matplot(x, y, ...)``` plots each *column* of *y* as separate data series.
 
-```{r}
+```{r eval=FALSE}
 x <- 1:10 # creates a vector of length 10, this will become the x-axes
 y.1 <- x^2 # another vectors of length 10
 y.2 <- x^2 - 2*x # and a third vector of length 10
 
-matplot(x, cbind(y.1, y.2), col =c(2, 4), pch = c(0, 2), xlab = "x", ylab = "y.1 = x^2 and y.2 = x^2-2*x")
-legend(1, 100, legend = c("y.1","y.2"), , col =c(2, 4), pch = c(0, 2)) # adds a plot legend
+matplot(x, cbind(y.1, y.2), col =c(2, 4), pch = c(0, 2), xlab = "x", ylab = "y.1 = x^2 and y.2 = x^2-2x")
+legend(1, 100, legend = c("y.1","y.2"), col =c(2, 4), pch = c(0, 2)) # adds a plot legend
 ```
 
 In the following example, the variable *x* is given by the first column of a matrix while the actual data are taken from the second and third column of that same matrix.

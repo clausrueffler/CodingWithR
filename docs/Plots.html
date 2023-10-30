@@ -303,7 +303,6 @@ $(document).ready(function () {
 <div id="basic-plotting" class="section level1 tabset">
 <h1 class="tabset">Basic Plotting</h1>
 <p>In <em>R</em>, you can choose different ways to plot your data and results. By default, <em>R</em> comes with built-in graphical functions. Other functions, or entirely different paradigms, can be enabled using different packages. Here we give a brief overview of the standard plotting functions that are useful for quick data exploration. These are also referred to as R “base graphics” as no extra package is required.</p>
-<p><em>R</em> base graphics are drawn interactively: you can start with a plot, and then overlay other elements on the existing plot.</p>
 <div id="scatter-plots" class="section level3">
 <h3>Scatter Plots</h3>
 <p>The function <code>plot(x, y, ...)</code> is the most basic way to plot points defined by their x- and y-coordinates. Here, <em>x</em> and <em>y</em> are vectors of equal length containing the x- and y-coordinates of the points to be plotted. For example,</p>
@@ -322,6 +321,13 @@ abline(h = 20) # adding a horizontal line by setting a y-value h
 abline(v = 10) # adding a vertical line by setting an x-value v
 plot(x, y, col = &quot;orange&quot;, xlab = &quot;my x-label&quot;, ylab = &quot;a y-label&quot;) # add axes labels
 plot(x, y, xlim = c(1,35), ylim = c(1,40)) # set plot ranges</code></pre>
+<p><em>R</em> base graphics are drawn interactively: you can start with a plot, and then overlay other elements on the existing plot.</p>
+<pre class="r"><code>x &lt;- 1:30
+y &lt;- rnorm(30, mean = x)
+
+plot(x, y, type = &quot;l&quot;, ylim = c(1,60), col = &quot;orange&quot;, ylab = &quot;f(x)&quot;) 
+lines(x, 2*y, type = &quot;l&quot;, col = &quot;blue&quot;) # adds a line to the previous plot
+legend(&quot;topleft&quot;, legend = c(&quot;f(x)=y&quot;,&quot;f(x)=2y&quot;), lty = c(1,1), col = c(&quot;orange&quot;, &quot;blue&quot;)) # adds a plot legend</code></pre>
 </div>
 <div id="function-plots" class="section level3">
 <h3>Function Plots</h3>
@@ -343,9 +349,8 @@ abline(h = 0) # adding a horizontal line at y = 0</code></pre>
 y.1 &lt;- x^2 # another vectors of length 10
 y.2 &lt;- x^2 - 2*x # and a third vector of length 10
 
-matplot(x, cbind(y.1, y.2), col =c(2, 4), pch = c(0, 2), xlab = &quot;x&quot;, ylab = &quot;y.1 = x^2 and y.2 = x^2-2*x&quot;)
-legend(1, 100, legend = c(&quot;y.1&quot;,&quot;y.2&quot;), , col =c(2, 4), pch = c(0, 2)) # adds a plot legend</code></pre>
-<p><img src="Plots_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+matplot(x, cbind(y.1, y.2), col =c(2, 4), pch = c(0, 2), xlab = &quot;x&quot;, ylab = &quot;y.1 = x^2 and y.2 = x^2-2x&quot;)
+legend(1, 100, legend = c(&quot;y.1&quot;,&quot;y.2&quot;), col =c(2, 4), pch = c(0, 2)) # adds a plot legend</code></pre>
 <p>In the following example, the variable <em>x</em> is given by the first column of a matrix while the actual data are taken from the second and third column of that same matrix.</p>
 <pre class="r"><code>x &lt;- 1:10 # creates a vector of length 10, this will become the x-axes
 y.1 &lt;- x^2 # two more vectors of length 10
