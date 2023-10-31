@@ -13,7 +13,7 @@
 
 <title>Learning Coding in R</title>
 
-<script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
@@ -178,8 +178,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "\e259";
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -187,9 +187,16 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "\e258";
-  font-family: 'Glyphicons Halflings';
+  content: "&#xe258;";
   border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -285,72 +292,36 @@ $(document).ready(function () {
 </div>
 
 
-<div id="r-as-an-oversized-calculator-the-console"
-class="section level1 tabset">
-<h1 class="tabset"><em>R</em> as an Oversized Calculator: the
-Console</h1>
+<div id="r-as-an-oversized-calculator-the-console" class="section level1 tabset">
+<h1 class="tabset"><em>R</em> as an Oversized Calculator: the Console</h1>
 <div id="getting-started" class="section level2">
 <h2>Getting started</h2>
-<p><em>R</em> is a versatile programming language for statistical
-analysis, data analysis and numerical calculations. The main hurdle new
-users face when learning <em>R</em> is that it is based on a
-command-line interface: to make things happen, you write text commands
-that then can be executed by the program. This might seem unusual if you
-are used to software based on a graphical user interface, where you tend
-to work by clicking on windows and buttons. However, the command line is
-what makes it easy to automate your analysis - all you have to do is
-collect all the commands in a <em>script</em>, and then run them in
-<em>R</em>.</p>
+<p><em>R</em> is a versatile programming language for statistical analysis, data analysis and numerical calculations. The main hurdle new users face when learning <em>R</em> is that it is based on a command-line interface: to make things happen, you write text commands that then can be executed by the program. This might seem unusual if you are used to software based on a graphical user interface, where you tend to work by clicking on windows and buttons. However, the command line is what makes it easy to automate your analysis - all you have to do is collect all the commands in a <em>script</em>, and then run them in <em>R</em>.</p>
 <div id="installing-r-and-rstudio" class="section level3">
 <h3>Installing <em>R</em> and <em>RStudio</em></h3>
-<p>We are using <em>RStudio</em>, a graphical interface that simplifies
-the use of <em>R</em> by giving you immediate access to the code, the
-console, and the graphics.</p>
-<p>To install <em>R</em> and <em>RStudio</em>, you can follow <a
-href="https://rstudio-education.github.io/hopr/starting.html">these
-instructions</a>.</p>
+<p>We are using <em>RStudio</em>, a graphical interface that simplifies the use of <em>R</em> by giving you immediate access to the code, the console, and the graphics.</p>
+<p>To install <em>R</em> and <em>RStudio</em>, you can follow <a href="https://rstudio-education.github.io/hopr/starting.html">these instructions</a>.</p>
 </div>
 <div id="finding-help" class="section level3">
 <h3>Finding Help</h3>
-<p>Each command in <em>R</em> comes with a manual page. To access it,
-type <code>?[NAME OFCOMMAND]</code> in the console (e.g.,
-<code>?lm</code>). Alternatively, search the command under the help-tab
-in the bottom right window of RStudio.</p>
-<p>But really, if you need help with <em>R</em> the internet is your
-friend. Virtually any problem you might encounter has been described and
-solved somewhere on the internet. It’s all about to phrase your question
-in the right manner in a Google search. Most often you will end up on <a
-href="https://stackexchange.com/">stackexchange</a>, <a
-href="https://stackoverflow.com/questions">stackoverflow</a> or <a
-href="https://www.r-bloggers.com/">r-bloggers</a>.</p>
+<p>Each command in <em>R</em> comes with a manual page. To access it, type <code>?[NAME OFCOMMAND]</code> in the console (e.g., <code>?lm</code>). Alternatively, search the command under the help-tab in the bottom right window of RStudio.</p>
+<p>But really, if you need help with <em>R</em> the internet is your friend. Virtually any problem you might encounter has been described and solved somewhere on the internet. It’s all about to phrase your question in the right manner in a Google search. Most often you will end up on <a href="https://stackexchange.com/">stackexchange</a>, <a href="https://stackoverflow.com/questions">stackoverflow</a> or <a href="https://www.r-bloggers.com/">r-bloggers</a>.</p>
 </div>
 <div id="the-anatomy-of-rstudio" class="section level3">
 <h3>The Anatomy of <em>RStudio</em></h3>
-<p><em>RStudio</em> is a so-called <em>integrated development
-environment</em>, <em>IDE</em> for short, developed to facilitate your
-interaction with <em>R</em>. By default the <em>RStudio</em> window
-consists of four sub-windows (as shown below, figure taken from <a
-href="https://r-unimelb.gitbook.io/rbook/">here</a>):</p>
+<p><em>RStudio</em> is a so-called <em>integrated development environment</em>, <em>IDE</em> for short, developed to facilitate your interaction with <em>R</em>. By default the <em>RStudio</em> window consists of four sub-windows (as shown below, figure taken from <a href="https://r-unimelb.gitbook.io/rbook/">here</a>):</p>
 <ol style="list-style-type: decimal">
 <li>The interactive <em>R</em> console (lower left)</li>
 <li>Environment/History (tabs in the upper right window)</li>
-<li>Files/Plots/Packages/Help/Viewer (tabs in the lower right
-window)</li>
-<li>Editor panel for <em>R</em>-scripts. This window appears in the top
-right once you opened an <em>R</em>-script.</li>
+<li>Files/Plots/Packages/Help/Viewer (tabs in the lower right window)</li>
+<li>Editor panel for <em>R</em>-scripts. This window appears in the top right once you opened an <em>R</em>-script.</li>
 </ol>
 <p><img src="images/anatomy%20of%20rstudio.png" width="100%" /></p>
 </div>
 </div>
-<div id="r-as-an-oversized-calculator" class="section level2">
-<h2><em>R</em> as an oversized calculator</h2>
-<p>I recommend that you always work in a <em>script window</em>. Only in
-special cases will it make sense to directly write in the
-<em>console</em>. We first explore simple operations, assignments, and
-data types to get familiar with the <em>R</em> console. A “greater than
-sign” (&gt;) at the <strong>beginning of the line in the
-console</strong> means that <em>R</em> is ready to accept your input.
-<!--You can navigate the history of previously typed commands by using the arrows on your keyboard. A comment starts with the hash (#), and does not require a closing symbol.--></p>
+<div id="basic-operations" class="section level2">
+<h2>Basic operations</h2>
+<p>I recommend that you always work in a <em>script window</em>. Only in special cases will it make sense to directly write in the <em>console</em>. We first explore simple operations, assignments, and data types to get familiar with the <em>R</em> console. A “greater than sign” (&gt;) at the <strong>beginning of the line in the console</strong> means that <em>R</em> is ready to accept your input. <!--You can navigate the history of previously typed commands by using the arrows on your keyboard. A comment starts with the hash (#), and does not require a closing symbol.--></p>
 <p>We can use <em>R</em> as an oversized calculator:</p>
 <pre class="r"><code>1.7 * 2 # multiplication
 12 / 5 # division
@@ -358,8 +329,7 @@ console</strong> means that <em>R</em> is ready to accept your input.
 log(10) # natural logarithm
 log10(10) # logarithm to base 10
 sqrt(9) # square root</code></pre>
-<p>The following table provides a list of arithmetic and logical
-operators in R:</p>
+<p>The following table provides a list of arithmetic and logical operators in R:</p>
 <table>
 <thead>
 <tr class="header">
@@ -426,16 +396,14 @@ operators in R:</p>
 </tr>
 </tbody>
 </table>
-<p>Let’s have a closer look at the logical operators. They create a
-logical value by comparing two elements:</p>
+<p>Let’s have a closer look at the logical operators. They create a logical value by comparing two elements:</p>
 <pre class="r"><code>5 &gt; 3
 5 == (10 / 2)
 6&gt;2^4
 6 &gt;= (2 * 3)
 (5 &gt; 3) &amp; (7 &lt; 5) # logical AND
 (5 &gt; 3) | (7 &lt; 5) # logical OR</code></pre>
-<p><em>R</em> comes with many built-in mathematical functions. Some are
-listed in the next table.</p>
+<p><em>R</em> comes with many built-in mathematical functions. Some are listed in the next table.</p>
 <table>
 <thead>
 <tr class="header">
@@ -470,9 +438,7 @@ listed in the next table.</p>
 </tr>
 </tbody>
 </table>
-<p>We can use the operator <code>%in%</code> to search for matches. It
-returns a logical value (i.e. <code>TRUE</code> or <code>FALSE</code>)
-indicating whether or not a match exists.</p>
+<p>We can use the operator <code>%in%</code> to search for matches. It returns a logical value (i.e. <code>TRUE</code> or <code>FALSE</code>) indicating whether or not a match exists.</p>
 <pre class="r"><code>3 %in% 1:5 # 1:5 generates a sequence
 # c() combines values into a vector or list
 # all arguments are converted to the same type (here it is a character string)
@@ -483,28 +449,13 @@ c(2, &quot;good to be&quot;, TRUE)
 </div>
 <div id="assignment-and-data-types" class="section level2">
 <h2>Assignment and Data Types</h2>
-<p>Everything in <em>R</em> is an <em>object</em>, where an object is a
-name that you can use to call up stored data. When programming in R, you
-assign data to objects using the assignment command is
-<code>&lt;-</code> (less-than sign, followed by a minus sign). Each new
-object will appear in the <em>environment</em>-pane in the top-right of
-<em>RStudio</em>.</p>
+<p>Everything in <em>R</em> is an <em>object</em>, where an object is a name that you can use to call up stored data. When programming in R, you assign data to objects using the assignment command is <code>&lt;-</code> (less-than sign, followed by a minus sign). Each new object will appear in the <em>environment</em>-pane in the top-right of <em>RStudio</em>.</p>
 <pre class="r"><code>x &lt;- 5 # assign the value 5 to x
 x * 2 # use variable x to perform operations
 x &lt;- 7 # assign new value to variable, this overwrites the previous assignment
 x*2</code></pre>
-<p>Note that the previous value is overwritten whenever a new value is
-assigned to the variable. To list all the variables you have created,
-type <code>ls()</code>. To remove a variable <em>x</em> from the current
-<em>R</em> session, type <code>rm(x)</code>.</p>
-<p><em>R</em> can handle different types or modes of data, the most
-important ones are <em>numeric</em> (numbers), <em>character</em>
-(strings of character, e.g., a word), and <em>logical</em> (TRUE and
-FALSE). In the following, we assign a new value to the variable
-<em>x</em>, each time altering its <em>type</em>. To determine the type
-of variable <code>x</code>, use the command <code>class</code>. You can
-also test whether a variable is of a certain type by using the functions
-<code>is.numeric</code>, <code>is.character</code>, etc.</p>
+<p>Note that the previous value is overwritten whenever a new value is assigned to the variable. To list all the variables you have created, type <code>ls()</code>. To remove a variable <em>x</em> from the current <em>R</em> session, type <code>rm(x)</code>.</p>
+<p><em>R</em> can handle different types or modes of data, the most important ones are <em>numeric</em> (numbers), <em>character</em> (strings of character, e.g., a word), and <em>logical</em> (TRUE and FALSE). In the following, we assign a new value to the variable <em>x</em>, each time altering its <em>type</em>. To determine the type of variable <code>x</code>, use the command <code>class</code>. You can also test whether a variable is of a certain type by using the functions <code>is.numeric</code>, <code>is.character</code>, etc.</p>
 <pre class="r"><code># numeric (real numbers)
 x &lt;- 5
 class(x)
@@ -518,12 +469,7 @@ class(x)
 x &lt;- &quot;hello&quot;
 class(x)
 is.numeric(x)</code></pre>
-<p>If you need to change the type of a variable (an operation called
-<em>casting</em>), use the functions <code>as.character</code> or
-<code>as.numeric</code>, etc. In <em>RStudio</em>, if you type the first
-few letters of the name of a function or a variable, you can see all the
-possible ways to complete the name; try typing <code>as.</code> to see
-all the available functions for type conversion. Some examples:</p>
+<p>If you need to change the type of a variable (an operation called <em>casting</em>), use the functions <code>as.character</code> or <code>as.numeric</code>, etc. In <em>RStudio</em>, if you type the first few letters of the name of a function or a variable, you can see all the possible ways to complete the name; try typing <code>as.</code> to see all the available functions for type conversion. Some examples:</p>
 <pre class="r"><code>x &lt;- &quot;05.2&quot; # assign a character string
 class(x)
 (x &lt;- as.numeric(x)) # cast character string to numeric, round brackets around assignment produce output
@@ -532,48 +478,35 @@ as.logical(0) # only 0 is FALSE</code></pre>
 </div>
 <div id="objects" class="section level2">
 <h2>Objects</h2>
-<p>Everying in <em>R</em> is an <em>object</em>. Objects come in
-different types, the most important ones are <em>vectors</em>,
-<em>matrices</em>, <em>lists</em>, and <em>functions</em>.</p>
+<p>Everying in <em>R</em> is an <em>object</em>. Objects come in different types, the most important ones are <em>vectors</em>, <em>matrices</em>, <em>lists</em>, and <em>functions</em>.</p>
 <div id="vectors" class="section level3">
 <h3>Vectors</h3>
-<p>The most basic data structure in <em>R</em> is the vector, which is
-an ordered collection of values of the same type. As such, vectors are
-<em>1-dimensional</em> objects. Vectors can be created by
-<em>concatenating</em> different values with the command
-<code>c</code>:</p>
+<p>The most basic data structure in <em>R</em> is the vector, which is an ordered collection of values of the same type. As such, vectors are <em>1-dimensional</em> objects. Vectors can be created by <em>concatenating</em> different values with the command <code>c</code>:</p>
 <pre class="r"><code>x &lt;- c(2, 3, 5, 2, 3, 13, 17, 3) # a numeric vector
 y &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;) # a vector of characters
 z &lt;- c(1, &quot;a&quot;) # entries in a vector have to be of the same type
 z # R coerces 1 into a character
 class(z)</code></pre>
-<p>You can access the elements of a vector by their index. You can
-access the elements of a vector by specifying their positions:</p>
+<p>You can access the elements of a vector by their index. You can access the elements of a vector by specifying their positions:</p>
 <pre class="r"><code>x[3]
 x[8]
 x[9] # what if the element does not exist?</code></pre>
-<p>You can add entries to a vector by gluing to the end of an existing
-vector.</p>
+<p>You can add entries to a vector by gluing to the end of an existing vector.</p>
 <pre class="r"><code>x &lt;- 1:3
 x &lt;- append(x, c(4, 5)) # gluing two vectors together
 x[7] &lt;- 7 # inserting a value at a certain position of the vector</code></pre>
-<p>Alternatively, you can access the elements of a vector by specifying
-using the logical <code>TRUE</code>:</p>
+<p>Alternatively, you can access the elements of a vector by specifying using the logical <code>TRUE</code>:</p>
 <pre class="r"><code>x[c(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)]
 x[c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE)]</code></pre>
-<p>You can extract several elements at once (i.e., create another
-vector) using the colon (<code>:</code>) command, or by concatenating
-the indices:</p>
+<p>You can extract several elements at once (i.e., create another vector) using the colon (<code>:</code>) command, or by concatenating the indices:</p>
 <pre class="r"><code>x[1:3]
 x[4:7]
 x[c(1,3,5)]</code></pre>
-<p>Sometimes one wants to know at which position in a vector a certain
-values occurs. We can find out with the <code>which</code> function.</p>
+<p>Sometimes one wants to know at which position in a vector a certain values occurs. We can find out with the <code>which</code> function.</p>
 <pre class="r"><code>which(x == 3) # the value 3 occurs at position 2, 4 and 8
 which(x &gt; 5) # values larger than 5 occur at position 6 and 7
 length(which(x == 3)) # the value 3 occurs exactly three times within the vector x</code></pre>
-<p>Given that <em>R</em> was born for statistics, there are many
-statistical functions you can perform on vectors:</p>
+<p>Given that <em>R</em> was born for statistics, there are many statistical functions you can perform on vectors:</p>
 <pre class="r"><code>length(x)
 min(x)
 max(x)
@@ -584,27 +517,22 @@ mean(x) # arithmetic mean
 var(x) # unbiased sample variance
 mean(x ^ 2) - mean(x) ^ 2 # population variance
 summary(x) # print a summary</code></pre>
-<p>You can generate vectors of sequential numbers using the colon
-command:</p>
+<p>You can generate vectors of sequential numbers using the colon command:</p>
 <pre class="r"><code>x &lt;- 1:10
 x</code></pre>
 <p>For more complex sequences, use <code>seq</code>:</p>
 <pre class="r"><code>seq(from = 1, to = 5, by = 0.5)</code></pre>
-<p>To repeat a value or a sequence several times, use
-<code>rep</code>:</p>
+<p>To repeat a value or a sequence several times, use <code>rep</code>:</p>
 <pre class="r"><code>rep(&quot;abc&quot;, 3)
 rep(c(1,2,3), 3)</code></pre>
 <div id="exercises" class="section level4">
 <h4>Exercises</h4>
 <ol style="list-style-type: lower-alpha">
-<li>Create a vector containing all the even numbers between 2 and 100
-(inclusive) and store it in the variable <code>z</code>.</li>
+<li>Create a vector containing all the even numbers between 2 and 100 (inclusive) and store it in the variable <code>z</code>.</li>
 <li>What is the sum of all the elements of <code>z</code>?</li>
 <li>Is the sum of the elements of <code>z</code> equal to 51 × 50?</li>
-<li>What is the product of entries at position 5, 10, and 15 of
-<code>z</code>?</li>
-<li>Does <code>seq(2, 100, by = 2)</code> produce the same vector as
-<code>(1:50) * 2</code>?</li>
+<li>What is the product of entries at position 5, 10, and 15 of <code>z</code>?</li>
+<li>Does <code>seq(2, 100, by = 2)</code> produce the same vector as <code>(1:50) * 2</code>?</li>
 <li>What happens if you type <code>z^2</code>?</li>
 </ol>
 <!--(b) Extract all the elements of ```z``` that are divisible by 12. How many elements match this criterion?
@@ -614,10 +542,7 @@ divisible by 3. Find the five elements of ```y``` that are also elements of ```z
 </div>
 <div id="matrices" class="section level3">
 <h3>Matrices</h3>
-<p>A <code>matrix</code> is a two-dimensional object where data are
-stored in a rectangular array with rows and columns. In the case of
-numeric values, you can perform common matrix operations (e.g., product,
-inverse, decomposition):</p>
+<p>A <code>matrix</code> is a two-dimensional object where data are stored in a rectangular array with rows and columns. In the case of numeric values, you can perform common matrix operations (e.g., product, inverse, decomposition):</p>
 <pre class="r"><code># create matrix by specifying values, number of rows, number of columns
 A &lt;- matrix(c(1, 2, 3, 4), nrow = 2, ncol = 2)
 A # by default, the matrix is filled column by column
@@ -634,8 +559,7 @@ B %*% t(B)
 (C &lt;- matrix(1:9, 3, 3))
 (D &lt;- matrix(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), 2, 2))
 A %*% D # matrix operations are not defined for matrices with numeric entries</code></pre>
-<p>Determine the dimensions of a matrix (the numbers of rows and
-columns) using the following commands:</p>
+<p>Determine the dimensions of a matrix (the numbers of rows and columns) using the following commands:</p>
 <pre class="r"><code>dim(B)
 nrow(B)
 ncol(B)</code></pre>
@@ -658,11 +582,7 @@ mean(Z) # arithmetic mean over all matric entries</code></pre>
 </div>
 <div id="lists" class="section level3">
 <h3>Lists</h3>
-<p>Vectors are a good choice when each element is of the same type
-(e.g., numbers, strings). Lists are used when we want to store elements
-of different types, or more complex objects (e.g., vectors, matrices,
-even lists of lists). Each element of the list can be referenced either
-by its index, or by a label:</p>
+<p>Vectors are a good choice when each element is of the same type (e.g., numbers, strings). Lists are used when we want to store elements of different types, or more complex objects (e.g., vectors, matrices, even lists of lists). Each element of the list can be referenced either by its index, or by a label:</p>
 <pre class="r"><code># create list containing two vectors that are labelled Names and Values
 mylist &lt;- list(Names = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), Values = c(1, 2, 3))
 mylist # prints the content of mylist
@@ -675,33 +595,13 @@ mylist[[&quot;Values&quot;]][3] # third element of the second entry</code></pre>
 </div>
 <div id="functions" class="section level3">
 <h3>Functions</h3>
-<p>Functions are <em>R</em> objects designed to perform operations on
-other objects. Each time you write a command at the <em>R</em> prompt
-and hit the Enter-key, one or several functions are executed. An
-<em>R</em> function is typically called by its name followed by
-parentheses. Inside the parentheses, the user must pass the arguments
-required by the function. We have already described several built-in
-functions previously, such as <code>c()</code>, <code>log()</code>, and
-<code>matrix()</code>. What makes <em>R</em> a powerful programming
-language is that you can define your own functions, something we will do
-later.</p>
+<p>Functions are <em>R</em> objects designed to perform operations on other objects. Each time you write a command at the <em>R</em> prompt and hit the Enter-key, one or several functions are executed. An <em>R</em> function is typically called by its name followed by parentheses. Inside the parentheses, the user must pass the arguments required by the function. We have already described several built-in functions previously, such as <code>c()</code>, <code>log()</code>, and <code>matrix()</code>. What makes <em>R</em> a powerful programming language is that you can define your own functions, something we will do later.</p>
 </div>
 <div id="data-frames" class="section level3">
 <h3>Data Frames</h3>
-<p>Data frames are special matrices that contain additional information
-about its content such as row and column names. In short, data frames
-are <em>R</em>s equivalent to a an EXCEL spreadsheet. The columns
-(typically representing different measurements) can be of different
-types (e.g., one column could be the date of measurement, another the
-weight of the individual, or the volume of the cell, or the treatment of
-the sample), while the rows typically represent different samples.</p>
-<p>When you import a spreadsheet file into <em>R</em>, it is
-automatically stored as a data frame. The difference between a matrix
-and a data frame is that in a matrix all the values are of the same type
-(e.g., all numeric), while in a data frame each column can be of a
-different type.</p>
-<p>Let us look at a data set that comes with <em>R</em>, called
-<em>trees</em>.</p>
+<p>Data frames are special matrices that contain additional information about its content such as row and column names. In short, data frames are <em>R</em>s equivalent to a an EXCEL spreadsheet. The columns (typically representing different measurements) can be of different types (e.g., one column could be the date of measurement, another the weight of the individual, or the volume of the cell, or the treatment of the sample), while the rows typically represent different samples.</p>
+<p>When you import a spreadsheet file into <em>R</em>, it is automatically stored as a data frame. The difference between a matrix and a data frame is that in a matrix all the values are of the same type (e.g., all numeric), while in a data frame each column can be of a different type.</p>
+<p>Let us look at a data set that comes with <em>R</em>, called <em>trees</em>.</p>
 <pre class="r"><code>data(trees) # load data set &quot;trees&quot;
 str(trees) # structure of data frame ’data.frame’
 ncol(trees) # number of columns
@@ -723,17 +623,14 @@ head(trees)</code></pre>
 <h4>Exercises</h4>
 <ol style="list-style-type: lower-alpha">
 <li>What is the average tree height?</li>
-<li>What is the average girth of those trees that are more than 75 ft
-tall?</li>
-<li>What is the maximum height of trees with a volume between 15 and 35
-ft^3?</li>
+<li>What is the average girth of those trees that are more than 75 ft tall?</li>
+<li>What is the maximum height of trees with a volume between 15 and 35 ft^3?</li>
 </ol>
 <p>We can also create our own data frame within <em>R</em>:</p>
 <pre class="r"><code>height &lt;- c(2.2, 2.4, 2.7)
 width &lt;- c(0.7, 0.75, 0.85)
 (my.trees &lt;- data.frame(height, width))</code></pre>
-<p>To <em>glue</em> additional rows and columns to a data frame we use
-the functions <em>rbind</em> and <em>cbind</em>, respectively.</p>
+<p>To <em>glue</em> additional rows and columns to a data frame we use the functions <em>rbind</em> and <em>cbind</em>, respectively.</p>
 <pre class="r"><code>(my.trees &lt;- rbind(my.trees, c(1.9, 0.55))) # adding a new row to the data frame my.trees
 dead &lt;- c(&quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;) 
 (my.trees &lt;- cbind(my.trees, dead)) # adding a new column with the name dead to the data frame</code></pre>
