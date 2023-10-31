@@ -69,9 +69,6 @@ We can use *R* as an oversized calculator:-->
 1.7 * 2 # multiplication
 12 / 5 # division
 2.1 ^ 5 # power
-log(10) # natural logarithm
-log10(10) # logarithm to base 10
-sqrt(9) # square root
 ```
 
 The following table provides a list of arithmetic and logical operators in R:
@@ -113,9 +110,15 @@ sqrt(x) | Square root
 cos(x), sin(x), tan(x) | Trigonometric functions
 log(x) | Natural logarithm
 log10(x) | Base 10 logarithm
-exp(x) | eponential function $e^x$
+exp(x) | exponential function $e^x$
 
-We can use the operator ```%in%``` to search for matches. It returns a logical value (i.e. ```TRUE``` or ```FALSE```) indicating whether or not a match exists.
+```{r eval=FALSE}
+log(10) # natural logarithm
+log10(10) # logarithm to base 10
+sqrt(9) # square root
+```
+
+We can use the operator ```%in%``` to search for matches. It returns a logical value (i.e., ```TRUE``` or ```FALSE```) indicating whether or not a match exists.
 
 ```{r eval=FALSE}
 3 %in% 1:5 # 1:5 generates a sequence

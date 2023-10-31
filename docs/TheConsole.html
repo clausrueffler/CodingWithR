@@ -363,10 +363,7 @@ However, generally it is recommended to work in a *script window*. Only in speci
 We can use *R* as an oversized calculator:--></p>
 <pre class="r"><code>1.7 * 2 # multiplication
 12 / 5 # division
-2.1 ^ 5 # power
-log(10) # natural logarithm
-log10(10) # logarithm to base 10
-sqrt(9) # square root</code></pre>
+2.1 ^ 5 # power</code></pre>
 <p>The following table provides a list of arithmetic and logical operators in R:</p>
 <table>
 <thead>
@@ -472,11 +469,14 @@ sqrt(9) # square root</code></pre>
 </tr>
 <tr class="even">
 <td>exp(x)</td>
-<td>eponential function <span class="math inline">\(e^x\)</span></td>
+<td>exponential function <span class="math inline">\(e^x\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>We can use the operator <code>%in%</code> to search for matches. It returns a logical value (i.e. <code>TRUE</code> or <code>FALSE</code>) indicating whether or not a match exists.</p>
+<pre class="r"><code>log(10) # natural logarithm
+log10(10) # logarithm to base 10
+sqrt(9) # square root</code></pre>
+<p>We can use the operator <code>%in%</code> to search for matches. It returns a logical value (i.e., <code>TRUE</code> or <code>FALSE</code>) indicating whether or not a match exists.</p>
 <pre class="r"><code>3 %in% 1:5 # 1:5 generates a sequence
 # c() combines values into a vector or list
 # all arguments are converted to the same type (here it is a character string)
