@@ -132,7 +132,7 @@ c(2, "good to be", TRUE)
 
 ## Assignment and Data Types
 
-Everything in *R* is an *object*, where an object is a name that you can use to call up stored data.  When programming in R, you assign data to objects using the assignment command is ```<-``` (less-than sign, followed by a minus sign). Each new object will appear in the *environment*-pane in the top-right of *RStudio*.
+Everything in *R* is an *object*, where an object is a name that you can use to call up stored data.  When programming in *R*, you assign data to objects using the assignment command is ```<-``` (less-than sign, followed by a minus sign). Each new object will appear in the *environment*-pane in the top-right of *RStudio*.
 
 ```{r eval=FALSE}
 x <- 5 # assign the value 5 to x
@@ -149,7 +149,7 @@ Note that the previous value is overwritten whenever a new value is assigned to 
 # numeric (real numbers)
 x <- 5
 class(x)
-X # note that R is cass sensitive, that is, x is different from X
+X # note that R is case sensitive, that is, x is different from X
 x <- pi # a numeric that R knows
 class(x)
 # logical (TRUE or FALSE)
@@ -308,25 +308,25 @@ ncol(B)
 Use indices to access a particular row/column of a matrix:
 
 ```{r eval=FALSE}
-Z
-Z[1, ] # first row
-Z[, 2] # second column
+C
+C[1, ] # first row
+C[, 2] # second column
 # select sub-matrix with coefficients of second
 # and third columns of the first two rows
-Z[1:2, 2:3]
+C[1:2, 2:3]
 # concatenate positions to index nonadjacent rows/columns
-Z[c(1,3), c(1,3)]
+C[c(1,3), c(1,3)]
 ```
 
 Several functions exist to compute sums and averages of matrices:
 
 ```{r eval=FALSE}
-rowSums(Z) # sum of the values in each row
-rowMeans(Z) # arithmetic mean for each row
-colSums(Z) # sum of the values in each column
-colMeans(Z) # arithmetic mean for each column
-sum(Z) # sum of all matrix entries
-mean(Z) # arithmetic mean over all matric entries
+rowSums(C) # sum of the values in each row
+rowMeans(C) # arithmetic mean for each row
+colSums(C) # sum of the values in each column
+colMeans(C) # arithmetic mean for each column
+sum(C) # sum of all matrix entries
+mean(C) # arithmetic mean over all matrix entries
 ```
 
 ### Lists
@@ -347,11 +347,11 @@ mylist[["Values"]][3] # third element of the second entry
 
 ### Functions
 
-Functions are *R* objects designed to perform operations on other objects. Each time you write a command at the *R* prompt and hit the Enter-key, one or several functions are executed. An *R* function is typically called by its name followed by parentheses. Inside the parentheses, the user must pass the arguments required by the function. We have already described several built-in functions previously, such as ```c()```, ```log()```, and ```matrix()```. What makes *R* a powerful programming language is that you can define your own functions, something we will do later.
+Functions are *R* objects designed to perform operations on other objects. Each time you evaluate a command in *R*, one or several functions are executed. An *R* function is typically called by its name followed by parentheses. Inside the parentheses, the user must pass the arguments required by the function. We have already described several built-in functions previously, such as ```c()```, ```log()```, and ```matrix()```. What makes *R* a powerful programming language is that you can define your own functions, something we will do later.
 
 ### Data Frames
 
-Data frames are special matrices that contain additional information about its content such as row and column names. In short, data frames are *R*s equivalent to a an EXCEL spreadsheet. The columns (typically representing different measurements) can be of different types (e.g., one column could be the date of measurement, another the weight of the individual, or the volume of the cell, or the treatment of the sample), while the rows typically represent different samples.
+Data frames are special matrices that contain additional information about its content such as row and column names. In short, data frames are *R*'s equivalent to a an EXCEL spreadsheet. The columns (typically representing different measurements) can be of different types (e.g., one column could be the date of measurement, another the weight of the individual, or the volume of the cell, or the treatment of the sample), while the rows typically represent different samples.
 
 When you import a spreadsheet file into *R*, it is automatically stored as a data frame. The difference between a matrix and a data frame is that in a matrix all the values are of the same type (e.g., all numeric), while in a data frame each column can be of a different type.
 
@@ -383,7 +383,6 @@ head(trees)
 (b) What is the average girth of those trees that are more than 75 ft tall?
 (c) What is the maximum height of trees with a volume between 15
 and 35 ft^3?
-
 
 We can also create our own data frame within *R*:
 

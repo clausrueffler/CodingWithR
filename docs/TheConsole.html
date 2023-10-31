@@ -487,7 +487,7 @@ c(2, &quot;good to be&quot;, TRUE)
 </div>
 <div id="assignment-and-data-types" class="section level2">
 <h2>Assignment and Data Types</h2>
-<p>Everything in <em>R</em> is an <em>object</em>, where an object is a name that you can use to call up stored data. When programming in R, you assign data to objects using the assignment command is <code>&lt;-</code> (less-than sign, followed by a minus sign). Each new object will appear in the <em>environment</em>-pane in the top-right of <em>RStudio</em>.</p>
+<p>Everything in <em>R</em> is an <em>object</em>, where an object is a name that you can use to call up stored data. When programming in <em>R</em>, you assign data to objects using the assignment command is <code>&lt;-</code> (less-than sign, followed by a minus sign). Each new object will appear in the <em>environment</em>-pane in the top-right of <em>RStudio</em>.</p>
 <pre class="r"><code>x &lt;- 5 # assign the value 5 to x
 x * 2 # use variable x to perform operations
 x &lt;- 7 # assign new value to variable, this overwrites the previous assignment
@@ -497,7 +497,7 @@ x*2</code></pre>
 <pre class="r"><code># numeric (real numbers)
 x &lt;- 5
 class(x)
-X # note that R is cass sensitive, that is, x is different from X
+X # note that R is case sensitive, that is, x is different from X
 x &lt;- pi # a numeric that R knows
 class(x)
 # logical (TRUE or FALSE)
@@ -602,21 +602,21 @@ A %*% D # matrix operations are not defined for matrices with numeric entries</c
 nrow(B)
 ncol(B)</code></pre>
 <p>Use indices to access a particular row/column of a matrix:</p>
-<pre class="r"><code>Z
-Z[1, ] # first row
-Z[, 2] # second column
+<pre class="r"><code>C
+C[1, ] # first row
+C[, 2] # second column
 # select sub-matrix with coefficients of second
 # and third columns of the first two rows
-Z[1:2, 2:3]
+C[1:2, 2:3]
 # concatenate positions to index nonadjacent rows/columns
-Z[c(1,3), c(1,3)]</code></pre>
+C[c(1,3), c(1,3)]</code></pre>
 <p>Several functions exist to compute sums and averages of matrices:</p>
-<pre class="r"><code>rowSums(Z) # sum of the values in each row
-rowMeans(Z) # arithmetic mean for each row
-colSums(Z) # sum of the values in each column
-colMeans(Z) # arithmetic mean for each column
-sum(Z) # sum of all matrix entries
-mean(Z) # arithmetic mean over all matric entries</code></pre>
+<pre class="r"><code>rowSums(C) # sum of the values in each row
+rowMeans(C) # arithmetic mean for each row
+colSums(C) # sum of the values in each column
+colMeans(C) # arithmetic mean for each column
+sum(C) # sum of all matrix entries
+mean(C) # arithmetic mean over all matrix entries</code></pre>
 </div>
 <div id="lists" class="section level3">
 <h3>Lists</h3>
@@ -633,11 +633,11 @@ mylist[[&quot;Values&quot;]][3] # third element of the second entry</code></pre>
 </div>
 <div id="functions" class="section level3">
 <h3>Functions</h3>
-<p>Functions are <em>R</em> objects designed to perform operations on other objects. Each time you write a command at the <em>R</em> prompt and hit the Enter-key, one or several functions are executed. An <em>R</em> function is typically called by its name followed by parentheses. Inside the parentheses, the user must pass the arguments required by the function. We have already described several built-in functions previously, such as <code>c()</code>, <code>log()</code>, and <code>matrix()</code>. What makes <em>R</em> a powerful programming language is that you can define your own functions, something we will do later.</p>
+<p>Functions are <em>R</em> objects designed to perform operations on other objects. Each time you evaluate a command in <em>R</em>, one or several functions are executed. An <em>R</em> function is typically called by its name followed by parentheses. Inside the parentheses, the user must pass the arguments required by the function. We have already described several built-in functions previously, such as <code>c()</code>, <code>log()</code>, and <code>matrix()</code>. What makes <em>R</em> a powerful programming language is that you can define your own functions, something we will do later.</p>
 </div>
 <div id="data-frames" class="section level3">
 <h3>Data Frames</h3>
-<p>Data frames are special matrices that contain additional information about its content such as row and column names. In short, data frames are <em>R</em>s equivalent to a an EXCEL spreadsheet. The columns (typically representing different measurements) can be of different types (e.g., one column could be the date of measurement, another the weight of the individual, or the volume of the cell, or the treatment of the sample), while the rows typically represent different samples.</p>
+<p>Data frames are special matrices that contain additional information about its content such as row and column names. In short, data frames are <em>R</em>’s equivalent to a an EXCEL spreadsheet. The columns (typically representing different measurements) can be of different types (e.g., one column could be the date of measurement, another the weight of the individual, or the volume of the cell, or the treatment of the sample), while the rows typically represent different samples.</p>
 <p>When you import a spreadsheet file into <em>R</em>, it is automatically stored as a data frame. The difference between a matrix and a data frame is that in a matrix all the values are of the same type (e.g., all numeric), while in a data frame each column can be of a different type.</p>
 <p>Let us look at a data set that comes with <em>R</em>, called <em>trees</em>.</p>
 <pre class="r"><code>data(trees) # load data set &quot;trees&quot;

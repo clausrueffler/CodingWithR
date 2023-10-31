@@ -2,7 +2,7 @@
 # a
 z <- seq(2, 100, 2)
 z
-# b
+# exercise no longer exists
 v <- 12*1:8
 v
 z %in% v
@@ -15,9 +15,10 @@ z %% 12 == 0
 z[z %% 12 == 0]
 # note: logical subsetting
 c(1, 2, 3)[c(TRUE, TRUE, FALSE)]
-# c
+
+# b
 sum(z)
-# d
+# c
 sum(z) == 51*50
 # e
 z[5]*z[10]*z[15]
