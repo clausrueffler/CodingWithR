@@ -9,7 +9,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r klippy, eval=FALSE, echo=FALSE, include=TRUE}
+```{r klippy, eval=TRUE, echo=FALSE, include=TRUE}
 klippy::klippy(position = c('top', 'right'))
 ```
 
