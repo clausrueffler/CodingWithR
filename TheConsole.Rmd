@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 klippy::klippy(position = c('top', 'right'))
 ```
 
-# *R* as an Oversized Calculator: the Console {.tabset}
+# *R* as an Oversized Calculator{.tabset}
 
 ## Getting started
 
@@ -44,12 +44,23 @@ But really, if you need help with *R* the internet is your friend. Virtually any
 knitr::include_graphics("images/anatomy of rstudio.png")
 ```
 
+## Scripts vs. Console
+
+You could actually accomplish almost everything you need for your research without writing any scripts — simply type the commands in the *console* one at a time. However, it makes usually more sense to write your code into the script window, which results in a text file (called a script) with extension ```.R```. In this way, you can
+
+   |   
+---|---
+recycle | You will encounter similar problems in the future, and, having a script, you will be almost done before you even start.
+automate | You will need to repeat the analysis on a different data set, or slightly tweak it in response to comments. This will be quick if you have a script, while repeating the analysis from scratch would take considerably longer (not to mention the possibility of making mistakes).
+document | By organizing your code in a script, you will know exactly what you did to obtain your results. You will much appreciate this precise documentation when you write the "Methods" section of your paper or thesis. More on documenting code later.
+share | Having a script makes it much easier to share your analysis with other scientists. You can ask your coauthors to examine your code for errors before you publish and eventually share it with other scientists who want to conduct their analysis exactly as described in your "Methods" section.
 
 ## Basic operations
 
-I recommend that you always work in a *script window*. Only in special cases will it make sense to directly write in the *console*. We first explore simple operations, assignments, and data types to get familiar with the *R* console. A "greater than sign" (>) at the **beginning of the line in the console** means that *R* is ready to accept your input.
+We first explore simple operations, assignments, and data types to get familiar with the *R*. If you work in the console, then a "greater than sign" (>) at the **beginning of the line in the console** means that *R* is ready to accept your input.
 <!--You can navigate the history of previously typed commands by using the arrows on your keyboard. A comment starts with the hash (#), and does not require a closing symbol.-->
 
+However, generally it is recommended to work in a *script window*. Only in special cases will it make sense to directly write in the *console*. 
 We can use *R* as an oversized calculator:
 
 ```{r eval=FALSE}

@@ -1,11 +1,11 @@
 
-name: "Population and community ecology"
-title: "Population and community ecology"
+name: "Population and Community Ecology"
+title: "Population and Community Ecology"
 type: inverse
 left:
   - text: "Learning Coding in R"
     menu:
-      - text: "R as an oversized calculator: The Console"
+      - text: "R as an Oversized Calculator"
         href: ./TheConsole.html
 #      - text: "1. Excercise: Solutions"
 #        href: ./PopulationDynamicsSolutions.html        

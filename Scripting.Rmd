@@ -17,24 +17,14 @@ klippy::klippy(position = c('top', 'right'))
 
 # Programming in R {.tabset}
 
-## Computing Using Scripts
+<!--## Computing Using Scripts
 
-Now that we are more familiar with the basics of *R*, we turn to writing *programs*. Typically, you will write more complex programs in a text file (called a script), with extension ```.R```. Before writing our first programs, this section will demonstrate how to organize your code to make it readable and easy to understand.
-
-### Why Write a Script?
-
-You could actually accomplish almost everything you need for your research without writing any scripts — simply type the commands in the console one at a time. However, by organizing your work into well-documented scripts, you can
-
-   |   
----|---
-recycle | You will encounter similar problems in the future, and, having a script, you will be almost done before you even start.
-automate | You will need to repeat the analysis on a different data set, or slightly tweak it in response to comments. This will be quick if you have a script, while repeating the analysis from scratch would take considerably longer (not to mention the possibility of making mistakes).
-document | By organizing your code in a script, you will know exactly what you did to obtain your results. You will much appreciate this precise documentation when you write the "Methods" section of your paper or thesis. More on documenting code later.
-share | Having a script makes it much easier to share your analysis with other scientists. You can ask your coauthors to examine your code for errors before you publish and eventually share it with other scientists who want to conduct their analysis exactly as described in your "Methods" section.
+Now that we are more familiar with the basics of *R*, we turn to writing *programs*.
+Typically, you will write more complex programs in a text file (called a script), with extension ```.R```. Before writing our first programs, this section will demonstrate how to organize your code to make it readable and easy to understand.-->
 
 ## Writing Good Code
 
-Before we start writing scripts, we have a few suggestions on how to organize and format your code:
+Before writing scripts, here a few suggestions on how to organize and format your code:
 
 ##### Names
 

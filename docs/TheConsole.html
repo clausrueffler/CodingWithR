@@ -249,7 +249,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Population and community ecology</a>
+      <a class="navbar-brand" href="index.html">Population and Community Ecology</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -261,7 +261,7 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="./TheConsole.html">R as an oversized calculator: The Console</a>
+      <a href="./TheConsole.html">R as an Oversized Calculator</a>
     </li>
     <li>
       <a href="./Scripting.html">Programming in R</a>
@@ -300,8 +300,8 @@ $(document).ready(function () {
   addClassKlippyTo("pre.r, pre.markdown");
   addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
 </script>
-<div id="r-as-an-oversized-calculator-the-console" class="section level1 tabset">
-<h1 class="tabset"><em>R</em> as an Oversized Calculator: the Console</h1>
+<div id="r-as-an-oversized-calculator" class="section level1 tabset">
+<h1 class="tabset"><em>R</em> as an Oversized Calculator</h1>
 <div id="getting-started" class="section level2">
 <h2>Getting started</h2>
 <p><em>R</em> is a versatile programming language for statistical analysis, data analysis and numerical calculations. The main hurdle new users face when learning <em>R</em> is that it is based on a command-line interface: to make things happen, you write text commands that then can be executed by the program. This might seem unusual if you are used to software based on a graphical user interface, where you tend to work by clicking on windows and buttons. However, the command line is what makes it easy to automate your analysis - all you have to do is collect all the commands in a <em>script</em>, and then run them in <em>R</em>.</p>
@@ -327,10 +327,38 @@ $(document).ready(function () {
 <p><img src="images/anatomy%20of%20rstudio.png" width="100%" /></p>
 </div>
 </div>
+<div id="scripts-vs.-console" class="section level2">
+<h2>Scripts vs. Console</h2>
+<p>You could actually accomplish almost everything you need for your research without writing any scripts — simply type the commands in the <em>console</em> one at a time. However, it makes usually more sense to write your code into the script window, which results in a text file (called a script) with extension <code>.R</code>. In this way, you can</p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>recycle</td>
+<td>You will encounter similar problems in the future, and, having a script, you will be almost done before you even start.</td>
+</tr>
+<tr class="even">
+<td>automate</td>
+<td>You will need to repeat the analysis on a different data set, or slightly tweak it in response to comments. This will be quick if you have a script, while repeating the analysis from scratch would take considerably longer (not to mention the possibility of making mistakes).</td>
+</tr>
+<tr class="odd">
+<td>document</td>
+<td>By organizing your code in a script, you will know exactly what you did to obtain your results. You will much appreciate this precise documentation when you write the “Methods” section of your paper or thesis. More on documenting code later.</td>
+</tr>
+<tr class="even">
+<td>share</td>
+<td>Having a script makes it much easier to share your analysis with other scientists. You can ask your coauthors to examine your code for errors before you publish and eventually share it with other scientists who want to conduct their analysis exactly as described in your “Methods” section.</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="basic-operations" class="section level2">
 <h2>Basic operations</h2>
-<p>I recommend that you always work in a <em>script window</em>. Only in special cases will it make sense to directly write in the <em>console</em>. We first explore simple operations, assignments, and data types to get familiar with the <em>R</em> console. A “greater than sign” (&gt;) at the <strong>beginning of the line in the console</strong> means that <em>R</em> is ready to accept your input. <!--You can navigate the history of previously typed commands by using the arrows on your keyboard. A comment starts with the hash (#), and does not require a closing symbol.--></p>
-<p>We can use <em>R</em> as an oversized calculator:</p>
+<p>We first explore simple operations, assignments, and data types to get familiar with the <em>R</em>. If you work in the console, then a “greater than sign” (&gt;) at the <strong>beginning of the line in the console</strong> means that <em>R</em> is ready to accept your input. <!--You can navigate the history of previously typed commands by using the arrows on your keyboard. A comment starts with the hash (#), and does not require a closing symbol.--></p>
+<p>However, generally it is recommended to work in a <em>script window</em>. Only in special cases will it make sense to directly write in the <em>console</em>. We can use <em>R</em> as an oversized calculator:</p>
 <pre class="r"><code>1.7 * 2 # multiplication
 12 / 5 # division
 2.1 ^ 5 # power
