@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Learning Coding in R</title>
+
+<script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Population and community ecology</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Learning Coding in R
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="./TheConsole.html">R as an oversized calculator: The Console</a>
+    </li>
+    <li>
+      <a href="./Scripting.html">Programming in R</a>
+    </li>
+    <li>
+      <a href="./Projects.html">Organizing your R-files</a>
+    </li>
+    <li>
+      <a href="./Plots.html">Basic Plotting</a>
+    </li>
+    <li>
+      <a href="./SolvingODEs.html">Solving ODEs</a>
+    </li>
+    <li>
+      <a href="./Markdown.html">Documenting Code</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<div id="documenting-code" class="section level1">
+<h1>Documenting Code</h1>
+<p>Properly documenting your code is important. It increases
+reproducibility and dissemination of your work. <em>RStudio</em>
+provides special packages that make it easy to write clear and
+eye-catching documentation of your code without the need to put in any
+extra effort.</p>
+<p>The easiest way is to use the <em>Compile Report</em>-button to
+produce a report in html- or pdf-format. You can apply this to any
+<em>R</em>-script. With this method, explanatory text is added using the
+#-symbol. However, such reports are not exaclty prett. <em>R</em> can do
+much better. Using the package <em>Rmarkdown</em> enables you to
+document your code using the very easy typesetting language
+<em>Markdown</em>. This allows you to dynamically produce reports
+including the text describing the code, the code itself, and the results
+including graphical output.</p>
+<p>To give you an idea how elegant your code and documentation can look
+I note that all websites through which I provide exercises to you are
+produced using RMarkdown, e.g., <a
+href="https://clausrueffler.github.io/ecology-course/Competition.html">this
+one</a> from the Ecology course. In fact, you could easily write a whole
+book using RMarkdown such as <a
+href="https://bookdown.org/yihui/rmarkdown-cookbook/">this one</a> or
+make a personal website like <a
+href="https://clausrueffler.github.io/">this one</a>.</p>
+<p>In order to create an RMarkdown document you have to first have to
+install and load the package <em>rmarkdown</em>.</p>
+<pre class="r"><code>install.packages(&quot;rmarkdown&quot;)
+library(rmarkdown)</code></pre>
+<p>Once this package is installed, open a new RMarkdown document under
+the file menu: -&gt;File -&gt;New Document -&gt;R Markdown. This will
+open an <em>.Rmd</em> file. You then have to choose an output format
+(e.g., PDF or HTML among many others, HTML seems to be the most robust).
+You compile the report in <em>RStudio</em> to produce the desired output
+by either typing Ctrl+Shift+K (Cmd on a Mac) (when launched for the
+first time, RStudio may prompt you to install some packages) or press
+the <em>Knit</em>-button that is located in the menu bar of the script
+window.</p>
+<p>Using RMarkdown is an easy method to write documents that contain
+extensive documentation of your code using plain text. You can alternate
+documentation and code chunks by using special RMarkdown tags. Code
+chunks are set within triple tick marks, followed by {r}:</p>
+<pre><code>```{r}
+#Everything between these marks will be evaluated in the R console
+curve(log, from = 0, to = 2)
+abline(h = 0)
+```</code></pre>
+<p>While working on you document, you can either execute code using the
+code section or evaluate all code in one step by presseing Ctrl+Shift*S
+(Cmd on a Mac). Text not enclosed in triple tick marks is not evaluated
+and this is how you include normal text to your report.</p>
+<p>Below you can see a few examples of Rmarkdown syntax that allows you
+to format your text in different ways:</p>
+</div>
+<div id="this-is-a-first-level-headline" class="section level1">
+<h1># This is a first-level headline</h1>
+<div id="this-is-a-second-level-headline" class="section level2">
+<h2>## This is a second-level headline</h2>
+<p><em>*italics</em>*</p>
+<p><strong>**bold**</strong></p>
+<p>As said above, code chunks are enclosed by triple tick marks with an
+<code>{r}</code> at the beginning (indicating that the enclosed code is
+written in R and not some other programming language). You can enter new
+code chunks under the <em>Insert</em>-menu at the top of the script
+window. Several optional arguments can be added to the code chunk.</p>
+<p>If you do not add any optional argument your report will show both
+the code chunk and the output:</p>
+<pre class="r"><code>curve(exp(x), from = -1, to = 1)</code></pre>
+<p><img src="Markdown_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>If you only want the code chunk the report but not the output start
+your code chunk with <code>{r eval=FALSE}</code>:</p>
+<pre class="r"><code>curve(exp(x), from = -1, to = 1)</code></pre>
+<p>Finally, if you only want the output to show up in your report but
+not the code chunk you have to add the optional argument start the code
+chunk with <code>{r echo=FALSE}</code>:</p>
+<p><img src="Markdown_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div id="mathematics-witin-rmarkdown-documents" class="section level3">
+<h3>Mathematics witin <em>Rmarkdown</em>-documents</h3>
+<p><a href="https://www.latex-project.org/"><span
+class="math inline">\(\LaTeX\)</span></a> is a free type-setting languge
+to produce beautiful documents that include lots of mathematics.
+<em>Rmarkdown</em> allows you to include latex-code such as</p>
+<pre class="r"><code>$$
+N(t + 1) = N(t)(1 + \beta - \delta)
+$$</code></pre>
+<p><span class="math display">\[
+N(t + 1) = N(t)(1 + \beta - \delta).
+\]</span> Here, the the two dollar-symbols before and after the equation
+open and close a <em>Latex</em>-environment, respectively. Whatever is
+in between will be interpreted as <em>Latex</em>-code. If you want to
+write math that is within a line, such as <span
+class="math inline">\(N(t + 1) = N(t)(1 + \beta - \delta)\)</span>, then
+open and close the latex environment with only a single $-sign. <a
+href="https://rpruim.github.io/s341/S19/from-class/MathinRmd.html">This
+website</a> provides a very concise overview of how you can use
+<em>Latex</em> within a <em>Rmarkdown</em>-document.</p>
+</div>
+<div id="import-figures-into-rmarkdown-documents"
+class="section level3">
+<h3>Import figures into <em>Rmarkdown</em> documents</h3>
+<p>It is also possible to import pictures into an Rmarkdown file. For
+this to be possible, you need to place the picture file in a place where
+<em>R</em> can find it. In this example, I stored the image file
+<em>Rmarkdown-logo.png</em> inside a folder called <em>images</em>,
+which is located inside the same <em>R</em>-project as this
+<em>.Rmd</em>-file. The picture is then included by writing
+<code>![Caption for the image](images/Rmarkdown-logo.png)</code>.</p>
+<div class="figure">
+<img src="images/Rmarkdown-logo.png" alt="" />
+<p class="caption">Caption for the image</p>
+</div>
+<p>If the optional argument [Caption for the image] is left empty, the
+caption is omitted. A more powerful method for including pictures exists
+in the form of the function <code>knitr::include_graphics()</code>:</p>
+<pre class="r"><code>knitr::include_graphics(&quot;images/Rmarkdown-logo.png&quot;)</code></pre>
+<p>The advantages of this method are for example discussed <a
+href="https://bookdown.org/yihui/bookdown/figures.html">here</a>.</p>
+</div>
+<div id="tables" class="section level3">
+<h3>Tables</h3>
+<p>It is easy to include simple tables into an <em>Rmarkdown</em>
+document using the function <code>knitr::kable()</code>. As an example,
+let us create a simple data frame and then present it as a table.</p>
+<pre class="r"><code>Height &lt;- c(70, 65, 63, 72, 81)
+Volume &lt;- c(10.3, 10.3, 10.2, 16.4, 18.8)
+tree.data &lt;- data.frame(Height, Volume) # a data frame with two columns and five rows
+
+knitr::kable(
+  tree.data, format = &quot;html&quot;, table.attr = &quot;style=&#39;width:30%;&#39;&quot;, caption = &#39;Table caption&#39;
+)</code></pre>
+<table style="width:30%;">
+<caption>
+Table caption
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+Height
+</th>
+<th style="text-align:right;">
+Volume
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+10.3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+10.3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+10.2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+72
+</td>
+<td style="text-align:right;">
+16.4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+81
+</td>
+<td style="text-align:right;">
+18.8
+</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+This is the simplest possible option to make a table and countless
+possibilities exist to fine tune tables, see for example <a
+href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html">here</a>
+and <a
+href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html">here</a>.</p>
+</div>
+<div id="additional-resources" class="section level3">
+<h3>Additional resources</h3>
+<p>As always, the internet is full with resources. One gets a long way
+using <a
+href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">this
+cheatsheet</a>.You can find an introduction to the basics of RMarkdown
+<a href="https://rmarkdown.rstudio.com/lesson-1.html">here</a>. <a
+href="https://m-clark.github.io/Introduction-to-Rmarkdown/">This
+tutorial</a> seems nice and crisp and more comprehensive overview can be
+found <a href="https://bookdown.org/yihui/rmarkdown/">here</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

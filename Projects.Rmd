@@ -30,10 +30,10 @@ Whenever we work with data, we have to import these from other files (often thes
 ```{r, echo=FALSE}
 (xfun::embed_file("data/trees.csv"))
 ```
-\
+
 This file contains two different measurements from trees, namely, their height and volume. It seems reasonable to assume that height and volume are positively correlated and an obvious first step to investigate this hypotheses is to plot volume as a function of height. In order to be able to do this, you first have to read the data into your workspace, for instance, using the command `read.csv()`.
 
-There are two straight-forward ways of doing this involving the *absolute path* to the file on your computer. This figure illustrates the logic the hierachical file structure on a computer and how the file path results from it.
+There are two straight-forward ways of doing this involving the *absolute path* to the file on your computer. This figure illustrates the logic the hierarchical file structure on a computer and how the file path results from it.
 
 ```{r, echo=FALSE}
 knitr::include_graphics("images/path.png")
