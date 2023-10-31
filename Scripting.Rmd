@@ -125,7 +125,7 @@ knitr::include_graphics("images/for_flowdiagram.png")
 
 As a slightly less trivial example, let us calculate the factorials of *n*, $n! = 1 * 2 * ... * (n-1) * n$ using a for-loop.
 
-```{r}
+```{r eval=FALSE}
 result <- 1
 for(i in 1:6) {
   result <- result * i
@@ -161,7 +161,7 @@ In summary, a for-loop is used when you know that you want to perform the analys
 
 #### *while*-loops
 
-The *while*-loop is used when the commands need to be repeated while a certain condition is true. The anatomy of the *while*-loop is
+The *while*-loop is used when the commands need to be repeated as long a certain condition is true. The anatomy of the *while*-loop is
 
 ````
 while (test expression is TRUE) {
@@ -187,7 +187,7 @@ while(i <= 6) {
 }
 ```
 
-This script performs exactly the same operations we wrote with the *for*-loop above. But the *while*-loop is moe complicated. First, we have *initialize* the value *i* outside of the *while*-loop. Second, we have to *update* the value of *i* inside the *while*-loop. What would happen if the last step would be omitted? The loop would run forever (infinite loop — to terminate click on the "Stop" button in the top-right corner of *RStudio*). Thus, programming with *while*-loops is more error-prone and, if possible, one should use a *for* loop instead.
+This script performs exactly the same operations we wrote with the *for*-loop above. But the *while*-loop is more complicated. First, we have to *initialize* the value *i* outside of the *while*-loop. Second, we have to *update* the value of *i* inside the *while*-loop. What would happen if the last step would be omitted? The loop would run forever (infinite loop — to terminate click on the "Stop" button in the top-right corner of the console window in *RStudio*). Thus, programming with *while*-loops is more error-prone and, if possible, one should use a *for* loop instead.
 
 But first, lets get some practice with the *while*-loop.
 
@@ -209,7 +209,7 @@ while (t <= tmax) {
 n
 ```
 
-b) Assume $\lambda < 1$. In this case, the population will shrink should ultimately go extinct. Let us a define a population as extinct whenever the population size has dropped below 1. Write a *while*-loop that runs exactly as long as it takes for the population to go extinct (hint: you have to use the extinction condition as the text-expression in the *while* loop). What is the easiest way to determine how long it takes for the population to go extinct?
+b) Assume $\lambda < 1$. In this case, the population will shrink and should ultimately go extinct. Let us a define a population as extinct whenever the population size has dropped below 1. Write a *while*-loop that runs exactly as long as it takes for the population to go extinct (hint: you have to use the condition for non-extinction *n[t]>1* as the test-expression in the *while* loop). What is the easiest way to determine how long it takes for the population to go extinct?
 
 ```{r eval=FALSE, echo=FALSE}
 lambda <- 0.9
@@ -221,6 +221,8 @@ while (n[t] > 1) {
   n[t + 1] <- n[t] * lambda
   t <- t + 1
 }
+
+length(n)
 ```
 
 c) What does this code do? Try to understand what the loop does, and then create and run a script to confirm your intuition.
@@ -233,7 +235,7 @@ for (k in z) {
   }
 }
 ```
-\
+
 ### *if*-statements
 
 Not a loop but another important way to modify the flow of your program: *ifelse*-constructs allows us to make the execution of commands conditional. The function ```ifelse(test, yes, no)``` contains a logical *test*, and *yes* and *no* are output conditional of whether the logical test results in *TRUE* or *FALSE*.
@@ -258,7 +260,6 @@ We can achieve the same result by nesting the ```ifelse``` command but this can 
 x <- 2
 ifelse (x > 0, "positive", ifelse(x < 0, "negative", "zero"))
 ```
-\
 
 ## Functions
 
@@ -281,10 +282,9 @@ circle.area <- function(radius) {
 }
 ```
 
-defines a function called ```circle.area``` which takes as input argument a variable called *radius*  and returns the value *pi*radius^2* (here *pi* is the constant $\pi=3.14\ldots$), which is indeed the formula for the surface area of a surface. The code of the function is contained between the curly brackets. At the end, a value may be returned.
+defines a function called ```circle.area``` which takes as input argument a variable called *radius*  and returns the value $pi \times radius^2$ (here *pi* is the constant $\pi=3.14\ldots$), which is indeed the formula for the surface area of a circle. The code of the function is contained between the curly brackets. At the end, a value may be returned.
 
 After submitting the function to *R*, we can *call* this function to calculate the surface of circles with given radius.
-
 
 ```{r eval=FALSE}
 circle.area(2)
@@ -312,7 +312,7 @@ It is often useful to explore functions by plotting them (see next section):
 curve(circle.area(x), from = 0, to = 2, xlab = "radius",  ylab = "circle area")
 ```
 
-Exercise: Plot the area of a rectangle with as a function of *side_1* (with *side_1* between 0 and 2) given that *side_2=2*.
+Exercise: Plot the area of a rectangle as a function of *side_1* (with *side_1* between 0 and 2) given that *side_2=2*.
 
 ```{r, echo=FALSE, eval=FALSE}
 curve(rectangle(x, side_2 = 2)$surface, from = 0, to = 2, xlab = "side_1", ylab = "rectangle surface")
@@ -348,7 +348,7 @@ my.factorial(4)
 
 Let us code a function that produces a population dynamical time series for exponential growth in discrete time.
 
-```{r}
+```{r eval=FALSE}
 time.series <- function(tmax, lambda, N0){
   n <- c(N0) # creates a vector with the initial population size N0 in its first position
   for (t in 1:tmax) {
@@ -360,16 +360,16 @@ time.series <- function(tmax, lambda, N0){
 time.series(tmax = 20, lambda = 1.1, N0 = 10)
 ```
 
-So far, so good. How can we plot the time series? Simply writing ```plot(n)``` does not work because the vector *n* in which the time series is stored is stored only *locally*, that is, within the function *time.series* (the output does not appear in your environment tab). But it is easy to export the values in *n* from the function by assigning the output of the function to a new object, which we here again call *n*.
+How can we plot the time series? Simply writing ```plot(n)``` does not work because the vector *n* in which the time series is stored is stored only *locally*, that is, within the function *time.series* (the output does not appear in your environment tab). But it is easy to export the values in *n* from the function by assigning the output of the function to a new object, which we here again call *n*.
 
-```{r}
+```{r eval=FALSE}
 n <- time.series(tmax = 20, lambda = 1.1, N0 = 10) # we assign the output of the function to n. It is only now that n appears in your environment tab and we can now use it outside the function.
 plot(n)
 ```
 
 The take-home message from this last step is important! Objects are *local* when they are declared *inside* a function. In this case, they are accessible only inside the function (and they do not appear in the *Environment*-tab). In contrast, *global* variables are those assigned outside a function, they appear in in the *Environment*-tab and are accessible everywere in *R*. Here a minimal example illustrating these ideas.
 
-```{r}
+```{r eval=FALSE}
 square <- function(x) {
   result <- x^2
 }
