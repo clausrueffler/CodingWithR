@@ -9,11 +9,11 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-<!--
+
 ```{r klippy, echo=FALSE, include=TRUE}
 klippy::klippy(position = c('top', 'right'))
 ```
--->
+
 
 # Programming in R {.tabset}
 
@@ -92,9 +92,9 @@ m <- matrix(25 , 5 , 5) # m is not very informative
 
 ## Loops
 
-An important way modify the flow of a program is to write a loop. A loop is a series of commands that are repeated a number of times. For example, you want you want to interate the same calculation many times to produce a population dynamical time series, or you want to run the same analysis on different data sets that you have collected, etc.
+An important way to modify the flow of a program is to write a loop. A loop is a series of commands that are repeated a number of times. For example, you want to iterate the same calculation many times to produce a population dynamical time series, or you want to run the same analysis on different data sets that you have collected, etc.
 
-R provides you with two ways to loop over blocks of commands: the ```for``` loop, and the ```while```-loop. Let’s start with the ```for```-loop, which is used to **iterate over a vector (or a list): for each value of the vector, a series of commands will be run.
+*R* provides you with two ways to loop over blocks of commands: the ```for``` loop, and the ```while```-loop. Let’s start with the ```for```-loop, which is used to iterate over a vector (or a list): for each value of the vector, a series of commands will be run.
 
 #### *for*-loops
 
@@ -119,8 +119,8 @@ In the code above, the variable *i* takes the value of each element of *myvec* i
 
 We can visualize to the logic of the *for*-loop using a flow chart.
 
-```{r echo=FALSE, out.width = '30%'}
-knitr::include_graphics("images/for-loop-r2.png")
+```{r echo=FALSE, out.width = '60%'}
+knitr::include_graphics("images/for_flowdiagram.png")
 ```
 
 As a slightly less trivial example, let us calculate the factorials of *n*, $n! = 1 * 2 * ... * (n-1) * n$ using a for-loop.

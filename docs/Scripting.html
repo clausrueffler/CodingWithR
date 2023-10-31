@@ -296,15 +296,10 @@ $(document).ready(function () {
 </div>
 
 
-<!--
-
-```{=html}
 <script>
   addClassKlippyTo("pre.r, pre.markdown");
   addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
 </script>
-```
--->
 <div id="programming-in-r" class="section level1 tabset">
 <h1 class="tabset">Programming in R</h1>
 <!--## Computing Using Scripts
@@ -363,8 +358,8 @@ m &lt;- matrix(25 , 5 , 5) # m is not very informative</code></pre>
 </div>
 <div id="loops" class="section level2">
 <h2>Loops</h2>
-<p>An important way modify the flow of a program is to write a loop. A loop is a series of commands that are repeated a number of times. For example, you want you want to interate the same calculation many times to produce a population dynamical time series, or you want to run the same analysis on different data sets that you have collected, etc.</p>
-<p>R provides you with two ways to loop over blocks of commands: the <code>for</code> loop, and the <code>while</code>-loop. Let’s start with the <code>for</code>-loop, which is used to **iterate over a vector (or a list): for each value of the vector, a series of commands will be run.</p>
+<p>An important way to modify the flow of a program is to write a loop. A loop is a series of commands that are repeated a number of times. For example, you want to iterate the same calculation many times to produce a population dynamical time series, or you want to run the same analysis on different data sets that you have collected, etc.</p>
+<p><em>R</em> provides you with two ways to loop over blocks of commands: the <code>for</code> loop, and the <code>while</code>-loop. Let’s start with the <code>for</code>-loop, which is used to iterate over a vector (or a list): for each value of the vector, a series of commands will be run.</p>
 <div id="for-loops" class="section level4">
 <h4><em>for</em>-loops</h4>
 <p>The the anatomy of a <em>for</em>-loop is:</p>
@@ -379,7 +374,7 @@ for (i in myvec) {
 }</code></pre>
 <p>In the code above, the variable <em>i</em> takes the value of each element of <em>myvec</em> in sequence. Inside the block defined by the for-loop, you can use the variable <em>i</em> to perform operations. Note that <em>i</em> is only an example of a variable name. Note also that in this for-loop each new command starts on a new line. This is essential! The same applies to the other looping constructions and to functions.</p>
 <p>We can visualize to the logic of the <em>for</em>-loop using a flow chart.</p>
-<p><img src="images/for-loop-r2.png" width="30%" /></p>
+<p><img src="images/for_flowdiagram.png" width="60%" /></p>
 <p>As a slightly less trivial example, let us calculate the factorials of <em>n</em>, <span class="math inline">\(n! = 1 * 2 * ... * (n-1) * n\)</span> using a for-loop.</p>
 <pre class="r"><code>result &lt;- 1
 for(i in 1:6) {

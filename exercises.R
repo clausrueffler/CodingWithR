@@ -36,6 +36,7 @@ z^2
 ## second exercises
 # a)
 data(trees)
+trees[trees$Height > 80, ]
 mean(trees$Height)
 # b
 mean(trees[trees$Height > 75, ]$Girth)
