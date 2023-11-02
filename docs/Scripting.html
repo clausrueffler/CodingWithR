@@ -569,7 +569,7 @@ runif(10, -1, 1)
 rnorm(4, mean = 1, sd = 5)</code></pre>
 <p>You can also define your <em>own</em> probability distribution and then draw values from is using the function</p>
 <pre><code>sample(x, size, prob, replace, ...)</code></pre>
-<p>To get to know this function, let us simulate the outcome of throwing a dice. The possible outcomes of throwing a dice are the numbers 1 to 6. This we encode in a vector of possible outcomes: <code>possible_outcomes &lt;- c(1, 2, 3, 4, 5, 6)</code>, or, for short, <code>possible_outcomes &lt;- 1:6</code>. If the dice is <em>fair</em> each number occurs with probability 1/6. This we encode in the vector <code>probabilities &lt;- c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)</code>, or, for short, <code>probabilities &lt;- rep(1/6, 6)</code>. Since the outcome of any particular throw is independent of all previous throws we <em>sample with replacement</em>. We have to specify this in the function <em>sample</em> by adding <em>replace = TRUE</em>. Finally, we have to add how often we throw the dice by specifying a value for <em>size</em>, for example, <em>size = 1</em> if we throw the dice only once.</p>
+<p>To get to know this function, let us simulate the outcome of throwing a dice. The possible outcomes of throwing a dice are the numbers 1 to 6. This we encode in a vector of possible outcomes: <code>possible_outcomes &lt;- c(1, 2, 3, 4, 5, 6)</code>, or, for short, <code>possible_outcomes &lt;- 1:6</code>. This is the first argument in the function <code>sample</code>. Thus, <code>x = possible_outcomes</code>. If the dice is <em>fair</em> each number occurs with probability 1/6. This we encode in the vector <code>probabilities &lt;- c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)</code>, or, for short, <code>probabilities &lt;- rep(1/6, 6)</code>. This is the third argument in the function <code>sample</code>. Thus, <code>prob = possible_outcomes</code>. Since the outcome of any particular throw is independent of all previous throws we <em>sample with replacement</em>. We have to specify this in the function <em>sample</em> by adding <em>replace = TRUE</em>. Finally, we have to add how often we throw the dice by specifying a value for <em>size</em>, for example, <em>size = 1</em> if we throw the dice only once.</p>
 <pre class="r"><code>possible_outcomes &lt;- 1:6
 probabilities &lt;- rep(1/6, 6)
 
@@ -582,6 +582,14 @@ sample(c(0, 1), 1, c(prob.death, 1 -prob.death), replace = TRUE) # returns a 0 i
 <p>We obtain the number of survivors in a population of 100 individuals by repeating this experiment 100 times and sum over the outcome:</p>
 <pre class="r"><code>prob.death &lt;- 0.3
 sum(sample(c(0, 1), 100, c(prob.death, 1 -prob.death), replace = TRUE))</code></pre>
+<p>One more example. We want to investigate the effect of <em>environmental stochasticity</em> on population growth for the special case the discrete time growth factor <span class="math inline">\(\lambda\)</span> can take two possible values with equal probabilities. We could code this, for example, in the following way;</p>
+<pre class="r"><code>lambda1 &lt;- (lambda.mean + deviation)
+lambda2 &lt;- (lambda.mean - deviation)
+
+lambda.mean &lt;- 1.01
+deviation &lt;- 0.1
+
+sample(c(lambda1, lambda2), 100, c(1/2, 1/2), replace = TRUE) # one hundred lambda-values that randomly fluctuate between lambda1 and lambda2</code></pre>
 <div id="exercises-1" class="section level4">
 <h4>Exercises</h4>
 <ol style="list-style-type: lower-alpha">

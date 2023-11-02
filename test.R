@@ -26,7 +26,7 @@ prod(y)
 z-2
 
 A <- matrix(c(1, 2,3, 5, 7,8,4,6,7),nrow = 3,ncol=3)
-A
+inv(A)
 B <- matrix(c(10:13),nrow = 4,ncol=1)
 
 B
