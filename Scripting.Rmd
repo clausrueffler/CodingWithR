@@ -127,7 +127,7 @@ As a slightly less trivial example, let us calculate the factorials of *n*, $n! 
 
 ```{r eval=FALSE}
 result <- 1
-for(i in 1:6) {
+for (i in 1:6) {
   result <- result * i
   print(result)
 }
@@ -141,7 +141,7 @@ tmax <- 15 # length of the time series
 N0 <- 10 # initial population size
 n <- c() # creates an empty vector in which we can store the data of the time series
 n[1] <- N0 # stores the initial population size as the first entry of the vector n 
-for(t in 1:tmax) {
+for (t in 1:tmax) {
   n[t+1] <- n[t] * lambda
 }
 n
@@ -180,7 +180,7 @@ For example,
 ```{r eval=FALSE}
 result <- 1
 i <- 1
-while(i <= 6) {
+while (i <= 6) {
   result <- result * i
   print(result)
   i <- i + 1
@@ -245,7 +245,14 @@ x <- 2
 ifelse (x > 0, "positive", "negative or 0")
 ```
 
-If we want to incorporate more than one logical test we can use ```if``` and ```else``` as in the following example:
+We can do the exact same task using
+
+```{r eval=FALSE}
+x <- 2
+if (x > 0) "positive" else "negative or 0"
+```
+
+If we want to incorporate more than one logical test we can nest several  ```if```/ ```else```-constructs as in the following example:
 
 ```{r eval=FALSE}
 x <- 0
@@ -257,8 +264,8 @@ if (x < 0) {print("Negative number")} else
 We can achieve the same result by nesting the ```ifelse``` command but this can become a bit hard to read if done repeatedly.
 
 ```{r eval=FALSE}
-x <- 2
-ifelse (x > 0, "positive", ifelse(x < 0, "negative", "zero"))
+x <- 0
+ifelse (x > 0, "positive", ifelse (x < 0, "negative", "zero"))
 ```
 
 ## Functions
@@ -288,8 +295,8 @@ After submitting the function to *R*, we can *call* this function to calculate t
 
 ```{r eval=FALSE}
 circle.area(2)
-# apply the function to a vector of radii
-circle.area(1:5) # We can apply the function to the numbers 1 to 5 in a single step; thus, we apply functions to a vector.
+
+circle.area(1:5) # We can apply the function to the numbers 1 to 5 in a single step; thus, we apply functions to a vector of radii.
 ```
 
 Some functions may have more than one argument and may return more than one value:
@@ -318,7 +325,7 @@ Exercise: Plot the area of a rectangle as a function of *side_1* (with *side_1* 
 curve(rectangle(x, side_2 = 2)$surface, from = 0, to = 2, xlab = "side_1", ylab = "rectangle surface")
 ```
 
-Functions can be arbitrarily complicated and most simulation models will have a more or less complex function at its heart. For instance, we can incorporate loops and ```iflese```-constructs into functions.
+Functions can be arbitrarily complex and most simulation models will have a more or less complex function at their heart. For instance, we can incorporate loops and ```iflese```-constructs into functions.
 
 ```{r eval=FALSE}
 sign_of_a_number <- function(x){
@@ -330,7 +337,7 @@ sign_of_a_number <- function(x){
 sign_of_a_number(2.3)
 ```
 
-To calculate the factorial more easily we can wrap a function around the while loop from the previous section:
+To calculate the factorial more easily, we can wrap a function around the while loop from the previous section:
 
 ```{r eval=FALSE}
 my.factorial <- function(n){
@@ -367,7 +374,7 @@ n <- time.series(tmax = 20, lambda = 1.1, N0 = 10) # we assign the output of the
 plot(n)
 ```
 
-The take-home message from this last step is important! Objects are *local* when they are declared *inside* a function. In this case, they are accessible only inside the function (and they do not appear in the *Environment*-tab). In contrast, *global* variables are those assigned outside a function, they appear in in the *Environment*-tab and are accessible everywere in *R*. Here a minimal example illustrating these ideas.
+The take-home message from this last step is important! Objects are *local* when they are declared *inside* a function. In this case, they are accessible only inside the function (and they do not appear in the *Environment*-tab). In contrast, *global* variables are those assigned outside a function, they appear in in the *Environment*-tab and are accessible everywhere in *R*. Here a minimal example illustrating these ideas.
 
 ```{r eval=FALSE}
 square <- function(x) {
@@ -381,6 +388,21 @@ result <- square(3)
 result # this will show that the result is equal to 9
 ```
 
+However, we add a command to a function so that is automatically *exports* the output to the global environment using the ```<<-``` arrow:
+
+```{r eval=FALSE}
+time.series <- function(tmax, lambda, N0){
+  n <- c(N0) # creates a vector with the initial population size N0 in its first position
+  for (t in 1:tmax) {
+    n[t+1] <- n[t] * lambda
+  }
+  return(n)
+  n <<- n # in this step we export n to the global environment
+}
+
+time.series(tmax = 20, lambda = 1.1, N0 = 10)
+plot(n) # now we can plot n without creating a new object
+```
  
 ## Random Numbers
 
