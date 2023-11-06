@@ -15,13 +15,13 @@ klippy::klippy(position = c('top', 'right'))
 
 # Documenting Code
 
-Properly documenting your code is important. It increases reproducibility and dissemination of your work. *RStudio* provides special packages that make it easy to write clear and eye-catching documentation of your code without the need to put in any extra effort.
+Properly documenting your code is important. It increases reproducibility and dissemination of your work. RStudio provides special packages that make it easy to write clear and eye-catching documentation of your code without the need to put in any extra effort.
 
-The easiest way is to use the *Compile Report*-button to produce a report in html- or pdf-format. You can apply this to any *R*-script. With this method, explanatory text is added using the #-symbol. However, such reports are not exaclty prett. *R* can do much better. Using the package *Rmarkdown* enables you to document your code using the very easy typesetting language *Markdown*. This allows you to dynamically produce reports including the text describing the code, the code itself, and the results including graphical output.
+The easiest way is to use the *Compile Report*-button to produce a report in html- or pdf-format. You can apply this to any *R*-script. With this method, explanatory text is added using the #-symbol. However, such reports are not exactly pretty. *R* can do much better. Using the package *Rmarkdown* enables you to document your code using the very easy typesetting language *Markdown*. You can then produce reports including the text describing the code, the code itself, and the results including graphical output.
 
-To give you an idea how elegant your code and documentation can look I note that all websites through which I provide exercises to you are produced using RMarkdown, e.g., [this one](https://clausrueffler.github.io/ecology-course/Competition.html) from the Ecology course. In fact, you could easily write a whole book using RMarkdown such as [this one](https://bookdown.org/yihui/rmarkdown-cookbook/) or make a personal website like [this one](https://clausrueffler.github.io/).
+To give you an idea how elegant your code and documentation can look, I note that all websites through which I provide exercises to you are produced using RMarkdown, e.g., [this one](https://clausrueffler.github.io/ecology-course/Competition.html) from the Ecology course. In fact, you could easily write a whole book using RMarkdown such as [this one](https://bookdown.org/yihui/rmarkdown-cookbook/) or make a personal website like [this one](https://clausrueffler.github.io/).
 
-In order to create an RMarkdown document you have to first have to install  and load the package *rmarkdown*.
+In order to create an RMarkdown document you have to first install and load the package *rmarkdown*.
 
 ```{r eval=FALSE}
 install.packages("rmarkdown")

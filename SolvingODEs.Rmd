@@ -17,7 +17,7 @@ klippy::klippy(position = c('top', 'right'))
 
 ## Numerical integration and the *R*-package *deSolve*
 
-Almost all ecological models formulated as *ordinary differential equations* (ODEs) cannot be solved explicitly. That is to say, no explicit formula can be derived that gives population size as a function of time (logistic growth is a notable exception, see below). However, ODE models can in general very easily be analyzed in *R* with a method called *numerical [integration*](https://en.wikipedia.org/wiki/Numerical_methods_for_ordinary_differential_equations). What does that mean?
+Almost all ecological models formulated as *ordinary differential equations* (ODEs) cannot be solved explicitly. That is to say, no explicit formula can be derived that gives population size as a function of time (logistic growth is a notable exception, see below). However, ODE models can in general very easily be analyzed in *R* with a method called [*numerical integration*](https://en.wikipedia.org/wiki/Numerical_methods_for_ordinary_differential_equations). What does that mean?
 
 The easiest method is called the *Euler method* and works as follows. Let us consider the ordinary differential equation
 
@@ -25,7 +25,7 @@ $$
 \frac{\mathrm{d}x}{\mathrm{d}t} = f(x(t)),
 $$
 
-where $x$ could stand for population size and $f$ is a function describing the rate of change. From any starting population size $x_0$, we can find an approximation of the value of $x$ a short time $\Delta t$ later through the through the finite time difference equation
+where $x$ could stand for population size and $f$ is a function describing the rate of change. From any starting population size $x_0$, we can find an approximation of the value of $x$ a short time $\Delta t$ later through the finite time difference equation
 
 $$
 \frac{\mathrm{d}x}{\mathrm{d}t} \approx \frac{x(t + \Delta t) − x(t)}{\Delta t},
@@ -35,13 +35,12 @@ $$
 x(t + \Delta t) \approx x(t) + \Delta t * \frac{\mathrm{d}x}{\mathrm{d}t},
 $$
 or, using the the right-hand side of the differential equation, as
-which can be rearranged as
 $$
 x(t + \Delta t) \approx x(t) + \Delta t * f(x(t)).
 $$
-In words, the value of the dynamic variable $x$ a short time $\Delta t$ later can be approximated by the current value $x(t)$ plus the slope of the curve, given by $f(x(t))$ multiplied by the length of the time interval $\Delta t$. Thus, we locally approximate the function $x(t)$ with its tangent line. 
+In words, the value of the dynamic variable $x$ a short time $\Delta t$ later can be approximated by the current value $x(t)$ plus the slope of the curve, given by $f(x(t))$, multiplied by the length of the time interval $\Delta t$. Thus, we locally approximate the function $x(t)$ with its tangent line. 
 
-This formula is usually applied in the following way. We choose a step size $\Delta t$, and then construct the sequence $t_0$, $t_1 = t_0 + \Delta t$, $t_2 = t_0 + 2\Delta t$, \ldots. We denote by $x_n$ a numerical estimate of the exact solution $x(t_n)$, which are computed following recursive scheme
+This formula is usually applied in the following way. We choose a step size $\Delta t$, and then construct the sequence $t_0,\, t_1 = t_0 + \Delta t,\, t_2 = t_0 + 2\Delta t,\, \ldots$. We denote by $x_n$ a numerical estimate of the exact solution $x(t_n)$, which are computed using the recursive scheme
 $$
 x_{n+1} = x_n + \Delta t * f(x_n).
 $$
