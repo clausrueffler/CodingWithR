@@ -441,20 +441,35 @@ for (k in z) {
 </div>
 <div id="if-statements" class="section level3">
 <h3><em>if</em>-statements</h3>
-<p>Not a loop but another important way to modify the flow of your program: <em>ifelse</em>-constructs allows us to make the execution of commands conditional. The function <code>ifelse(test, yes, no)</code> contains a logical <em>test</em>, and <em>yes</em> and <em>no</em> are output conditional of whether the logical test results in <em>TRUE</em> or <em>FALSE</em>.</p>
+<p>Not a loop but another important way to modify the flow of your program: <em>if-else</em>-constructs allows us to make the execution of commands conditional. The function <code>if (test) "output if TRUE" else "output if FALSE"</code> contains a logical <em>test</em>, and <em>yes</em> and <em>no</em> are output conditional of whether the logical test results in TRUE or FALSE: if the <em>test</em> evaluates to TRUE, this command returns whatever is written in the next position, and if <em>test</em> evaluates to FALSE, this command returns whatever is written in the last position. Here two simple examples:</p>
+<!--
+
+```r
+x <- 2
+ifelse (x > 0, "positive", "negative or 0")
+```
+We can do the exact same task using
+-->
 <pre class="r"><code>x &lt;- 2
-ifelse (x &gt; 0, &quot;positive&quot;, &quot;negative or 0&quot;)</code></pre>
-<p>We can do the exact same task using</p>
-<pre class="r"><code>x &lt;- 2
-if (x &gt; 0) &quot;positive&quot; else &quot;negative or 0&quot;</code></pre>
-<p>If we want to incorporate more than one logical test we can nest several <code>if</code>/ <code>else</code>-constructs as in the following example:</p>
+if (x &gt; 0) &quot;positive&quot; else &quot;negative or 0&quot; # this returns &quot;positive&quot;
+
+a &lt;- 1
+b &lt;- 2
+if (a &gt; b) 1 else 0 # this returns 0</code></pre>
+<p>If we want to incorporate more than one logical test we can nest several <em>if-else</em>-constructs as in the following example:</p>
 <pre class="r"><code>x &lt;- 0
-if (x &lt; 0) {print(&quot;Negative number&quot;)} else
-    if (x &gt; 0) {print(&quot;Positive number&quot;)} else
-      print(&quot;Zero&quot;)</code></pre>
-<p>We can achieve the same result by nesting the <code>ifelse</code> command but this can become a bit hard to read if done repeatedly.</p>
-<pre class="r"><code>x &lt;- 0
-ifelse (x &gt; 0, &quot;positive&quot;, ifelse (x &lt; 0, &quot;negative&quot;, &quot;zero&quot;))</code></pre>
+if (x &lt; 0) &quot;Negative number&quot; else
+    if (x &gt; 0) &quot;Positive number&quot; else
+      &quot;Zero&quot;</code></pre>
+<!--
+We can achieve the same result by nesting the ```ifelse``` command but this can become a bit hard to read if done repeatedly.
+
+
+```r
+x <- 0
+ifelse (x > 0, "positive", ifelse (x < 0, "negative", "zero"))
+```
+-->
 </div>
 </div>
 <div id="functions" class="section level2">

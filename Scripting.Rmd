@@ -238,35 +238,42 @@ for (k in z) {
 
 ### *if*-statements
 
-Not a loop but another important way to modify the flow of your program: *ifelse*-constructs allows us to make the execution of commands conditional. The function ```ifelse(test, yes, no)``` contains a logical *test*, and *yes* and *no* are output conditional of whether the logical test results in *TRUE* or *FALSE*.
+Not a loop but another important way to modify the flow of your program: *if-else*-constructs allows us to make the execution of commands conditional. The function ```if (test) "output if TRUE" else "output if FALSE"``` contains a logical *test*, and *yes* and *no* are output conditional of whether the logical test results in TRUE or FALSE: if the *test* evaluates to TRUE, this command returns whatever is written in the next position, and if *test* evaluates to FALSE, this command returns whatever is written in the last position. Here two simple examples:
 
+<!--
 ```{r eval=FALSE}
 x <- 2
 ifelse (x > 0, "positive", "negative or 0")
 ```
-
 We can do the exact same task using
+-->
 
 ```{r eval=FALSE}
 x <- 2
-if (x > 0) "positive" else "negative or 0"
+if (x > 0) "positive" else "negative or 0" # this returns "positive"
+
+a <- 1
+b <- 2
+if (a > b) 1 else 0 # this returns 0
 ```
 
-If we want to incorporate more than one logical test we can nest several  ```if```/ ```else```-constructs as in the following example:
+If we want to incorporate more than one logical test we can nest several *if-else*-constructs as in the following example:
 
 ```{r eval=FALSE}
 x <- 0
-if (x < 0) {print("Negative number")} else
-    if (x > 0) {print("Positive number")} else
-      print("Zero")
+if (x < 0) "Negative number" else
+    if (x > 0) "Positive number" else
+      "Zero"
 ```
 
+<!--
 We can achieve the same result by nesting the ```ifelse``` command but this can become a bit hard to read if done repeatedly.
 
 ```{r eval=FALSE}
 x <- 0
 ifelse (x > 0, "positive", ifelse (x < 0, "negative", "zero"))
 ```
+-->
 
 ## Functions
 
