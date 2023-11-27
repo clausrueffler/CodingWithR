@@ -2,13 +2,16 @@
 title: "Population and community ecology @ Uppsala University"
 output: 
   html_document:
-    toc: FALSE
+    theme: cerulean
+    toc: no
+    toc_float:
+      collapsed: false
 ---
 *Learning coding in R*
 
 R has been developed as a tool for statistical analysis and might by now be the most popular tool in this area. However, R is also a language that we can use to program simulation models in order to investigate population dynamical models in ecology. As such, R can to some extend replace proprietary software packages like MatLab or Mathematica.
 
-This website contains an introduction to some R commands that are essential for coding simulations in R (and, in fact, pretty much everything else you might want to do in R...). Click the tab button and select from the differnt sections in the drop-down menu. You can work on this material by copying the R-code and pasting it in the skript window of your R-Studio application.
+This website contains an introduction to some R commands that are essential for coding simulations in R (and, in fact, pretty much everything else you might want to do in R...). Click the tab button and select from the different sections in the drop-down menu. You can work on this material by copying the R-code and pasting it in the script window of your R-Studio application.
 
 This website borrows heavily from chapter 8 of the book 
 

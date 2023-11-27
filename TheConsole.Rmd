@@ -2,7 +2,10 @@
 pagetitle: 'Learning Coding in R'
 output: 
   html_document:
-    toc: FALSE
+    theme: cerulean
+    toc: yes
+    toc_float:
+      collapsed: false
 ---
 
 ```{r setup, include=FALSE}
@@ -13,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 klippy::klippy(position = c('top', 'right'))
 ```
 
-# *R* as an Oversized Calculator{.tabset}
+# *R* as an Oversized Calculator
 
 ## Getting started
 
