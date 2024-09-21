@@ -129,5 +129,5 @@ Rmarkdown-themes allow you to alter the appearance of your document by defining 
 
 ### Additional resources
 
-As always, the internet is full with resources. One gets a long way using [this cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf).You can find an introduction to the basics of RMarkdown [here](https://rmarkdown.rstudio.com/lesson-1.html). [This tutorial](https://m-clark.github.io/Introduction-to-Rmarkdown/) seems nice and crisp and more comprehensive overview can be found [here](https://bookdown.org/yihui/rmarkdown/).
+As always, the internet is full with resources. One gets a long way using [this cheatsheet](https://rstudio.github.io/cheatsheets/rmarkdown.pdf).You can find an introduction to the basics of RMarkdown [here](https://rmarkdown.rstudio.com/lesson-1.html). [This tutorial](https://m-clark.github.io/Introduction-to-Rmarkdown/) seems nice and crisp and more comprehensive overview can be found [here](https://bookdown.org/yihui/rmarkdown/).
 
