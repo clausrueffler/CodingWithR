@@ -363,13 +363,13 @@ str(trees) # structure of data frame ’data.frame’
 ncol(trees) # number of columns
 nrow(trees) # number of rows
 head(trees) # print the first few rows Girth Height Volume
-trees$girth # select column by name
+trees$Girth # select column by name
 # select column by name; return first 5 elements
-trees$height[1:5]
+trees$Height[1:5]
 trees[1:3, ] # select rows 1 through 3
-trees[trees$height > 80, ] # select all rows that contain trees taller than 80 ft
+trees[trees$Height > 80, ] # select all rows that contain trees taller than 80 ft
 # select rows 1 through 3; return column Volume
-trees[1:3, ]$volume
+trees[1:3, ]$Volume
 trees <- rbind(trees, c(13.25, 76, 30.17)) # add a row
 trees_double <- cbind(trees, trees) # combine columns
 head(trees_double)

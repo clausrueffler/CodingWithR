@@ -87,7 +87,7 @@ if (b == 5) {
 # bad
 x<-5*7 # hard to read
 y <- 7*x^2
-m <- matrix(25 , 5 , 5) # m is not very informative
+m <- matrix(25 , 5 , 5) # but m is not very informative name
 ```
 
 ## Loops
@@ -105,7 +105,7 @@ for (variable in list_or_vector) {
   execute these commands # if there is more than one command each has to start on a new line
 }
 ````
-Here a simple example.
+Here is a simple example.
 
 ```{r eval=FALSE}
 myvec <- 1:10 # vector with numbers from 1 to 10
@@ -115,15 +115,15 @@ for (i in myvec) {
 }
 ```
 
-In the code above, the variable *i* takes the value of each element of *myvec* in sequence. Inside the block defined by the for-loop, you can use the variable *i* to perform operations. Note that *i* is only an example of a variable name. Note also that in this for-loop each new command starts on a new line. This is essential! The same applies to the other looping constructions and to functions.
+In the code above, the variable *i* takes the value of each element in the vector *myvec* in sequence. Inside the in the for-loop, you can use the variable *i* to perform operations. Note that *i* is only an example of a variable name. Note also that in a for-loop each new command has to start on a new line. This is essential! The same applies to the other looping constructions and to functions.
 
 We can visualize to the logic of the *for*-loop using a flow chart.
 
-```{r echo=FALSE, out.width = '60%'}
-knitr::include_graphics("images/for_flowdiagram.png")
+```{r echo=FALSE, out.width = '50%'}
+knitr::include_graphics("images/ForLoop.png")
 ```
 
-As a slightly less trivial example, let us calculate the factorials of *n*, $n! = 1 * 2 * ... * (n-1) * n$ using a for-loop.
+Thus, each time the loop is executed, *R* moves to the next entry in the vector, until no entry is left. This is when the loop stops. As a slightly less trivial example, let us calculate the factorials of *n*, $n! = 1 * 2 * ... * (n-1) * n$ using a for-loop.
 
 ```{r eval=FALSE}
 result <- 1
@@ -161,7 +161,7 @@ In summary, a for-loop is used when you know that you want to perform the analys
 
 #### *while*-loops
 
-The *while*-loop is used when the commands need to be repeated as long a certain condition is true. The anatomy of the *while*-loop is
+The *while*-loop is used when the statement in the loop needs to be repeated as long a certain condition is true. The anatomy of the *while*-loop is
 
 ````
 while (test expression is TRUE) {
@@ -187,7 +187,7 @@ while (i <= 6) {
 }
 ```
 
-This script performs exactly the same operations we wrote with the *for*-loop above. But the *while*-loop is more complicated. First, we have to *initialize* the value *i* outside of the *while*-loop. Second, we have to *update* the value of *i* inside the *while*-loop. What would happen if the last step would be omitted? The loop would run forever (infinite loop — to terminate click on the "Stop" button in the top-right corner of the console window in *RStudio*). Thus, programming with *while*-loops is more error-prone and, if possible, one should use a *for* loop instead.
+This script performs exactly the same operations we wrote with the *for*-loop above. But the *while*-loop is more complicated. First, we have to *initialize* the value *i* outside of the *while*-loop. Second, we have to *update* the value of *i* inside the *while*-loop. This is crucial! What would happen if the last step would be omitted? The loop would run forever (infinite loop — to terminate click on the "Stop" button in the top-right corner of the console window in *RStudio*). Thus, programming with *while*-loops is more error-prone and. Thus, if you can achieve the same goal with a *for*-loop, then the *for*-loop is to be preferred.
 
 But first, lets get some practice with the *while*-loop.
 
