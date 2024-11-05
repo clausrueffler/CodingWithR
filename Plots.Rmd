@@ -2,7 +2,10 @@
 pagetitle: 'Learning Coding in R'
 output: 
   html_document:
-    toc: FALSE
+    theme: cerulean
+    toc: yes
+    toc_float:
+      collapsed: no
 ---
 
 ```{r setup, include=FALSE}

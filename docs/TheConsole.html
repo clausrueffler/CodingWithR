@@ -16,7 +16,7 @@
 <script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -223,6 +226,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -230,6 +302,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -293,8 +375,8 @@ $(document).ready(function () {
   addClassKlippyTo("pre.r, pre.markdown");
   addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
 </script>
-<div id="r-as-an-oversized-calculator" class="section level1 tabset">
-<h1 class="tabset"><em>R</em> as an Oversized Calculator</h1>
+<div id="r-as-an-oversized-calculator" class="section level1">
+<h1><em>R</em> as an Oversized Calculator</h1>
 <div id="getting-started" class="section level2">
 <h2>Getting started</h2>
 <p><em>R</em> is a versatile programming language for statistical
@@ -340,10 +422,15 @@ href="https://r-unimelb.gitbook.io/rbook/">here</a>):</p>
 <ol style="list-style-type: decimal">
 <li>The interactive <em>R</em> console (lower left)</li>
 <li>Environment/History (tabs in the upper right window)</li>
+<<<<<<< HEAD
 <li>Files/Plots/Packages/Help/Viewer (tabs in the lower right
 window)</li>
 <li>Editor panel for <em>R</em>-scripts. This window appears in the top
 right once you opened an <em>R</em>-script.</li>
+=======
+<li>Files/Plots/Packages/Help/Viewer (tabs in the lower right window)</li>
+<li>Editor panel for <em>R</em>-scripts. This window appears in the top left once you opened an <em>R</em>-script.</li>
+>>>>>>> 31fe298da5a3bf87c25432b99a8bc9ee46acdc8a
 </ol>
 <p><img src="images/anatomy%20of%20rstudio.png" width="100%" /></p>
 </div>
@@ -406,8 +493,12 @@ We can use *R* as an oversized calculator:--></p>
 <pre class="r"><code>1.7 * 2 # multiplication
 12 / 5 # division
 2.1 ^ 5 # power</code></pre>
+<<<<<<< HEAD
 <p>The following table provides a list of arithmetic and logical
 operators in R:</p>
+=======
+<p>The following table provides a list of arithmetic and logical operators in <em>R</em>:</p>
+>>>>>>> 31fe298da5a3bf87c25432b99a8bc9ee46acdc8a
 <table>
 <thead>
 <tr class="header">
@@ -684,9 +775,14 @@ B %*% t(B)
 # by default, matrices are filled by column
 (C &lt;- matrix(1:9, 3, 3))
 (D &lt;- matrix(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), 2, 2))
+<<<<<<< HEAD
 A %*% D # matrix operations are not defined for matrices with numeric entries</code></pre>
 <p>Determine the dimensions of a matrix (the numbers of rows and
 columns) using the following commands:</p>
+=======
+A %*% D # matrix operations are not defined for matrices with character entries</code></pre>
+<p>Determine the dimensions of a matrix (the numbers of rows and columns) using the following commands:</p>
+>>>>>>> 31fe298da5a3bf87c25432b99a8bc9ee46acdc8a
 <pre class="r"><code>dim(B)
 nrow(B)
 ncol(B)</code></pre>
@@ -795,6 +891,8 @@ dead &lt;- c(&quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;)
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -827,6 +925,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

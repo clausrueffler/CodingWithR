@@ -2,7 +2,10 @@
 pagetitle: 'Learning Coding in R'
 output: 
   html_document:
-    toc: FALSE
+    theme: journal
+    toc: no
+    toc_float:
+      collapsed: no
 ---
 
 ```{r setup, include=FALSE}
@@ -119,7 +122,12 @@ knitr::kable(
 \
 This is the simplest possible option to make a table and countless possibilities exist to fine tune tables, see for example [here](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) and [here](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html).
 
+### Altering the style of your document
+
+Rmarkdown-themes allow you to alter the appearance of your document by defining a *theme* in the header of your document. For instance, this particular website uses a theme called *journal*. You can find a quick introduction to Rmarkdown-themes
+[here](https://rpubs.com/ranydc/rmarkdown_themes).
+
 ### Additional resources
 
-As always, the internet is full with resources. One gets a long way using [this cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf).You can find an introduction to the basics of RMarkdown [here](https://rmarkdown.rstudio.com/lesson-1.html). [This tutorial](https://m-clark.github.io/Introduction-to-Rmarkdown/) seems nice and crisp and more comprehensive overview can be found [here](https://bookdown.org/yihui/rmarkdown/).
+As always, the internet is full with resources. One gets a long way using [this cheatsheet](https://rstudio.github.io/cheatsheets/rmarkdown.pdf).You can find an introduction to the basics of RMarkdown [here](https://rmarkdown.rstudio.com/lesson-1.html). [This tutorial](https://m-clark.github.io/Introduction-to-Rmarkdown/) seems nice and crisp and more comprehensive overview can be found [here](https://bookdown.org/yihui/rmarkdown/).
 

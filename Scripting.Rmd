@@ -2,7 +2,10 @@
 pagetitle: 'Learning Coding in R'
 output: 
   html_document:
-    toc: FALSE
+    theme: cerulean
+    toc: yes
+    toc_float:
+      collapsed: false
 ---
 
 ```{r setup, include=FALSE}
@@ -15,7 +18,7 @@ klippy::klippy(position = c('top', 'right'))
 ```
 
 
-# Programming in R {.tabset}
+# Programming in R
 
 <!--## Computing Using Scripts
 
@@ -236,7 +239,7 @@ for (k in z) {
 }
 ```
 
-### *if*-statements
+#### *if*-statements
 
 Not a loop but another important way to modify the flow of your program: *if-else*-constructs allows us to make the execution of commands conditional. The function ```if (test) "output if TRUE" else "output if FALSE"``` contains a logical *test*, and *yes* and *no* are output conditional of whether the logical test results in TRUE or FALSE: if the *test* evaluates to TRUE, this command returns whatever is written in the next position, and if *test* evaluates to FALSE, this command returns whatever is written in the last position. Here two simple examples:
 

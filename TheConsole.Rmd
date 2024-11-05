@@ -2,7 +2,10 @@
 pagetitle: 'Learning Coding in R'
 output: 
   html_document:
-    toc: FALSE
+    theme: cerulean
+    toc: yes
+    toc_float:
+      collapsed: false
 ---
 
 ```{r setup, include=FALSE}
@@ -13,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 klippy::klippy(position = c('top', 'right'))
 ```
 
-# *R* as an Oversized Calculator{.tabset}
+# *R* as an Oversized Calculator
 
 ## Getting started
 
@@ -38,7 +41,7 @@ But really, if you need help with *R* the internet is your friend. Virtually any
 1) The interactive *R* console (lower left)
 2) Environment/History (tabs in the upper right window)
 3) Files/Plots/Packages/Help/Viewer (tabs in the lower right window)
-4) Editor panel for *R*-scripts. This window appears in the top right once you opened an *R*-script.
+4) Editor panel for *R*-scripts. This window appears in the top left once you opened an *R*-script.
 
 ```{r out.width='100%', echo=FALSE}
 knitr::include_graphics("images/anatomy of rstudio.png")
@@ -71,7 +74,7 @@ We can use *R* as an oversized calculator:-->
 2.1 ^ 5 # power
 ```
 
-The following table provides a list of arithmetic and logical operators in R:
+The following table provides a list of arithmetic and logical operators in *R*:
 
 Operators | Description
 ----------|------------
@@ -293,7 +296,7 @@ B %*% t(B)
 # by default, matrices are filled by column
 (C <- matrix(1:9, 3, 3))
 (D <- matrix(c("a", "b", "c", "d"), 2, 2))
-A %*% D # matrix operations are not defined for matrices with numeric entries
+A %*% D # matrix operations are not defined for matrices with character entries
 ```
 
 Determine the dimensions of a matrix (the numbers of rows and
