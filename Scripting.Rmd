@@ -398,7 +398,7 @@ result <- square(3)
 result # this will show that the result is equal to 9
 ```
 
-However, we add a command to a function so that is automatically *exports* the output to the global environment using the ```<<-``` arrow:
+However, we add a command to a function so that it automatically *exports* the output to the global environment using the ```<<-``` arrow:
 
 ```{r eval=FALSE}
 time.series <- function(tmax, lambda, N0){
