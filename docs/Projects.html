@@ -13,7 +13,7 @@
 
 <title>Learning Coding in R</title>
 
-<script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
@@ -182,8 +182,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "\e259";
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -191,9 +191,16 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "\e258";
-  font-family: 'Glyphicons Halflings';
+  content: "&#xe258;";
   border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -297,49 +304,20 @@ $(document).ready(function () {
 <h1 class="tabset">Organize your <em>R</em>-files</h1>
 <div id="where-do-r-files-live-on-your-computer" class="section level2">
 <h2>Where do <em>R</em>-files live on your computer?</h2>
-<p>We started our <em>tour-de-R</em> by writing code into the
-<strong>console</strong>. Everything you write in the console will leave
-its mark in the <em>work space</em>, that is, in the
-<em>Environment</em> and <em>History</em>-tabs in the top right of your
-RStudio working environment. Once you are done with your work and you
-close RStudio, everything is saved in two files called <em>.RData</em>
-and <em>.RHistory</em>. These files are located in your <em>home
-directory</em>, but they are not meant to be opened and read by you.
-Instead, <em>R</em> uses them to recover your previous work session once
-you open RStudio again.</p>
-<p>We then started to work with <strong>R-scripts</strong>.
-<em>R</em>-scripts allow you to more easily re-run and augment earlier
-analyses and enables you to work on different analyses in parallel by
-storing the corresponding code in separate <em>R</em>-scripts.</p>
-<p><em>R</em>-scripts are files ending on <em>.R</em> that are saved on
-our computer. We can then share them with colleagues when we collaborate
-on an analyses or make them publicly available so that people interested
-in our work can <em>reproduce</em> our results.</p>
+<p>We started our <em>tour-de-R</em> by writing code into the <strong>console</strong>. Everything you write in the console will leave its mark in the <em>work space</em>, that is, in the <em>Environment</em> and <em>History</em>-tabs in the top right of your RStudio working environment. Once you are done with your work and you close RStudio, everything is saved in two files called <em>.RData</em> and <em>.RHistory</em>. These files are located in your <em>home directory</em>, but they are not meant to be opened and read by you. Instead, <em>R</em> uses them to recover your previous work session once you open RStudio again.</p>
+<p>We then started to work with <strong>R-scripts</strong>. <em>R</em>-scripts allow you to more easily re-run and augment earlier analyses and enables you to work on different analyses in parallel by storing the corresponding code in separate <em>R</em>-scripts.</p>
+<p><em>R</em>-scripts are files ending on <em>.R</em> that are saved on our computer. We can then share them with colleagues when we collaborate on an analyses or make them publicly available so that people interested in our work can <em>reproduce</em> our results.</p>
 <div id="r-scripts-involving-external-data" class="section level4">
 <h4><em>R</em>-scripts involving external data</h4>
-<p>Whenever we work with data, we have to import these from other files
-(often these will be <em>comma-separated-value</em>-files, that is,
-<em>.CSV</em> files). Let’s do an example. For this, download the file
-<em>trees.csv</em> to your computer by clicking on the following
-link:</p>
+<p>Whenever we work with data, we have to import these from other files (often these will be <em>comma-separated-value</em>-files, that is, <em>.CSV</em> files). Let’s do an example. For this, download the file <em>trees.csv</em> to your computer by clicking on the following link:</p>
 <a href="data:text/csv;base64,IkhlaWdodCIsIlZvbHVtZSIKNzAsMTAuMwo2NSwxMC4zCjYzLDEwLjIKNzIsMTYuNAo4MSwxOC44CjgzLDE5LjcKNjYsMTUuNgo3NSwxOC4yCjgwLDIyLjYKNzUsMTkuOQo3OSwyNC4yCjc2LDIxCjc2LDIxLjQKNjksMjEuMwo3NSwxOS4xCjc0LDIyLjIKODUsMzMuOAo4NiwyNy40CjcxLDI1LjcKNjQsMjQuOQo3OCwzNC41CjgwLDMxLjcKNzQsMzYuMwo3MiwzOC4zCjc3LDQyLjYKODEsNTUuNAo4Miw1NS43CjgwLDU4LjMKODAsNTEuNQo4MCw1MQo4Nyw3Nwo=" download="trees.csv">Download trees.csv</a>
-<p>This file contains two different measurements from trees, namely,
-their height and volume. It seems reasonable to assume that height and
-volume are positively correlated and an obvious first step to
-investigate this hypotheses is to plot volume as a function of height.
-In order to be able to do this, you first have to read the data into
-your workspace, for instance, using the command
-<code>read.csv()</code>.</p>
-<p>There are two straight-forward ways of doing this involving the
-<em>absolute path</em> to the file on your computer. This figure
-illustrates the logic the hierarchical file structure on a computer and
-how the file path results from it.</p>
+<p>This file contains two different measurements from trees, namely, their height and volume. It seems reasonable to assume that height and volume are positively correlated and an obvious first step to investigate this hypotheses is to plot volume as a function of height. In order to be able to do this, you first have to read the data into your workspace, for instance, using the command <code>read.csv()</code>.</p>
+<p>There are two straight-forward ways of doing this involving the <em>absolute path</em> to the file on your computer. This figure illustrates the logic the hierarchical file structure on a computer and how the file path results from it.</p>
 <p><img src="images/path.png" width="1083" /></p>
-<p>First, you can either add the <em>absolute</em> path in front of the
-file name within the <code>read.csv()</code> command. On my computer,
-this would currently be</p>
-<pre class="r"><code>tree.data &lt;- read.csv(&quot;/Users/ClausR/Documents/github websites/CodingWithR/trees.csv&quot;)</code></pre>
-<!-- if I compile this on my laptop the path is: /Users/clausrueffler/Documents/github websites/CodingWithR/trees.csv -->
+<p>First, you can either add the <em>absolute</em> path in front of the file name within the <code>read.csv()</code> command. On my computer, this would currently be</p>
+<pre class="r"><code>tree.data &lt;- read.csv(&quot;/Users/clausruffler/Documents/github websites/CodingWithR/trees.csv&quot;)</code></pre>
+<!-- if I compile this on my laptop the path is: /Users/clausruffler/Documents/github websites/CodingWithR/trees.csv -->
+<!-- if I compile this on my desktop the path is: /Users/ClausR/Documents/github websites/CodingWithR/trees.csv -->
 <p>Now we are ready to inspect the data.</p>
 <pre class="r"><code>head(tree.data)</code></pre>
 <pre><code>##   Height Volume
@@ -349,24 +327,14 @@ this would currently be</p>
 ## 4     72   16.4
 ## 5     81   18.8
 ## 6     83   19.7</code></pre>
-<p>Second, you set the <em>working directory</em> to be equal to the
-location of file <em>trees.csv</em> on your computer. The working
-directory is a file path on your computer that sets the default location
-of any files you read into <em>R</em>, or save out of <em>R</em>. You
-can only have one working directory active at any given time. This
-active working directory is called your <em>current</em> working
-directory and you can find it using</p>
+<p>Second, you set the <em>working directory</em> to be equal to the location of file <em>trees.csv</em> on your computer. The working directory is a file path on your computer that sets the default location of any files you read into <em>R</em>, or save out of <em>R</em>. You can only have one working directory active at any given time. This active working directory is called your <em>current</em> working directory and you can find it using</p>
 <pre class="r"><code>getwd()</code></pre>
-<p>and set the working directory to any other location using the command
-<code>setwd()</code>. For example, let me set my working directory to be
-the location of the file <em>tress.csv</em> on my computer.</p>
-<pre class="r"><code>setwd(&quot;/Users/ClausR/Documents/github websites/CodingWithR&quot;)
+<p>and set the working directory to any other location using the command <code>setwd()</code>. For example, let me set my working directory to be the location of the file <em>tress.csv</em> on my computer.</p>
+<pre class="r"><code>setwd(&quot;/Users/clausruffler/Documents/github websites/CodingWithR&quot;)
 
-getwd() # check that the above code did the trick</code></pre>
-<pre><code>## [1] &quot;/Users/ClausR/Documents/github websites/CodingWithR&quot;</code></pre>
-<p>With this change of working directory, I can now import the file
-<em>trees.csv</em> by using <code>read.csv()</code> without adding a
-file path.</p>
+getwd() # check that the above code did the job</code></pre>
+<pre><code>## [1] &quot;/Users/clausruffler/Documents/github websites/CodingWithR&quot;</code></pre>
+<p>With this change of working directory, I can now import the file <em>trees.csv</em> by using <code>read.csv()</code> without adding a file path.</p>
 <pre class="r"><code>tree.data.2 &lt;- read.csv(&quot;trees.csv&quot;)
 head(tree.data.2)</code></pre>
 <pre><code>##   Height Volume
@@ -376,111 +344,39 @@ head(tree.data.2)</code></pre>
 ## 4     72   16.4
 ## 5     81   18.8
 ## 6     83   19.7</code></pre>
-<p>These approaches, although a bit cumbersome, work just fine. The
-problem, however, is that this <em>R</em>-script will almost certainly
-not work on your next computer, or, for the same matter, on anybody
-else’s computer, simply because there are no two computers with exactly
-the same file structure. Luckily, there is an easy method with which we
-will never have to bother about <em>absolute</em> file paths. In
-RStudio, this is called <strong>Projects</strong> and we explore them in
-the next tab.</p>
+<p>These approaches, although a bit cumbersome, work just fine. The problem, however, is that this <em>R</em>-script will almost certainly not work on your next computer, or, for the same matter, on anybody else’s computer, simply because there are no two computers with exactly the same file structure. Luckily, there is an easy method with which we will never have to bother about <em>absolute</em> file paths. In RStudio, this is called <strong>Projects</strong> and we explore them in the next tab.</p>
 </div>
 </div>
 <div id="r-projects" class="section level2">
 <h2><em>R</em>-projects</h2>
-<p>The best possible way to address the difficulties arising from using
-absolute file paths is by working with <em>Projects</em> in RStudio. A
-<em>Project</em> is a file structure that comes with RStudio and that
-helps you to keep all files associated with a specific project organized
-in a common folder – input data, <em>R</em> scripts, analytical results,
-figures.</p>
-<p>The advantage of working with projects is that the working directory
-is automatically given by the project folder and all paths to files are
-<em>relative</em> to that folder (what is meant with this hopefully
-becomes clear further down).</p>
-<p>Let’s put some life into these abstract ideas by creating a project.
-You can do this by choosing <em>New Project</em> from the
-<em>File</em>-Menu in RStudio. Choose <em>New Directory</em> from the
-pop-up menu, then choose <em>New Project</em> at the next step and give
-it a name. The directory name you choose here will be the project name.
-Call it whatever you like (but keep in mind that good names are short
-and informative). Finally, choose a location for you project. You might
-want to have one location for all R-projects you work on. Alternatively,
-you might want to place the directory in a folder where you have all
-things related to the current course.</p>
-<p>In the bottom-right window you will now see in the file tab a new
-file called <em>YourFileName.Rproj</em>. Next, let us add an
-<em>R</em>-script to this project and immediately safe it (for this you
-will have to name it). It will then appear in the file tab in the bottom
-right of your RStudio window.</p>
-<p>Let’s further populate our new project by adding the tree data file
-our project.</p>
+<p>The best possible way to address the difficulties arising from using absolute file paths is by working with <em>Projects</em> in RStudio. A <em>Project</em> is a file structure that comes with RStudio and that helps you to keep all files associated with a specific project organized in a common folder – input data, <em>R</em> scripts, analytical results, figures.</p>
+<p>The advantage of working with projects is that the working directory is automatically given by the project folder and all paths to files are <em>relative</em> to that folder (what is meant with this hopefully becomes clear further down).</p>
+<p>Let’s put some life into these abstract ideas by creating a project. You can do this by choosing <em>New Project</em> from the <em>File</em>-Menu in RStudio. Choose <em>New Directory</em> from the pop-up menu, then choose <em>New Project</em> at the next step and give it a name. The directory name you choose here will be the project name. Call it whatever you like (but keep in mind that good names are short and informative). Finally, choose a location for you project. You might want to have one location for all R-projects you work on. Alternatively, you might want to place the directory in a folder where you have all things related to the current course.</p>
+<p>In the bottom-right window you will now see in the file tab a new file called <em>YourFileName.Rproj</em>. Next, let us add an <em>R</em>-script to this project and immediately safe it (for this you will have to name it). It will then appear in the file tab in the bottom right of your RStudio window.</p>
+<p>Let’s further populate our new project by adding the tree data file our project.</p>
 <a href="data:text/csv;base64,IkhlaWdodCIsIlZvbHVtZSIKNzAsMTAuMwo2NSwxMC4zCjYzLDEwLjIKNzIsMTYuNAo4MSwxOC44CjgzLDE5LjcKNjYsMTUuNgo3NSwxOC4yCjgwLDIyLjYKNzUsMTkuOQo3OSwyNC4yCjc2LDIxCjc2LDIxLjQKNjksMjEuMwo3NSwxOS4xCjc0LDIyLjIKODUsMzMuOAo4NiwyNy40CjcxLDI1LjcKNjQsMjQuOQo3OCwzNC41CjgwLDMxLjcKNzQsMzYuMwo3MiwzOC4zCjc3LDQyLjYKODEsNTUuNAo4Miw1NS43CjgwLDU4LjMKODAsNTEuNQo4MCw1MQo4Nyw3Nwo=" download="trees.csv">Download trees.csv</a>
 <p> <!--this lonely slash inserts an empty line--></p>
-<p>Manually move this file to your project folder. You should now see
-the file <em>trees.csv</em> in the files-tap at the bottom-right of your
-RStudio window. It is good habit to organise the files in a project into
-folders, each of them storing files of a certain type. Thus, let us move
-the file <em>trees.csv</em> to a new folder called <em>data</em> (use
-the <em>add folder</em>-icon in the file-tab to create this new folder
-and then move the data file to it by first ticking the box in front and
-then choosing <em>Move</em> under <em>gear wheel</em>-icon).</p>
-<p>Next, go back to your <em>R</em>-script and load the data into your
-work space using the command</p>
+<p>Manually move this file to your project folder. You should now see the file <em>trees.csv</em> in the files-tap at the bottom-right of your RStudio window. It is good habit to organise the files in a project into folders, each of them storing files of a certain type. Thus, let us move the file <em>trees.csv</em> to a new folder called <em>data</em> (use the <em>add folder</em>-icon in the file-tab to create this new folder and then move the data file to it by first ticking the box in front and then choosing <em>Move</em> under <em>gear wheel</em>-icon).</p>
+<p>Next, go back to your <em>R</em>-script and load the data into your work space using the command</p>
 <pre class="r"><code>tree.data &lt;- read.csv(&quot;data/trees.csv&quot;)</code></pre>
-<p>Note that in this code, <em>data/trees.csv</em> indicates the
-<em>path</em> to the data file <em>within</em> the project folder. In
-other words, the path is <em>relative</em> with respect to the project
-folder. The beauty is that this code to load the data file should now
-work on each and everybody’s computer that contains the project
-folder!</p>
-<p>Finally, let’s plot the volume of trees as a function of height and
-export the resulting graph as a pdf. Again, let us keep a clear
-structure in our project folder by keeping files of different types in
-different folders. Thus, before you run the following code create a new
-folder called <em>images</em>.</p>
+<p>Note that in this code, <em>data/trees.csv</em> indicates the <em>path</em> to the data file <em>within</em> the project folder. In other words, the path is <em>relative</em> with respect to the project folder. The beauty is that this code to load the data file should now work on each and everybody’s computer that contains the project folder!</p>
+<p>Finally, let’s plot the volume of trees as a function of height and export the resulting graph as a pdf. Again, let us keep a clear structure in our project folder by keeping files of different types in different folders. Thus, before you run the following code create a new folder called <em>images</em>.</p>
 <pre class="r"><code>plot(tree.data)</code></pre>
 <p><img src="Projects_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre class="r"><code>dev.print(pdf, &quot;images/HeightVsVolume.pdf&quot;)</code></pre>
 <pre><code>## quartz_off_screen 
 ##                 2</code></pre>
-<p>In this code, <em>images/HeightVsVolume.pdf</em> is the complete
-path, relative to the project folder, to the location to which we store
-the newly created pdf.</p>
+<p>In this code, <em>images/HeightVsVolume.pdf</em> is the complete path, relative to the project folder, to the location to which we store the newly created pdf.</p>
 <p>Your RStudio environment should now look something like this:</p>
 <p><img src="images/ProjectScreenshot.png" width="1261" /></p>
-<p>The key point is that all your files (data, <em>R</em>-script,
-graphics output) related to this exercise are stored in the same project
-folder. <strong>In particular, notice that each time you loaded or saved
-data, you had to specify the file <em>path</em> only relative to the
-project folder</strong>. The reason is that when working with a
-<em>Project</em> the <em>working directory</em> is automatically set to
-the project folder. It is exactly this feature that allows to re-run
-your code on whatever computer, that is, by another person or by you –
-years later – when you have a different computer. Your work becomes
-fully <strong>reproducible</strong>!</p>
-<p>You can now save your <em>R</em>-script and close RStudio. If you
-want to continue to work on this project at a later time, open RStudio
-and choose the desired project by selecting it from <em>Recent
-Projects</em> under the <em>File</em>-menu or simply navigate to the
-<em>.Rproj</em>-file on your computer and open it.</p>
+<p>The key point is that all your files (data, <em>R</em>-script, graphics output) related to this exercise are stored in the same project folder. <strong>In particular, notice that each time you loaded or saved data, you had to specify the file <em>path</em> only relative to the project folder</strong>. The reason is that when working with a <em>Project</em> the <em>working directory</em> is automatically set to the project folder. It is exactly this feature that allows to re-run your code on whatever computer, that is, by another person or by you – years later – when you have a different computer. Your work becomes fully <strong>reproducible</strong>!</p>
+<p>You can now save your <em>R</em>-script and close RStudio. If you want to continue to work on this project at a later time, open RStudio and choose the desired project by selecting it from <em>Recent Projects</em> under the <em>File</em>-menu or simply navigate to the <em>.Rproj</em>-file on your computer and open it.</p>
 <div id="further-information" class="section level3">
 <h3>Further Information</h3>
-<p>Hopefully I managed to convince you that working with
-<em>Projects</em> is the way to go. The real utility of this will become
-more apparent once you work with larger projects that include lots of
-data files and as you collaborate with others or want to share your work
-in a manner so that your analysis is <em>reproducible</em> by others. I
-recommend the following sources if you want to dig just a little bit
-deeper into this topic.</p>
+<p>Hopefully I managed to convince you that working with <em>Projects</em> is the way to go. The real utility of this will become more apparent once you work with larger projects that include lots of data files and as you collaborate with others or want to share your work in a manner so that your analysis is <em>reproducible</em> by others. I recommend the following sources if you want to dig just a little bit deeper into this topic.</p>
 <ul>
-<li><p>RStudio provides more detailed instructions on how to use
-projects, which you can find <a
-href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">here</a>.</p></li>
-<li><p><a
-href="https://www.r-bloggers.com/2020/01/rstudio-projects-and-working-directories-a-beginners-guide/">This</a>
-blogpost explains in more detail why working with projects is the right
-thing to do.</p></li>
+<li><p>RStudio provides more detailed instructions on how to use projects, which you can find <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">here</a>.</p></li>
+<li><p><a href="https://www.r-bloggers.com/2020/01/rstudio-projects-and-working-directories-a-beginners-guide/">This</a> blogpost explains in more detail why working with projects is the right thing to do.</p></li>
 </ul>
 </div>
 </div>

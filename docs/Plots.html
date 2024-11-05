@@ -13,7 +13,7 @@
 
 <title>Learning Coding in R</title>
 
-<script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
@@ -185,8 +185,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "\e259";
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -194,9 +194,16 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "\e258";
-  font-family: 'Glyphicons Halflings';
+  content: "&#xe258;";
   border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -377,19 +384,10 @@ div.tocify {
 </script>
 <div id="basic-plotting" class="section level1 tabset">
 <h1 class="tabset">Basic Plotting</h1>
-<p>In <em>R</em>, you can choose different ways to plot your data and
-results. By default, <em>R</em> comes with built-in graphical functions.
-Other functions, or entirely different paradigms, can be enabled using
-different packages. Here we give a brief overview of the standard
-plotting functions that are useful for quick data exploration. These are
-also referred to as R “base graphics” as no extra package is
-required.</p>
+<p>In <em>R</em>, you can choose different ways to plot your data and results. By default, <em>R</em> comes with built-in graphical functions. Other functions, or entirely different paradigms, can be enabled using different packages. Here we give a brief overview of the standard plotting functions that are useful for quick data exploration. These are also referred to as R “base graphics” as no extra package is required.</p>
 <div id="scatter-plots" class="section level3">
 <h3>Scatter Plots</h3>
-<p>The function <code>plot(x, y, ...)</code> is the most basic way to
-plot points defined by their x- and y-coordinates. Here, <em>x</em> and
-<em>y</em> are vectors of equal length containing the x- and
-y-coordinates of the points to be plotted. For example,</p>
+<p>The function <code>plot(x, y, ...)</code> is the most basic way to plot points defined by their x- and y-coordinates. Here, <em>x</em> and <em>y</em> are vectors of equal length containing the x- and y-coordinates of the points to be plotted. For example,</p>
 <pre class="r"><code># generate data
 x &lt;- 1:30 # creates a vector of 30 values that we use as x-coordinates
 y &lt;- rnorm(30, mean = x) # creates a vector of 30 values that we use as y-coordinates; each values is drawn from normal distribution with with an increasing mean value
@@ -404,19 +402,15 @@ abline(a = 0, b = 1) # add a line to the same plot by specifying its intercept a
 abline(h = 20) # adding a horizontal line by setting a y-value h
 abline(v = 10) # adding a vertical line by setting an x-value v
 plot(y, col = &quot;orange&quot;, xlab = &quot;my x-label&quot;, ylab = &quot;a y-label&quot;) # add axes labels
-plot(y, xlim = c(1,35), ylim = c(1,40)) # set plot ranges</code></pre>
-<p>In the above examples, we plotted the entries of a vector <em>v</em>
-without specifying values for the x-axes of the plot. Indeed, if no
-x-vector is specified, then the default <em>x = (1, 2, 3, …)</em> is
-used. This does not work anymore if y-values do not correspond to
-x-values that are consecutive natural numbers. Here an example:</p>
+plot(y, xlim = c(1,35), ylim = c(1,40)) # set plot ranges
+plot(y, log=&quot;y&quot;) # plots the same data but with the y-axis on a log-scale (the same can be done with the x-axis)</code></pre>
+<p>In the above examples, we plotted the entries of a vector <em>v</em> without specifying values for the x-axes of the plot. Indeed, if no x-vector is specified, then the default <em>x = (1, 2, 3, …)</em> is used. This does not work anymore if y-values do not correspond to x-values that are consecutive natural numbers. Here an example:</p>
 <pre class="r"><code>x &lt;- seq(0, 5, 0.5) 
 x
 y &lt;- x^2
 plot(x, y) # check the x-axes; this is the desired plot
 plot(y) # without specifying x, the y-values are at wrong positions</code></pre>
-<p><em>R</em> base graphics are drawn interactively: you can start with
-a plot, and then overlay other elements on the existing plot.</p>
+<p><em>R</em> base graphics are drawn interactively: you can start with a plot, and then overlay other elements on the existing plot.</p>
 <pre class="r"><code>x &lt;- 1:30
 y &lt;- rnorm(30, mean = x)
 
@@ -426,12 +420,7 @@ legend(&quot;topleft&quot;, legend = c(&quot;f(x)=y&quot;,&quot;f(x)=2y&quot;), 
 </div>
 <div id="function-plots" class="section level3">
 <h3>Function Plots</h3>
-<p>We can plot the graphs of functions using the command
-<code>curve(expr, from, to, ...)</code>, where <em>expr</em> is a
-mathematical expression containing an argument <em>x</em> or function
-name, and <em>from</em> and <em>to</em> defines the range of
-<em>x</em>-values for which the function is plotted. This is a useful
-tool to visually explore the shape of functions.</p>
+<p>We can plot the graphs of functions using the command <code>curve(expr, from, to, ...)</code>, where <em>expr</em> is a mathematical expression containing an argument <em>x</em> or function name, and <em>from</em> and <em>to</em> defines the range of <em>x</em>-values for which the function is plotted. This is a useful tool to visually explore the shape of functions.</p>
 <pre class="r"><code>curve(exp, from = -3, to = 3) # plot of the exponential function in the interval (-3, 3)
 abline(v = 0) # adding a vertical line at x = 0
 logistic &lt;- function(n, r, k){# definition of the user-defined function giving the population growth rate of a logistically growing population as a function the current population size n, the intrinsic growth rate r and the carrying capacity k
@@ -444,21 +433,14 @@ abline(h = 0) # adding a horizontal line at y = 0</code></pre>
 </div>
 <div id="plotting-matrix-columns" class="section level3">
 <h3>Plotting Matrix Columns</h3>
-<p>The plotting command <code>matplot(x, y, ...)</code> is an easy way
-to superimpose several data series. Here, <em>x</em> is a vector
-containing the values for the x-axes and <em>y</em> is a matrix
-containing the data as a function of <em>x</em>. Note, that
-<code>matplot(x, y, ...)</code> plots each <em>column</em> of <em>y</em>
-as separate data series.</p>
+<p>The plotting command <code>matplot(x, y, ...)</code> is an easy way to superimpose several data series. Here, <em>x</em> is a vector containing the values for the x-axes and <em>y</em> is a matrix containing the data as a function of <em>x</em>. Note, that <code>matplot(x, y, ...)</code> plots each <em>column</em> of <em>y</em> as separate data series.</p>
 <pre class="r"><code>x &lt;- 1:10 # creates a vector of length 10, this will become the x-axes
 y.1 &lt;- x^2 # another vectors of length 10
 y.2 &lt;- x^2 - 2*x # and a third vector of length 10
 
 matplot(x, cbind(y.1, y.2), col =c(2, 4), pch = c(0, 2), xlab = &quot;x&quot;, ylab = &quot;y.1 = x^2 and y.2 = x^2-2x&quot;)
 legend(1, 100, legend = c(&quot;y.1&quot;,&quot;y.2&quot;), col =c(2, 4), pch = c(0, 2)) # adds a plot legend</code></pre>
-<p>In the following example, the variable <em>x</em> is given by the
-first column of a matrix while the actual data are taken from the second
-and third column of that same matrix.</p>
+<p>In the following example, the variable <em>x</em> is given by the first column of a matrix while the actual data are taken from the second and third column of that same matrix.</p>
 <pre class="r"><code>x &lt;- 1:10 # creates a vector of length 10, this will become the x-axes
 y.1 &lt;- x^2 # two more vectors of length 10
 y.2 &lt;- x^2 - 2*x
@@ -471,10 +453,7 @@ legend(1, 100, legend = c(&quot;y.1&quot;,&quot;y.2&quot;), pch = c(16, 1), col 
 </div>
 <div id="histograms" class="section level3">
 <h3>Histograms</h3>
-<p>The function <code>hist(x, ...)</code> is used to produce simple
-histograms, where <em>x</em> is a vector of values for which the
-histogram is desired. Histograms show the abundance or frequency of data
-falling in certain discrete classes.</p>
+<p>The function <code>hist(x, ...)</code> is used to produce simple histograms, where <em>x</em> is a vector of values for which the histogram is desired. Histograms show the abundance or frequency of data falling in certain discrete classes.</p>
 <pre class="r"><code># generate data, drawn from Poisson distribution with mean 3
 d1 &lt;- rpois(100, lambda = 3)
 # basic histogram
@@ -495,8 +474,7 @@ z$mids # midpoints of the bins</code></pre>
 </div>
 <div id="bar-plots" class="section level3">
 <h3>Bar Plots</h3>
-<p>A bar plot is used to represent data for discrete groups. Here are
-some examples using the function <code>barplot(height, ...)</code>:</p>
+<p>A bar plot is used to represent data for discrete groups. Here are some examples using the function <code>barplot(height, ...)</code>:</p>
 <pre class="r"><code>data(rivers) # load data on length of North American rivers
 barplot(rivers, xlab = &quot;rivers&quot;, ylab = &quot;length&quot;)
 barplot(rivers, xlab = &quot;rivers&quot;, ylab = &quot;length&quot;, horiz = TRUE) # horizontal
@@ -507,10 +485,7 @@ barplot(height = iris$Petal.Width, beside = TRUE, col = iris$Species, xlab = &qu
 </div>
 <div id="box-plots" class="section level3">
 <h3>Box Plots</h3>
-<p>Box plots are used to show the range of a distribution, and the
-location of the bulk of its mass. Use the function
-<code>boxplot(x, ...)</code> where <em>x</em> specifies the data from
-which the boxplot is to be produced.</p>
+<p>Box plots are used to show the range of a distribution, and the location of the bulk of its mass. Use the function <code>boxplot(x, ...)</code> where <em>x</em> specifies the data from which the boxplot is to be produced.</p>
 <pre class="r"><code>data(iris)
 # set specific colors
 boxplot(iris$Petal.Width ~ iris$Species, col = c(&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;))</code></pre>

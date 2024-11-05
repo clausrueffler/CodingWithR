@@ -40,6 +40,7 @@ abline(h = 20) # adding a horizontal line by setting a y-value h
 abline(v = 10) # adding a vertical line by setting an x-value v
 plot(y, col = "orange", xlab = "my x-label", ylab = "a y-label") # add axes labels
 plot(y, xlim = c(1,35), ylim = c(1,40)) # set plot ranges
+plot(y, log="y") # plots the same data but with the y-axis on a log-scale (the same can be done with the x-axis)
 ```
 
 In the above examples, we plotted the entries of a vector *v* without specifying values for the x-axes of the plot. Indeed, if no x-vector is specified, then the default *x = (1, 2, 3, ...)* is used. This does not work anymore if y-values do not correspond to x-values that are consecutive natural numbers. Here an example:
