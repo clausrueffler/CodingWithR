@@ -47,7 +47,7 @@ First, you can either add the *absolute* path in front of the file name within t
 ```{r}
 tree.data <- read.csv("/Users/ClausR/Documents/github websites/CodingWithR/trees.csv")
 ```
-<!-- if I compile this on my laptop the path is: /Users/clausrueffler/Documents/github websites with RStudio/CodingWithR/trees.csv -->
+<!-- if I compile this on my laptop the path is: /Users/clausrueffler/Documents/github websites/CodingWithR/trees.csv -->
 
 Now we are ready to inspect the data.
 

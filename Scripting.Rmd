@@ -190,7 +190,7 @@ while (i <= 6) {
 }
 ```
 
-This script performs exactly the same operations we wrote with the *for*-loop above. But the *while*-loop is more complicated. First, we have to *initialize* the value *i* outside of the *while*-loop. Second, we have to *update* the value of *i* inside the *while*-loop. This is crucial! What would happen if the last step would be omitted? The loop would run forever (infinite loop — to terminate click on the "Stop" button in the top-right corner of the console window in *RStudio*). Thus, programming with *while*-loops is more error-prone and. Thus, if you can achieve the same goal with a *for*-loop, then the *for*-loop is to be preferred.
+This script performs exactly the same operations we wrote with the *for*-loop above. But the *while*-loop is more complicated. First, we have to *initialize* the value *i* outside of the *while*-loop. Second, we have to *update* the value of *i* inside the *while*-loop. This is crucial! What would happen if the last step would be omitted? The loop would run forever (infinite loop — to terminate click on the "Stop" button in the top-right corner of the console window in *RStudio*). Thus, programming with *while*-loops is more error-prone. Thus, if you can achieve the same goal with a *for*-loop, then the *for*-loop is to be preferred.
 
 But first, lets get some practice with the *while*-loop.
 
