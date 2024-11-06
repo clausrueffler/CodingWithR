@@ -31,13 +31,15 @@ y <- rnorm(30, mean = x) # creates a vector of 30 values that we use as y-coordi
 plot(y) # if no x-vector is given the default x = (1, 2, 3, ...) is used
 plot(x, y) # this plot produces an identical result but strictly speaking x is not necessary here
 # there are many different option one can add to the plot command
+```
+Within this basic plotting command, we can add many additional arguments to change to the exact layout of the plot. For a more thorough overview of the options see [here](https://r-charts.com/base-r/line-types/).
+
+```{r eval=FALSE}
 plot(y, type = "l") # using lines instead of points
+plot(y, type = "l", lty = 2) # change the line-type, the value 2 produces a dashed line.
 plot(y, type = "b") # using both lines and points
 plot(y, type = "b", pch = 4) # change the type of point
 plot(y, type = "b", pch = 4, col = "blue") # change color
-abline(a = 0, b = 1) # add a line to the same plot by specifying its intercept a and slope b
-abline(h = 20) # adding a horizontal line by setting a y-value h
-abline(v = 10) # adding a vertical line by setting an x-value v
 plot(y, col = "orange", xlab = "my x-label", ylab = "a y-label") # add axes labels
 plot(y, xlim = c(1,35), ylim = c(1,40)) # set plot ranges
 plot(y, log="y") # plots the same data but with the y-axis on a log-scale (the same can be done with the x-axis)
@@ -62,6 +64,10 @@ y <- rnorm(30, mean = x)
 plot(x, y, type = "l", ylim = c(1,60), col = "orange", ylab = "f(x)") 
 lines(x, 2*y, type = "l", col = "blue") # adds a line to the previous plot
 legend("topleft", legend = c("f(x)=y","f(x)=2y"), lty = c(1,1), col = c("orange", "blue")) # adds a plot legend
+
+abline(h = 20) # adding a horizontal line by setting a y-value h
+abline(v = 10) # adding a vertical line by setting an x-value v
+abline(a = 0, b = 1, col = "red") # add a line to the same plot by specifying its intercept a and slope b
 ```
 
 

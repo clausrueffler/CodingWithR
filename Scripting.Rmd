@@ -269,6 +269,12 @@ if (x < 0) "Negative number" else
       "Zero"
 ```
 
+Alternatively, the command ```ifelse(test, "output if TRUE", "output if FALSE")``` can be used for the same task: 
+```{r eval=FALSE}
+x <- 2
+ifelse(x > 0, "positive", "negative or 0")
+```
+
 <!--
 We can achieve the same result by nesting the ```ifelse``` command but this can become a bit hard to read if done repeatedly.
 
