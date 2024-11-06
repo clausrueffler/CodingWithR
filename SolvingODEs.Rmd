@@ -141,7 +141,7 @@ This graph is virtually indistinguishable from the one based on numerical integr
 
 ## Solving systems of coupled ODEs
 
-Many ecological models describe the rate of change of more than one variable, such as a predator and its prey, or two competing species. The package *deSolve* can also solve such *systems of coupled ordinary differential equations*. As case in point, let us analyze the continuous time Lotka-Volterra competition model, which can be written as
+Many ecological models describe the rate of change of more than one variable, such as a predator and its prey, or two competing species. The package *deSolve* can also solve such *systems of coupled ordinary differential equations*. As a case in point, let us analyze the continuous time Lotka-Volterra competition model, which can be written as
 
 $$
 \frac{\mathrm{d}N_1}{\mathrm{d}t} = N_1 \left(r_1 - \alpha_{11} N_1 - \alpha_{21} N_2 \right)\\
