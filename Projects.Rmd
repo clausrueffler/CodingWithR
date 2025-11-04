@@ -45,7 +45,7 @@ knitr::include_graphics("images/path.png")
 First, you can either add the *absolute* path in front of the file name within the `read.csv()` command. On my computer, this would currently be 
 
 ```{r}
-tree.data <- read.csv("/Users/ClausR/Documents/github websites/CodingWithR/trees.csv")
+tree.data <- read.csv("/Users/clausruffler/Documents/github websites/CodingWithR/trees.csv")
 ```
 <!-- if I compile this on my laptop the path is: /Users/clausruffler/Documents/github websites/CodingWithR/trees.csv -->
 <!-- if I compile this on my desktop the path is: /Users/ClausR/Documents/github websites/CodingWithR/trees.csv -->
@@ -66,7 +66,7 @@ getwd()
 and set the working directory to any other location using the command `setwd()`. For example, let me set my working directory to be the location of the file *tress.csv* on my computer.
 
 ```{r}
-setwd("/Users/ClausR/Documents/github websites/CodingWithR")
+setwd("/Users/clausruffler/Documents/github websites/CodingWithR")
 
 getwd() # check that the above code did the job
 ```
