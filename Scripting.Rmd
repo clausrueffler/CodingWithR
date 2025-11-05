@@ -284,7 +284,7 @@ ifelse (x > 0, "positive", ifelse (x < 0, "negative", "zero"))
 ```
 -->
 
-### Functions
+## Functions
 
 Functions are *R* objects designed to perform operations on other objects. Each time you evaluate a command in *R*, one or several functions are executed. An *R* function is typically called by its name followed by parentheses. Inside the parentheses, the user must pass the arguments required by the function. We have already described several built-in functions previously, such as ```c()```, ```log()```, and ```matrix()```. What makes *R* a powerful programming language is that you can define your own functions. These are called *user-defined functions*.
 
@@ -405,6 +405,9 @@ result <- square(3)
 result # this will show that the result is equal to 9
 ```
 
+<!--
+When testing this it actually did not work...
+
 However, we can add a command to a function so that it automatically *exports* the output to the global environment using the ```<<-``` arrow:
 
 ```{r eval=FALSE}
@@ -420,7 +423,8 @@ time.series <- function(tmax, lambda, N0){
 time.series(tmax = 20, lambda = 1.1, N0 = 10)
 plot(n) # now we can plot n without creating a new object
 ```
- 
+-->
+
 ## Random Numbers
 
 *R* can sample (pseudo)random numbers from many distributions. This is very useful for *stochastic* simulations.

@@ -556,8 +556,9 @@ ifelse (x > 0, "positive", ifelse (x < 0, "negative", "zero"))
 ```
 -->
 </div>
-<div id="functions" class="section level3">
-<h3>Functions</h3>
+</div>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
 <p>Functions are <em>R</em> objects designed to perform operations on other objects. Each time you evaluate a command in <em>R</em>, one or several functions are executed. An <em>R</em> function is typically called by its name followed by parentheses. Inside the parentheses, the user must pass the arguments required by the function. We have already described several built-in functions previously, such as <code>c()</code>, <code>log()</code>, and <code>matrix()</code>. What makes <em>R</em> a powerful programming language is that you can define your own functions. These are called <em>user-defined functions</em>.</p>
 <p>Here is the general anatomy of a function:</p>
 <pre><code>my_func_name &lt;- function([optional arguments]) {
@@ -630,19 +631,26 @@ result # this will produce the Error: object &#39;result&#39; not found
 
 result &lt;- square(3)
 result # this will show that the result is equal to 9</code></pre>
-<p>However, we can add a command to a function so that it automatically <em>exports</em> the output to the global environment using the <code>&lt;&lt;-</code> arrow:</p>
-<pre class="r"><code>time.series &lt;- function(tmax, lambda, N0){
-  n &lt;- c(N0) # creates a vector with the initial population size N0 in its first position
+<!--
+When testing this it actually did not work...
+
+However, we can add a command to a function so that it automatically *exports* the output to the global environment using the ```<<-``` arrow:
+
+
+```r
+time.series <- function(tmax, lambda, N0){
+  n <- c(N0) # creates a vector with the initial population size N0 in its first position
   for (t in 1:tmax) {
-    n[t+1] &lt;- n[t] * lambda
+    n[t+1] <- n[t] * lambda
   }
   return(n)
-  n &lt;&lt;- n # in this step we export n to the global environment
+  n <<- n # in this step we export n to the global environment
 }
 
 time.series(tmax = 20, lambda = 1.1, N0 = 10)
-plot(n) # now we can plot n without creating a new object</code></pre>
-</div>
+plot(n) # now we can plot n without creating a new object
+```
+-->
 </div>
 <div id="random-numbers" class="section level2">
 <h2>Random Numbers</h2>
