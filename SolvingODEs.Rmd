@@ -79,7 +79,7 @@ parameters <- c(r = 1, a = 0.01)
 3) Specify the vector of time-steps at the which the ODE will be evaluated.
 
 ```{r}
-time.steps <- seq(0, 10, 2) # this creates the vector (0, 2, 4, 6, 8, 10). Thus, here Delta t equals 1.
+time.steps <- seq(0, 10, 2) # this creates the vector (0, 2, 4, 6, 8, 10). Thus, here Delta t equals 2.
 ```
 
 4) Specify a function containing the differential equation model.
