@@ -88,7 +88,7 @@ time.steps <- seq(0, 10, 2) # this creates the vector (0, 2, 4, 6, 8, 10). Thus,
 log.growth <- function(time.steps, N0, parameters) {
   with(as.list(c(N0, parameters)), {
     dN.dt <- N * r*(1 - a * N)
-    return(list(dN.dt))
+    list(dN.dt)
   })
 }
 ```
@@ -166,7 +166,7 @@ LV.comp <- function(time.steps, N, parameters) {
   with(as.list(c(N, parameters)), {
   dN1.dt <- N[1] * (r[1] - a[1] * N[1] - a[2] * N[2]) # here [i] indicates the ith position in the corresponding vector
   dN2.dt <- N[2] * (r[2] - a[3] * N[2] - a[4] * N[1])
-  return(list(c(dN1.dt, dN2.dt)))
+  list(c(dN1.dt, dN2.dt))
   })
 }  
 ```
