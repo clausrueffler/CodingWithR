@@ -16,7 +16,9 @@ knitr::opts_chunk$set(echo = TRUE)
 klippy::klippy(position = c('top', 'right'))
 ```
 
-# Documenting Code
+# Documenting Code {.tabset}
+
+## Documenting code
 
 Properly documenting your code is important. It increases reproducibility and dissemination of your work. RStudio provides special packages that make it easy to write clear and eye-catching documentation of your code without the need to put in any extra effort.
 
@@ -43,13 +45,13 @@ abline(h = 0)
 ```
 ````
 
-While working on you document, you can either execute code using the code section or evaluate all code in one step by presseing Ctrl+Shift*S (Cmd on a Mac). Text not enclosed in triple tick marks is not evaluated and this is how you include normal text to your report.
+While working on you document, you can either execute code using the code section or evaluate all code in one step by pressing Ctrl+Shift*S (Cmd on a Mac). Text not enclosed in triple tick marks is not evaluated and this is how you include normal text to your report.
 
 Below you can see a few examples of Rmarkdown syntax that allows you to format your text in different ways:
 
-# \# This is a first-level headline
+`# This produces a first-level headline`
 
-## \## This is a second-level headline
+`## This produces a second-level headline`
 
 *\*italics*\*
 
@@ -130,4 +132,48 @@ Rmarkdown-themes allow you to alter the appearance of your document by defining 
 ### Additional resources
 
 As always, the internet is full with resources. One gets a long way using [this cheatsheet](https://rstudio.github.io/cheatsheets/rmarkdown.pdf).You can find an introduction to the basics of RMarkdown [here](https://rmarkdown.rstudio.com/lesson-1.html). [This tutorial](https://m-clark.github.io/Introduction-to-Rmarkdown/) seems nice and crisp and more comprehensive overview can be found [here](https://bookdown.org/yihui/rmarkdown/).
+
+## Tools for an effective Rmarkdown document 
+
+I you submit an html produced in Rmarkdown, there are some useful tricks for making a document that only shows what is interesting for the reader, which is not necessarily all code you used to produce the document. In particular, one can add options to code chunks. Maybe the two most important ones are `echo` and `eval`. Both options can take the value `TRUE` and `FALSE`, with the first one being the default option.
+
+Let's look at an example. The following code produces a data frame and shows the result in the compiled file.
+
+````
+```{r}`r ''`
+Height <- c(70, 65, 63, 72, 81)
+Volume <- c(10.3, 10.3, 10.2, 16.4, 18.8)
+tree.data <- data.frame(Height, Volume)
+tree.data
+```
+````
+
+```{r, echo=FALSE}
+Height <- c(70, 65, 63, 72, 81)
+Volume <- c(10.3, 10.3, 10.2, 16.4, 18.8)
+tree.data <- data.frame(Height, Volume)
+tree.data
+```
+
+Sometimes, we want to run code and show the output, but without echoing the code. The reason might be that the output file would become excessively long, and this is justified if we reuse code that we have shown earlier in the file This is for example the case, if we have reuse code that we have shown earlier in the file. This is achieved by adding the option `echo=FALSE` at the beginning of the code chunk:
+
+````
+```{r, echo=FALSE}`r ''`
+Height <- c(70, 65, 63, 72, 81)
+Volume <- c(10.3, 10.3, 10.2, 16.4, 18.8)
+tree.data <- data.frame(Height, Volume)
+tree.data
+```
+````
+
+In other cases, we might want to show the R-code but without running the code. The reason might be that the code might take a long time to run, and we just want to explain to the reader how the code looks that we used. This is achieved by adding the option `eval=FALSE`:
+
+````
+```{r, eval=FALSE}`r ''`
+Height <- c(70, 65, 63, 72, 81)
+Volume <- c(10.3, 10.3, 10.2, 16.4, 18.8)
+tree.data <- data.frame(Height, Volume)
+tree.data
+```
+````
 
