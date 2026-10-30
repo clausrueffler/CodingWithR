@@ -433,34 +433,65 @@ This is the simplest possible option to make a table and countless possibilities
 </div>
 <div id="tools-for-an-effective-rmarkdown-document" class="section level2">
 <h2>Tools for an effective Rmarkdown document</h2>
-<p>I you submit an html produced in Rmarkdown, there are some useful tricks for making a document that only shows what is interesting for the reader, which is not necessarily all code you used to produce the document. In particular, one can add options to code chunks. Maybe the two most important ones are <code>echo</code> and <code>eval</code>. Both options can take the value <code>TRUE</code> and <code>FALSE</code>, with the first one being the default option.</p>
-<p>Let’s look at an example. The following code produces a data frame and shows the result in the compiled file.</p>
-<pre><code>```{r}
-Height &lt;- c(70, 65, 63, 72, 81)
-Volume &lt;- c(10.3, 10.3, 10.2, 16.4, 18.8)
-tree.data &lt;- data.frame(Height, Volume)
+<p>If you submit an output file produced in Rmarkdown, there are some useful tricks for making a document that only shows what is interesting for the reader, which is not necessarily all code or all output from the code. This can be achieved by adding options to code chunks. The two most important ones are <code>echo</code> and <code>eval</code>. Both options can take the value <code>TRUE</code> and <code>FALSE</code>, with the first one being the default option.</p>
+<p>Let’s look at an example. The following code defines the function for the exponential growth curve:</p>
+<pre class="r"><code>exponential.growth &lt;- function(t, r, N0){
+  N0*exp(r*t)
+}</code></pre>
+<p>To obtain the graph for a particular <em>r</em>-value, say <em>r=-0.1</em>, we can use the code</p>
+<pre class="r"><code>t &lt;- seq(0, 50, by = 1)
+N0 &lt;- 10
+
+plot(t, exponential.growth(t, r = -0.1, N0 = 10),  xlab = &quot;time&quot;, ylab = &quot;N(t)&quot;)</code></pre>
+<p><img src="Markdown_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Assume you want to show how exponential growth looks if <em>r=0.1</em>. For the reader, it should be clear that this is achieved by changing the parameter <em>r</em> in the plot command accordingly. Your report becomes easier to read if you just show the graph without repeating the code that produces the graph. This is achieved by starting the code chunk with <code>{r, echo=FALSE}</code>. This says that the code chunk should not be <em>echoed</em>, and produces output without showing the code that generated it.</p>
+<p><img src="Markdown_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>In other cases, you might want to show the code that produces a particular output, without actually showing the output. This is achieved by starting the code chunk with <code>{r, eval=FALSE}</code>:</p>
+<pre class="r"><code>plot(t, exponential.growth(t, r = 0.1, N0 = 10),  xlab = &quot;time&quot;, ylab = &quot;N(t)&quot;)</code></pre>
+<!--
+Let's look at an example. The following code produces a data frame and shows the result in the compiled file.
+
+````
+```{r}
+Height <- c(70, 65, 63, 72, 81)
+Volume <- c(10.3, 10.3, 10.2, 16.4, 18.8)
+tree.data <- data.frame(Height, Volume)
 tree.data
-```</code></pre>
-<pre><code>##   Height Volume
+```
+````
+
+
+```
+##   Height Volume
 ## 1     70   10.3
 ## 2     65   10.3
 ## 3     63   10.2
 ## 4     72   16.4
-## 5     81   18.8</code></pre>
-<p>Sometimes, we want to run code and show the output, but without echoing the code. The reason might be that the output file would become excessively long, and this is justified if we reuse code that we have shown earlier in the file This is for example the case, if we have reuse code that we have shown earlier in the file. This is achieved by adding the option <code>echo=FALSE</code> at the beginning of the code chunk:</p>
-<pre><code>```{r, echo=FALSE}
-Height &lt;- c(70, 65, 63, 72, 81)
-Volume &lt;- c(10.3, 10.3, 10.2, 16.4, 18.8)
-tree.data &lt;- data.frame(Height, Volume)
+## 5     81   18.8
+```
+
+Sometimes, we want to run code and show the output, but without echoing the code. The reason might be that the output file would become excessively long, and this is justified if we reuse code that we have shown earlier in the file. This is for example the case if we reuse code that we have shown earlier in the file. This is achieved by adding the option `echo=FALSE` at the beginning of the code chunk:
+
+````
+```{r, echo=FALSE}
+Height <- c(70, 65, 63, 72, 81)
+Volume <- c(10.3, 10.3, 10.2, 16.4, 18.8)
+tree.data <- data.frame(Height, Volume)
 tree.data
-```</code></pre>
-<p>In other cases, we might want to show the R-code but without running the code. The reason might be that the code might take a long time to run, and we just want to explain to the reader how the code looks that we used. This is achieved by adding the option <code>eval=FALSE</code>:</p>
-<pre><code>```{r, eval=FALSE}
-Height &lt;- c(70, 65, 63, 72, 81)
-Volume &lt;- c(10.3, 10.3, 10.2, 16.4, 18.8)
-tree.data &lt;- data.frame(Height, Volume)
+```
+````
+
+In other cases, we might want to show the R-code but without running the code. The reason might be that the code might take a long time to run, and we just want to explain to the reader how the code looks that we used. This is achieved by adding the option `eval=FALSE`:
+
+````
+```{r, eval=FALSE}
+Height <- c(70, 65, 63, 72, 81)
+Volume <- c(10.3, 10.3, 10.2, 16.4, 18.8)
+tree.data <- data.frame(Height, Volume)
 tree.data
-```</code></pre>
+```
+````
+-->
 </div>
 </div>
 

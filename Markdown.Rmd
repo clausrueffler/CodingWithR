@@ -135,8 +135,39 @@ As always, the internet is full with resources. One gets a long way using [this 
 
 ## Tools for an effective Rmarkdown document 
 
-I you submit an html produced in Rmarkdown, there are some useful tricks for making a document that only shows what is interesting for the reader, which is not necessarily all code you used to produce the document. In particular, one can add options to code chunks. Maybe the two most important ones are `echo` and `eval`. Both options can take the value `TRUE` and `FALSE`, with the first one being the default option.
+If you submit an output file produced in Rmarkdown, there are some useful tricks for making a document that only shows what is interesting for the reader, which is not necessarily all code or all output from the code. This can be achieved by adding options to code chunks. The two most important ones are `echo` and `eval`. Both options can take the value `TRUE` and `FALSE`, with the first one being the default option.
 
+Let's look at an example. The following code defines the function for the exponential growth curve:
+
+```{r}
+exponential.growth <- function(t, r, N0){
+  N0*exp(r*t)
+}
+```
+
+To obtain the graph for a particular *r*-value, say *r=-0.1*, we can use the code
+
+```{r}
+t <- seq(0, 50, by = 1)
+N0 <- 10
+
+plot(t, exponential.growth(t, r = -0.1, N0 = 10),  xlab = "time", ylab = "N(t)")
+```
+
+Assume you want to show how exponential growth looks if *r=0.1*. For the reader, it should be clear that this is achieved by changing the parameter *r* in the plot command accordingly. Your report becomes easier to read if you just show the graph without repeating the code that produces the graph. This is achieved by starting the code chunk with ```{r, echo=FALSE}```. This says that the code chunk should not be *echoed*, and produces output without showing the code that generated it.
+
+```{r, echo=FALSE}
+plot(t, exponential.growth(t, r = 0.1, N0 = 10),  xlab = "time", ylab = "N(t)")
+```
+
+In other cases, you might want to show the code that produces a particular output, without actually showing the output. This is achieved by starting the code chunk with ```{r, eval=FALSE}```:
+
+```{r, eval=FALSE}
+plot(t, exponential.growth(t, r = 0.1, N0 = 10),  xlab = "time", ylab = "N(t)")
+```
+
+
+<!--
 Let's look at an example. The following code produces a data frame and shows the result in the compiled file.
 
 ````
@@ -155,7 +186,7 @@ tree.data <- data.frame(Height, Volume)
 tree.data
 ```
 
-Sometimes, we want to run code and show the output, but without echoing the code. The reason might be that the output file would become excessively long, and this is justified if we reuse code that we have shown earlier in the file This is for example the case, if we have reuse code that we have shown earlier in the file. This is achieved by adding the option `echo=FALSE` at the beginning of the code chunk:
+Sometimes, we want to run code and show the output, but without echoing the code. The reason might be that the output file would become excessively long, and this is justified if we reuse code that we have shown earlier in the file. This is for example the case if we reuse code that we have shown earlier in the file. This is achieved by adding the option `echo=FALSE` at the beginning of the code chunk:
 
 ````
 ```{r, echo=FALSE}`r ''`
@@ -176,4 +207,7 @@ tree.data <- data.frame(Height, Volume)
 tree.data
 ```
 ````
+-->
+
+
 
