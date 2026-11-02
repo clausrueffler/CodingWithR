@@ -32,7 +32,7 @@ To install *R* and *RStudio*, you can follow [these instructions](https://rstudi
 
 Each command in *R* comes with a manual page. To access it, type ```?[NAME OFCOMMAND]``` in the console (e.g., ```?lm```). Alternatively, search the command under the help-tab in the bottom right window of RStudio.
 
-But really, if you need help with *R* the internet is your friend. Virtually any problem you might encounter has been described and solved somewhere on the internet. It's all about to phrase your question in the right manner in a Google search. Most often you will end up on [stackexchange](https://stackexchange.com/), [stackoverflow](https://stackoverflow.com/questions) or [r-bloggers](https://www.r-bloggers.com/).
+But really, if you need help with *R* the internet is your friend. Virtually any problem you might encounter has been described and solved somewhere on the internet. It's all about to phrase your question in the right manner in a Google search. Most often you will end up on [stackexchange](https://stackexchange.com/), [stackoverflow](https://stackoverflow.com/questions) or [r-bloggers](https://www.r-bloggers.com/). And of course, the new thing is AI. If you use it, use it wisely, so that it does not make you stupid. Use it as a tutor as something that does the job for you.
 
 ### The Anatomy of *RStudio*
 
@@ -210,26 +210,18 @@ x[8]
 x[9] # what if the element does not exist?
 ```
 
-You can add entries to a vector by gluing to the end of an existing vector.
-
-```{r eval=FALSE}
-x <- 1:3
-x <- append(x, c(4, 5)) # gluing two vectors together
-x[7] <- 7 # inserting a value at a certain position of the vector
-```
-
-Alternatively, you can access the elements of a vector by specifying using the logical ```TRUE```:
-```{r eval=FALSE}
-x[c(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)]
-x[c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE)]
-```
-
 You can extract several elements at once (i.e., create another vector) using the colon (```:```) command, or by concatenating the indices:
 
 ```{r eval=FALSE}
 x[1:3]
 x[4:7]
 x[c(1,3,5)]
+```
+
+Alternatively, you can access the elements of a vector by specifying using the logical ```TRUE```:
+```{r eval=FALSE}
+x[c(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)]
+x[c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE)]
 ```
 
 Sometimes one wants to know at which position in a vector a certain values occurs. We can find out with the ```which``` function.
@@ -240,9 +232,25 @@ which(x > 5) # values larger than 5 occur at position 6 and 7
 length(which(x == 3)) # the value 3 occurs exactly three times within the vector x
 ```
 
+You can generate vectors of sequential numbers using the colon command:
+
+```{r eval=FALSE}
+x <- 1:10
+x
+```
+
+You can add entries to a vector by gluing to the end of an existing vector.
+
+```{r eval=FALSE}
+x <- 1:3
+x <- append(x, c(4, 5)) # gluing two vectors together
+x[7] <- 7 # inserting a value at a certain position of the vector
+```
+
 Given that *R* was born for statistics, there are many statistical functions you can perform on vectors:
 
 ```{r eval=FALSE}
+x <- 1:7
 length(x)
 min(x)
 max(x)
@@ -254,15 +262,7 @@ var(x) # unbiased sample variance
 mean(x ^ 2) - mean(x) ^ 2 # population variance
 summary(x) # print a summary
 ```
-
-You can generate vectors of sequential numbers using the colon command:
-
-```{r eval=FALSE}
-x <- 1:10
-x
-```
-
-For more complex sequences, use ```seq```:
+For can create more complex sequences, using ```seq```:
 
 ```{r eval=FALSE}
 seq(from = 1, to = 5, by = 0.5)

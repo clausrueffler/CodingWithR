@@ -395,7 +395,7 @@ div.tocify {
 <div id="finding-help" class="section level3">
 <h3>Finding Help</h3>
 <p>Each command in <em>R</em> comes with a manual page. To access it, type <code>?[NAME OFCOMMAND]</code> in the console (e.g., <code>?lm</code>). Alternatively, search the command under the help-tab in the bottom right window of RStudio.</p>
-<p>But really, if you need help with <em>R</em> the internet is your friend. Virtually any problem you might encounter has been described and solved somewhere on the internet. It’s all about to phrase your question in the right manner in a Google search. Most often you will end up on <a href="https://stackexchange.com/">stackexchange</a>, <a href="https://stackoverflow.com/questions">stackoverflow</a> or <a href="https://www.r-bloggers.com/">r-bloggers</a>.</p>
+<p>But really, if you need help with <em>R</em> the internet is your friend. Virtually any problem you might encounter has been described and solved somewhere on the internet. It’s all about to phrase your question in the right manner in a Google search. Most often you will end up on <a href="https://stackexchange.com/">stackexchange</a>, <a href="https://stackoverflow.com/questions">stackoverflow</a> or <a href="https://www.r-bloggers.com/">r-bloggers</a>. And of course, the new thing is AI. If you use it, use it wisely, so that it does not make you stupid. Use it as a tutor as something that does the job for you.</p>
 </div>
 <div id="the-anatomy-of-rstudio" class="section level3">
 <h3>The Anatomy of <em>RStudio</em></h3>
@@ -619,23 +619,27 @@ class(z)</code></pre>
 <pre class="r"><code>x[3]
 x[8]
 x[9] # what if the element does not exist?</code></pre>
-<p>You can add entries to a vector by gluing to the end of an existing vector.</p>
-<pre class="r"><code>x &lt;- 1:3
-x &lt;- append(x, c(4, 5)) # gluing two vectors together
-x[7] &lt;- 7 # inserting a value at a certain position of the vector</code></pre>
-<p>Alternatively, you can access the elements of a vector by specifying using the logical <code>TRUE</code>:</p>
-<pre class="r"><code>x[c(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)]
-x[c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE)]</code></pre>
 <p>You can extract several elements at once (i.e., create another vector) using the colon (<code>:</code>) command, or by concatenating the indices:</p>
 <pre class="r"><code>x[1:3]
 x[4:7]
 x[c(1,3,5)]</code></pre>
+<p>Alternatively, you can access the elements of a vector by specifying using the logical <code>TRUE</code>:</p>
+<pre class="r"><code>x[c(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)]
+x[c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE)]</code></pre>
 <p>Sometimes one wants to know at which position in a vector a certain values occurs. We can find out with the <code>which</code> function.</p>
 <pre class="r"><code>which(x == 3) # the value 3 occurs at position 2, 4 and 8
 which(x &gt; 5) # values larger than 5 occur at position 6 and 7
 length(which(x == 3)) # the value 3 occurs exactly three times within the vector x</code></pre>
+<p>You can generate vectors of sequential numbers using the colon command:</p>
+<pre class="r"><code>x &lt;- 1:10
+x</code></pre>
+<p>You can add entries to a vector by gluing to the end of an existing vector.</p>
+<pre class="r"><code>x &lt;- 1:3
+x &lt;- append(x, c(4, 5)) # gluing two vectors together
+x[7] &lt;- 7 # inserting a value at a certain position of the vector</code></pre>
 <p>Given that <em>R</em> was born for statistics, there are many statistical functions you can perform on vectors:</p>
-<pre class="r"><code>length(x)
+<pre class="r"><code>x &lt;- 1:7
+length(x)
 min(x)
 max(x)
 sum(x) # sum all elements
@@ -645,10 +649,7 @@ mean(x) # arithmetic mean
 var(x) # unbiased sample variance
 mean(x ^ 2) - mean(x) ^ 2 # population variance
 summary(x) # print a summary</code></pre>
-<p>You can generate vectors of sequential numbers using the colon command:</p>
-<pre class="r"><code>x &lt;- 1:10
-x</code></pre>
-<p>For more complex sequences, use <code>seq</code>:</p>
+<p>For can create more complex sequences, using <code>seq</code>:</p>
 <pre class="r"><code>seq(from = 1, to = 5, by = 0.5)</code></pre>
 <p>To repeat a value or a sequence several times, use <code>rep</code>:</p>
 <pre class="r"><code>rep(&quot;abc&quot;, 3)
