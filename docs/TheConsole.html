@@ -566,14 +566,6 @@ x[! (x == 4)] # returns the vector without the entry 4</code></pre>
 <pre class="r"><code>log(10) # natural logarithm
 log10(10) # logarithm to base 10
 sqrt(9) # square root</code></pre>
-<p>We can use the operator <code>%in%</code> to search for matches. It returns a logical value (i.e., <code>TRUE</code> or <code>FALSE</code>) indicating whether or not a match exists.</p>
-<pre class="r"><code>3 %in% 1:5 # 1:5 generates a sequence
-# c() combines values into a vector or list
-# all arguments are converted to the same type (here it is a character string)
-c(2, &quot;good to be&quot;, TRUE)
-2 %in% c(2, &quot;good to be&quot;, TRUE)
-# test for multiple elements at once
-1:8 %in% c(1, 3, 5)</code></pre>
 </div>
 <div id="assignment-and-data-types" class="section level2">
 <h2>Assignment and Data Types</h2>
@@ -606,7 +598,7 @@ as.logical(0) # only 0 is FALSE</code></pre>
 </div>
 <div id="objects" class="section level2">
 <h2>Objects</h2>
-<p>Everying in <em>R</em> is an <em>object</em>. Objects come in different types, the most important ones are <em>vectors</em>, <em>matrices</em>, <em>lists</em>, and <em>functions</em>.</p>
+<p>Everything in <em>R</em> is an <em>object</em>. Objects come in different types, the most important ones are <em>vectors</em>, <em>matrices</em>, <em>lists</em>, and <em>functions</em>.</p>
 <div id="vectors" class="section level3">
 <h3>Vectors</h3>
 <p>The most basic data structure in <em>R</em> is the vector, which is an ordered collection of values of the same type. As such, vectors are <em>1-dimensional</em> objects. Vectors can be created by <em>concatenating</em> different values with the command <code>c</code>:</p>
@@ -615,7 +607,10 @@ y &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;) # a vector of characters
 z &lt;- c(1, &quot;a&quot;) # entries in a vector have to be of the same type
 z # R coerces 1 into a character
 class(z)</code></pre>
-<p>You can access the elements of a vector by their index. You can access the elements of a vector by specifying their positions:</p>
+<p>You can generate vectors of sequential numbers using the colon command:</p>
+<pre class="r"><code>x &lt;- 1:10
+x</code></pre>
+<p>You can access the elements of a vector by their index, that is, their position:</p>
 <pre class="r"><code>x[3]
 x[8]
 x[9] # what if the element does not exist?</code></pre>
@@ -630,9 +625,14 @@ x[c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE)]</code></pre>
 <pre class="r"><code>which(x == 3) # the value 3 occurs at position 2, 4 and 8
 which(x &gt; 5) # values larger than 5 occur at position 6 and 7
 length(which(x == 3)) # the value 3 occurs exactly three times within the vector x</code></pre>
-<p>You can generate vectors of sequential numbers using the colon command:</p>
-<pre class="r"><code>x &lt;- 1:10
-x</code></pre>
+<p>We can use the operator <code>%in%</code> to search for matches between two vectors. It returns a logical value (i.e., <code>TRUE</code> or <code>FALSE</code>) indicating whether or not a match exists.</p>
+<pre class="r"><code>3 %in% 1:5 # 1:5 generates a sequence
+# c() combines values into a vector or list
+# all arguments are converted to the same type (here it is a character string)
+c(2, &quot;good to be&quot;, TRUE)
+2 %in% c(2, &quot;good to be&quot;, TRUE)
+# test for multiple elements at once
+1:8 %in% c(1, 3, 5)</code></pre>
 <p>You can add entries to a vector by gluing to the end of an existing vector.</p>
 <pre class="r"><code>x &lt;- 1:3
 x &lt;- append(x, c(4, 5)) # gluing two vectors together
@@ -649,7 +649,7 @@ mean(x) # arithmetic mean
 var(x) # unbiased sample variance
 mean(x ^ 2) - mean(x) ^ 2 # population variance
 summary(x) # print a summary</code></pre>
-<p>For can create more complex sequences, using <code>seq</code>:</p>
+<p>One can create more complex sequences using <code>seq</code>:</p>
 <pre class="r"><code>seq(from = 1, to = 5, by = 0.5)</code></pre>
 <p>To repeat a value or a sequence several times, use <code>rep</code>:</p>
 <pre class="r"><code>rep(&quot;abc&quot;, 3)
