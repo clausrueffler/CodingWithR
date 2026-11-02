@@ -454,7 +454,7 @@ for (i in myvec) {
   a &lt;- i ^ 2
   print(a)
 }</code></pre>
-<p>In the code above, the variable <em>i</em> takes the value of each element in the vector <em>myvec</em> in sequence. Inside the in the for-loop, you can use the variable <em>i</em> to perform operations. Note that <em>i</em> is only an example of a variable name. Note also that in a for-loop each new command has to start on a new line. This is essential! The same applies to the other looping constructions and to functions.</p>
+<p>In the code above, the variable <em>i</em> takes the value of each element in the vector <em>myvec</em> in sequence. Inside the for-loop, you can use the variable <em>i</em> to perform operations. Note that <em>i</em> is only an example of a variable name. Note also that in a for-loop each new command has to start on a new line. This is essential! The same applies to the other looping constructions and to functions.</p>
 <p>We can visualize to the logic of the <em>for</em>-loop using a flow chart.</p>
 <p><img src="images/ForLoop.png" width="50%" /></p>
 <p>Thus, each time the loop is executed, <em>R</em> moves to the next entry in the vector, until no entry is left. This is when the loop stops. As a slightly less trivial example, let us calculate the factorials of <em>n</em>, <span class="math inline">\(n! = 1 * 2 * ... * (n-1) * n\)</span> using a for-loop.</p>
@@ -511,7 +511,7 @@ while (i &lt;= 6) {
 <ol style="list-style-type: lower-alpha">
 <li><p>Write a <em>while</em>-loops that produces exactly the same population dynamical time series as above.</p></li>
 <li><p>Assume <span class="math inline">\(\lambda &lt; 1\)</span>. In this case, the population will shrink and should ultimately go extinct. Let us a define a population as extinct whenever the population size has dropped below 1. Write a <em>while</em>-loop that runs exactly as long as it takes for the population to go extinct (hint: you have to use the condition for non-extinction <em>n[t]&gt;1</em> as the test-expression in the <em>while</em> loop). What is the easiest way to determine how long it takes for the population to go extinct?</p></li>
-<li><p>What does this code do? Try to understand what the loop does, and then create and run a script to confirm your intuition.</p></li>
+<li><p>What does this code do? Try to understand what the loop does, and only then run the code to confirm your intuition.</p></li>
 </ol>
 <pre class="r"><code>z &lt;- seq(1, 100, by = 3)
 for (k in z) {
@@ -523,7 +523,7 @@ for (k in z) {
 </div>
 <div id="if-statements" class="section level4">
 <h4><em>if</em>-statements</h4>
-<p>Not a loop but another important way to modify the flow of your program: <em>if-else</em>-constructs allows us to make the execution of commands conditional. The function <code>if (test) "output if TRUE" else "output if FALSE"</code> contains a logical <em>test</em>, and <em>yes</em> and <em>no</em> are output conditional of whether the logical test results in TRUE or FALSE: if the <em>test</em> evaluates to TRUE, this command returns whatever is written in the next position, and if <em>test</em> evaluates to FALSE, this command returns whatever is written in the last position. Here two simple examples:</p>
+<p>Not a loop but another important way to modify the flow of your program: <em>if-else</em>-constructs allows us to make the execution of commands conditional. The function <code>if (test) "output if TRUE" else "output if FALSE"</code> contains a logical <em>test</em>, and specific output conditional on whether the logical test results in TRUE or FALSE: if the <em>test</em> evaluates to TRUE, this command returns whatever is written in the next position, and if <em>test</em> evaluates to FALSE, this command returns whatever is written in the last position. Here two simple examples:</p>
 <!--
 
 ```r
@@ -538,14 +538,14 @@ if (x &gt; 0) &quot;positive&quot; else &quot;negative or 0&quot; # this returns
 a &lt;- 1
 b &lt;- 2
 if (a &gt; b) 1 else 0 # this returns 0</code></pre>
-<p>If we want to incorporate more than one logical test we can nest several <em>if-else</em>-constructs as in the following example:</p>
+<p>Alternatively, the command <code>ifelse(test, "output if TRUE", "output if FALSE")</code> can be used for the same task:</p>
+<pre class="r"><code>x &lt;- 2
+ifelse(x &gt; 0, &quot;positive&quot;, &quot;negative or 0&quot;)</code></pre>
+<p>We can incorporate more than one logical test by nesting several <em>if-else</em>-constructs, as in the following example:</p>
 <pre class="r"><code>x &lt;- 0
 if (x &lt; 0) &quot;Negative number&quot; else
     if (x &gt; 0) &quot;Positive number&quot; else
       &quot;Zero&quot;</code></pre>
-<p>Alternatively, the command <code>ifelse(test, "output if TRUE", "output if FALSE")</code> can be used for the same task:</p>
-<pre class="r"><code>x &lt;- 2
-ifelse(x &gt; 0, &quot;positive&quot;, &quot;negative or 0&quot;)</code></pre>
 <!--
 We can achieve the same result by nesting the ```ifelse``` command but this can become a bit hard to read if done repeatedly.
 
@@ -586,7 +586,9 @@ rectangle(2, 3)</code></pre>
 <p>It is often useful to explore functions by plotting them (see next section):</p>
 <pre class="r"><code>curve(circle.area(x), from = 0, to = 2, xlab = &quot;radius&quot;,  ylab = &quot;circle area&quot;)</code></pre>
 <p><img src="Scripting_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
-<p>Exercise: Plot the area of a rectangle as a function of <em>side_1</em> (with <em>side_1</em> between 0 and 2) given that <em>side_2=2</em>.</p>
+<div id="exercise" class="section level5">
+<h5>Exercise</h5>
+<p>Plot the area of a rectangle as a function of <em>side_1</em> (with <em>side_1</em> between 0 and 2) given that <em>side_2=2</em>.</p>
 <p>Functions can be arbitrarily complex and most simulation models will have a more or less complex function at their heart. For instance, we can incorporate loops and <code>iflese</code>-constructs into functions.</p>
 <pre class="r"><code>sign_of_a_number &lt;- function(x){
   if (x &lt; 0) {print(&quot;Negative number&quot;)} else
@@ -613,7 +615,7 @@ my.factorial(4)</code></pre>
   for (t in 1:tmax) {
     n[t+1] &lt;- n[t] * lambda
   }
-  return(n)
+  n
 }
 
 time.series(tmax = 20, lambda = 1.1, N0 = 10)</code></pre>
@@ -652,6 +654,7 @@ plot(n) # now we can plot n without creating a new object
 ```
 -->
 </div>
+</div>
 <div id="random-numbers" class="section level2">
 <h2>Random Numbers</h2>
 <p><em>R</em> can sample (pseudo)random numbers from many distributions. This is very useful for <em>stochastic</em> simulations.</p>
@@ -673,7 +676,7 @@ rbinom(n = 1, size = 1, prob = 0.5) # samples one value
 ```
 
 ```
-## [1] 1
+## [1] 0
 ```
 
 ```r
@@ -693,7 +696,7 @@ runif(10, -1, 1)
 rnorm(4, mean = 1, sd = 5)</code></pre>
 <p>You can also define your <em>own</em> probability distribution and then draw values from is using the function</p>
 <pre><code>sample(x, size, prob, replace, ...)</code></pre>
-<p>To get to know this function, let us simulate the outcome of throwing a dice. The possible outcomes of throwing a dice are the numbers 1 to 6. This we encode in a vector of possible outcomes: <code>possible_outcomes &lt;- c(1, 2, 3, 4, 5, 6)</code>, or, shorter, <code>possible_outcomes &lt;- 1:6</code>. This is the first argument in the function <code>sample</code>. Thus, <code>x = possible_outcomes</code>. If the dice is <em>fair</em>, each number occurs with probability 1/6. This we encode in the vector <code>probabilities &lt;- c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)</code>, or, shorter, <code>probabilities &lt;- rep(1/6, 6)</code>. This is the third argument in the function <code>sample</code>. Thus, <code>prob = possible_outcomes</code>. Since the outcome of any particular throw is independent of all previous throws we <em>sample with replacement</em>. We have to specify this in the function <em>sample</em> by adding <em>replace = TRUE</em>. Finally, we have to add how often we throw the dice by specifying a value for <em>size</em>, for example, <em>size = 1</em> if we throw the dice only once.</p>
+<p>To get to know this function, let us simulate the outcome of throwing a dice. The possible outcomes of throwing a dice are the numbers 1 to 6. This we encode in a vector of possible outcomes: <code>possible_outcomes &lt;- c(1, 2, 3, 4, 5, 6)</code>, or, shorter, <code>possible_outcomes &lt;- 1:6</code>. This is the first argument in the function <code>sample</code>. Thus, <code>x = possible_outcomes</code>. If the dice is <em>fair</em>, each number occurs with probability 1/6. This we encode in the vector <code>probabilities &lt;- c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)</code>, or, shorter, <code>probabilities &lt;- rep(1/6, 6)</code>. This is the third argument in the function <code>sample</code>. Thus, <code>prob = probabilities</code>. Since the outcome of any particular throw is independent of all previous throws we <em>sample with replacement</em>. We have to specify this in the function <em>sample</em> by adding <em>replace = TRUE</em>. Finally, we have to add how often we throw the dice by specifying a value for <em>size</em>, for example, <em>size = 1</em> if we throw the dice only once.</p>
 <pre class="r"><code>possible_outcomes &lt;- 1:6
 probabilities &lt;- rep(1/6, 6)
 

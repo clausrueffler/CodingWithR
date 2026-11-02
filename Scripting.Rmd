@@ -118,7 +118,7 @@ for (i in myvec) {
 }
 ```
 
-In the code above, the variable *i* takes the value of each element in the vector *myvec* in sequence. Inside the in the for-loop, you can use the variable *i* to perform operations. Note that *i* is only an example of a variable name. Note also that in a for-loop each new command has to start on a new line. This is essential! The same applies to the other looping constructions and to functions.
+In the code above, the variable *i* takes the value of each element in the vector *myvec* in sequence. Inside the for-loop, you can use the variable *i* to perform operations. Note that *i* is only an example of a variable name. Note also that in a for-loop each new command has to start on a new line. This is essential! The same applies to the other looping constructions and to functions.
 
 We can visualize to the logic of the *for*-loop using a flow chart.
 
@@ -228,7 +228,7 @@ while (n[t] > 1) {
 length(n)
 ```
 
-c) What does this code do? Try to understand what the loop does, and then create and run a script to confirm your intuition.
+c) What does this code do? Try to understand what the loop does, and only then run the code to confirm your intuition.
 
 ```{r eval=FALSE}
 z <- seq(1, 100, by = 3)
@@ -241,7 +241,7 @@ for (k in z) {
 
 #### *if*-statements
 
-Not a loop but another important way to modify the flow of your program: *if-else*-constructs allows us to make the execution of commands conditional. The function ```if (test) "output if TRUE" else "output if FALSE"``` contains a logical *test*, and *yes* and *no* are output conditional of whether the logical test results in TRUE or FALSE: if the *test* evaluates to TRUE, this command returns whatever is written in the next position, and if *test* evaluates to FALSE, this command returns whatever is written in the last position. Here two simple examples:
+Not a loop but another important way to modify the flow of your program: *if-else*-constructs allows us to make the execution of commands conditional. The function ```if (test) "output if TRUE" else "output if FALSE"``` contains a logical *test*, and specific output conditional on whether the logical test results in TRUE or FALSE: if the *test* evaluates to TRUE, this command returns whatever is written in the next position, and if *test* evaluates to FALSE, this command returns whatever is written in the last position. Here two simple examples:
 
 <!--
 ```{r eval=FALSE}
@@ -260,7 +260,14 @@ b <- 2
 if (a > b) 1 else 0 # this returns 0
 ```
 
-If we want to incorporate more than one logical test we can nest several *if-else*-constructs as in the following example:
+Alternatively, the command ```ifelse(test, "output if TRUE", "output if FALSE")``` can be used for the same task:
+
+```{r eval=FALSE}
+x <- 2
+ifelse(x > 0, "positive", "negative or 0")
+```
+
+We can incorporate more than one logical test by nesting several *if-else*-constructs, as in the following example:
 
 ```{r eval=FALSE}
 x <- 0
@@ -269,11 +276,6 @@ if (x < 0) "Negative number" else
       "Zero"
 ```
 
-Alternatively, the command ```ifelse(test, "output if TRUE", "output if FALSE")``` can be used for the same task: 
-```{r eval=FALSE}
-x <- 2
-ifelse(x > 0, "positive", "negative or 0")
-```
 
 <!--
 We can achieve the same result by nesting the ```ifelse``` command but this can become a bit hard to read if done repeatedly.
@@ -335,7 +337,8 @@ It is often useful to explore functions by plotting them (see next section):
 curve(circle.area(x), from = 0, to = 2, xlab = "radius",  ylab = "circle area")
 ```
 
-Exercise: Plot the area of a rectangle as a function of *side_1* (with *side_1* between 0 and 2) given that *side_2=2*.
+##### Exercise
+Plot the area of a rectangle as a function of *side_1* (with *side_1* between 0 and 2) given that *side_2=2*.
 
 ```{r, echo=FALSE, eval=FALSE}
 curve(rectangle(x, side_2 = 2)$surface, from = 0, to = 2, xlab = "side_1", ylab = "rectangle surface")
@@ -377,7 +380,7 @@ time.series <- function(tmax, lambda, N0){
   for (t in 1:tmax) {
     n[t+1] <- n[t] * lambda
   }
-  return(n)
+  n
 }
 
 time.series(tmax = 20, lambda = 1.1, N0 = 10)
@@ -473,7 +476,7 @@ You can also define your *own* probability distribution and then draw values fro
 sample(x, size, prob, replace, ...)
 ```
 
-To get to know this function, let us simulate the outcome of throwing a dice. The possible outcomes of throwing a dice are the numbers 1 to 6. This we encode in a vector of possible outcomes: ```possible_outcomes <- c(1, 2, 3, 4, 5, 6)```, or, shorter, ```possible_outcomes <- 1:6```. This is the first argument in the function ```sample```. Thus, ```x = possible_outcomes```. If the dice is *fair*, each number occurs with probability 1/6. This we encode in the vector ```probabilities <- c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)```, or, shorter, ```probabilities <- rep(1/6, 6)```. This is the third argument in the function ```sample```. Thus, ```prob = possible_outcomes```. Since the outcome of any particular throw is independent of all previous throws we *sample with replacement*. We have to specify this in the function *sample* by adding *replace = TRUE*. Finally, we have to add how often we throw the dice by specifying a value for *size*, for example, *size = 1* if we throw the dice only once.
+To get to know this function, let us simulate the outcome of throwing a dice. The possible outcomes of throwing a dice are the numbers 1 to 6. This we encode in a vector of possible outcomes: ```possible_outcomes <- c(1, 2, 3, 4, 5, 6)```, or, shorter, ```possible_outcomes <- 1:6```. This is the first argument in the function ```sample```. Thus, ```x = possible_outcomes```. If the dice is *fair*, each number occurs with probability 1/6. This we encode in the vector ```probabilities <- c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)```, or, shorter, ```probabilities <- rep(1/6, 6)```. This is the third argument in the function ```sample```. Thus, ```prob = probabilities```. Since the outcome of any particular throw is independent of all previous throws we *sample with replacement*. We have to specify this in the function *sample* by adding *replace = TRUE*. Finally, we have to add how often we throw the dice by specifying a value for *size*, for example, *size = 1* if we throw the dice only once.
 
 ```{r eval=FALSE}
 possible_outcomes <- 1:6
