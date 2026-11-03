@@ -684,10 +684,8 @@ B &lt;- matrix(1, 3, 2) # 3 x 2 matrix filled with 1s
 B
 t(B) # transpose
 B %*% t(B)
-# by default, matrices are filled by column
-(C &lt;- matrix(1:9, 3, 3))
-(D &lt;- matrix(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), 2, 2))
-A %*% D # matrix operations are not defined for matrices with character entries</code></pre>
+(C &lt;- matrix(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), 2, 2))
+A %*% C # matrix operations are not defined for matrices with character entries</code></pre>
 <p>Determine the dimensions of a matrix (the numbers of rows and columns) using the following commands:</p>
 <pre class="r"><code>dim(B)
 nrow(B)

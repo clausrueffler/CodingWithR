@@ -306,10 +306,8 @@ B <- matrix(1, 3, 2) # 3 x 2 matrix filled with 1s
 B
 t(B) # transpose
 B %*% t(B)
-# by default, matrices are filled by column
-(C <- matrix(1:9, 3, 3))
-(D <- matrix(c("a", "b", "c", "d"), 2, 2))
-A %*% D # matrix operations are not defined for matrices with character entries
+(C <- matrix(c("a", "b", "c", "d"), 2, 2))
+A %*% C # matrix operations are not defined for matrices with character entries
 ```
 
 Determine the dimensions of a matrix (the numbers of rows and
