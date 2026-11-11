@@ -90,7 +90,7 @@ $$
 $$
 N(t + 1) = N(t)(1 + \beta - \delta).
 $$
-Here, the the two dollar-symbols before and after the equation open and close a *Latex*-environment, respectively. Whatever is in between will be interpreted as *Latex*-code. If you want to write math that is within a line, such as $N(t + 1) = N(t)(1 + \beta - \delta)$, then open and close the latex environment with only a single $-sign. [This website](https://rpruim.github.io/s341/S19/from-class/MathinRmd.html) provides a very concise overview of how you can use *Latex* within a *Rmarkdown*-document.
+Here, the the two dollar-symbols before and after the equation open and close a *Latex*-environment, respectively. Whatever is in between will be interpreted as *Latex*-code. If you want to write math that is within a line, such as $N(t + 1) = N(t)(1 + \beta - \delta)$, then open and close the latex environment with only a single $-sign. [This website](https://www.rpubs.com/aaaaaa1234sta/1197405) provides a very concise overview of how you can use *Latex* within a *Rmarkdown*-document.
 
 ### Import figures into *Rmarkdown* documents
 
